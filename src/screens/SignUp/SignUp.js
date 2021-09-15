@@ -1,28 +1,53 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { postSignUp } from '../../services/linkr-api';
 import * as S from './SignLogStyled';
+
 
 
 export default function SignUp (){
 
+    let history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
-    const [avatar, setAvatar] = useState('');
+    const [pictureUrl, setPictureUrl] = useState('');
+    const [inputDisabled, setInputDisabled] = useState(false);
+
+    function processError(status){
+        if (status === 400){
+            alert('invalid picture url')
+        }
+        if (status === 403){
+            alert('email is already taken')
+        }
+        setInputDisabled(false);
+    }
 
     function submitForm (){
-        console.log('submitting');
+        const body = {
+            email,
+            password,
+            username,
+            pictureUrl
+        };
+
+        setInputDisabled(true);
+        
+        postSignUp(body)
+            .then(()=>history.push('/'))
+            .catch((res)=>processError(res.response.status));
     }
 
     function emptyInputExist(){
-        return (email === '' || password === '' || username === '' || avatar === '');
+        return (email === '' || password === '' || username === '' || pictureUrl === '');
     }
 
     function inspectInputs(e){
         e.preventDefault();
 
         if (emptyInputExist()){
-            alert('All inputs must be filled out before submitting')
+            alert('all inputs must be filled out before submitting')
         }
         else {
             submitForm();
@@ -31,7 +56,7 @@ export default function SignUp (){
 
     return (
         <S.SignUp>
-            <S.LeftContainer>
+            <S.WoodmarkContainer>
                 <S.TextContainer>
                     <h1>linkr</h1>
                     <h2>
@@ -39,14 +64,30 @@ export default function SignUp (){
                     the best links on the web
                     </h2>
                 </S.TextContainer>
-            </S.LeftContainer>
+            </S.WoodmarkContainer>
 
             <S.Form onSubmit={inspectInputs}>
-                <input onChange={(e)=>setEmail(e.target.value)} value={email} type='email'/>
-                <input onChange={(e)=>setPassword(e.target.value)} value={password} type='password'/>
-                <input onChange={(e)=>setUsername(e.target.value)} value={username} type='text'/>
-                <input onChange={(e)=>setAvatar(e.target.value)} value={avatar} type='url'/>
-                <input type="submit" value="Sign Up" />
+                <input 
+                disabled={inputDisabled} 
+                onChange={(e)=>setEmail(e.target.value)} 
+                value={email} type='email'
+                placeholder='e-mail'/>
+                <input 
+                disabled={inputDisabled} 
+                onChange={(e)=>setPassword(e.target.value)} 
+                value={password} type='password'
+                placeholder='password'/>
+                <input 
+                disabled={inputDisabled} 
+                onChange={(e)=>setUsername(e.target.value)} 
+                value={username} type='text'
+                placeholder='username'/>
+                <input 
+                disabled={inputDisabled} 
+                onChange={(e)=>setPictureUrl(e.target.value)} 
+                value={pictureUrl} type='url'
+                placeholder='picture url'/>
+                <input disabled={inputDisabled} type="submit" value="Sign Up" />
                 <Link to='/'>Switch back to log in</Link>
             </S.Form>
         </S.SignUp>
