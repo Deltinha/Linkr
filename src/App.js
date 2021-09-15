@@ -1,41 +1,46 @@
+import * as S from './AppStyled'
+import './reset.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import SignUp from './screens/SignUp/SignUp';
 
 export default function App() {
   return (
+    <S.App>
     <BrowserRouter>
       <Switch>
-        <Route exact to='/'>
-
+        <Route exact path='/'>
+          
         </Route>
 
-        <Route exact to='/cadastro'>
-
+        <Route exact path='/cadastro'>
+          <SignUp />
         </Route>
 
         <>
           {/* NAVBAR */}
           {/* SIDEBAR */}
-          <Route exact to='/timeline'>
+          <Route exact path='/timeline'>
+            
+          </Route>
+
+          <Route exact path='/myposts'>
 
           </Route>
 
-          <Route exact to='/myposts'>
+          <Route exact path='/mylikes'>
 
           </Route>
 
-          <Route exact to='/mylikes'>
+          <Route exact path='/user/:id'>
 
           </Route>
 
-          <Route exact to='/user/:id'>
-
-          </Route>
-
-          <Route exact to='/hashtag/:hashtag'>
+          <Route exact path='/hashtag/:hashtag'>
 
           </Route>
         </>
       </Switch>
     </BrowserRouter>
+    </S.App>
   );
 }
