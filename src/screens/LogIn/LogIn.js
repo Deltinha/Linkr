@@ -16,15 +16,7 @@ export default function LogIn() {
     function saveDataAndToken(data){
         setUserData(data.user);
         setToken(data.token);
-        localStorage.setItem('token', data.token);
     }
-
-    function lookForTokenInLocalStorage(){
-        if (localStorage.getItem('token')){
-          setToken(localStorage.getItem('token'));
-          history.push('/timeline');
-        }
-      }
 
     function processError(status){
         if (status === 403){
@@ -63,8 +55,6 @@ export default function LogIn() {
             logInUser();
         }
     }
-
-    lookForTokenInLocalStorage();
 
     return (
         <S.LogIn>
