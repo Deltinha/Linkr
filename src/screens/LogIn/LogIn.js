@@ -11,7 +11,13 @@ export default function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [inputDisabled, setInputDisabled] = useState(false);
-    const {setUserData} = useContext(UserContext);
+    const {setUserData, setToken} = useContext(UserContext);
+
+    function saveDataAndToken(data){
+        setUserData(data.user);
+        setToken(data.token);
+        localStorage.setItem('token', data.token);
+    }
 
     function processError(status){
         if (status === 403){
@@ -30,7 +36,7 @@ export default function LogIn() {
         
         postLogIn(body)
             .then((res)=>{
-                setUserData(res.data);
+                saveDataAndToken(res.data);
                 history.push('/timeline');
             })
             .catch((res)=>processError(res.response.status));
