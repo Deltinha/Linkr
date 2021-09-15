@@ -16,7 +16,7 @@ const WoodmarkContainer = styled.div`
     box-sizing: border-box;
     box-shadow: 4px 0 4px 0 rgba(0,0,0,0.25);
  
-    @media (max-width: 375px){
+    @media (max-width: 1230px){
         left: 0;
         top: 0;
         height: 175px;
@@ -43,7 +43,7 @@ const TextContainer = styled.div`
         margin: 0;
     }
 
-    @media (max-width: 375px){
+    @media (max-width: 1230px){
         height: 100%;
         position: static;
         display: flex;
@@ -103,10 +103,13 @@ const Form = styled.form`
         white-space: nowrap;
     }
 
-
-    @media (max-width: 375px){
+    @media (max-width: 1230px){
         left: 50%;
         transform: translateX(-50%);
+    }
+
+    @media (max-width: 480px){
+        
         top: 215px;
         gap: 11px;
 

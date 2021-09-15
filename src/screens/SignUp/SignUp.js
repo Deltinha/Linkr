@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { postSignUp } from '../../services/linkr-api';
-import * as S from './SignLogStyled';
+import * as S from '../../components/shared/SignLogStyled';
 
 
 
@@ -19,7 +19,7 @@ export default function SignUp (){
             alert('URL da imagem inválida')
         }
         if (status === 403){
-            alert('esse email já está sendo usado')
+            alert('o email inserido já está sendo usado')
         }
         setInputDisabled(false);
     }

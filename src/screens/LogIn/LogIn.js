@@ -1,4 +1,4 @@
-import * as S from '../SignUp/SignLogStyled';
+import * as S from '../../components/shared/SignLogStyled';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useContext, useState } from 'react';
