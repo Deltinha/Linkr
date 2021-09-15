@@ -94,6 +94,9 @@ const Form = styled.form`
         background-color: #1877F2;
         cursor: pointer;
         color: white;
+        :disabled {
+            opacity: 0.7;
+        }
     }
 
     a {
