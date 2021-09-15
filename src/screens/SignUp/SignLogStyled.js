@@ -36,7 +36,7 @@ const TextContainer = styled.div`
     }
 `;
 
-const Form = styled.div`
+const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,12 +49,12 @@ const Form = styled.div`
         width: 429px;
         height: 65px;
         box-sizing: border-box;
+        border: none;
     }
 
-    button {
-        width: 429px;
-        height: 65px;
-        box-sizing: border-box;
+    input[type=submit] {
+        background-color: #1877F2;
+        cursor: pointer;
     }
 
     a {
