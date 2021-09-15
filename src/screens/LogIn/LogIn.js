@@ -19,6 +19,13 @@ export default function LogIn() {
         localStorage.setItem('token', data.token);
     }
 
+    function lookForTokenInLocalStorage(){
+        if (localStorage.getItem('token')){
+          setToken(localStorage.getItem('token'));
+          history.push('/timeline');
+        }
+      }
+
     function processError(status){
         if (status === 403){
             alert('User not found. Invalid email or password');
@@ -56,6 +63,8 @@ export default function LogIn() {
             logInUser();
         }
     }
+
+    lookForTokenInLocalStorage();
 
     return (
         <S.LogIn>
