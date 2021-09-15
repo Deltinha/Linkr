@@ -34,8 +34,8 @@ export default function App() {
           <Route exact to='/hashtag/:hashtag'>
 
           </Route>
-          <>
-          </Switch>
-        </BrowserRouter>
+        </>
+      </Switch>
+    </BrowserRouter>
   );
 }
