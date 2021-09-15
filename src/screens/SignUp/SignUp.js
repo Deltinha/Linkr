@@ -16,10 +16,10 @@ export default function SignUp (){
 
     function processError(status){
         if (status === 400){
-            alert('invalid picture url')
+            alert('URL da imagem inválida')
         }
         if (status === 403){
-            alert('email is already taken')
+            alert('o email inserido já está sendo usado')
         }
         setInputDisabled(false);
     }
@@ -47,7 +47,7 @@ export default function SignUp (){
         e.preventDefault();
 
         if (emptyInputExist()){
-            alert('all inputs must be filled out before submitting')
+            alert('todos os inputs devem ser preenchidos antes de prosseguir')
         }
         else {
             submitForm();
