@@ -2,44 +2,50 @@ import * as S from './AppStyled'
 import './reset.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SignUp from './screens/SignUp/SignUp';
+import LogIn from './screens/LogIn/LogIn';
+import { UserContext } from './contexts/UserContext';
+import { useState } from 'react';
 
 export default function App() {
+  const [userData, setUserData] = useState('');
   return (
     <S.App>
     <BrowserRouter>
-      <Switch>
-        <Route exact path='/'>
-          
-        </Route>
-
-        <Route exact path='/cadastro'>
-          <SignUp />
-        </Route>
-
-        <>
-          {/* NAVBAR */}
-          {/* SIDEBAR */}
-          <Route exact path='/timeline'>
-            
+      <UserContext.Provider value={{userData, setUserData}}>
+        <Switch>
+          <Route exact path='/'>
+            <LogIn />
           </Route>
 
-          <Route exact path='/myposts'>
-
+          <Route exact path='/sign-up'>
+            <SignUp />
           </Route>
 
-          <Route exact path='/mylikes'>
+          <>
+            {/* NAVBAR */}
+            {/* SIDEBAR */}
+            <Route exact path='/timeline'>
+              
+            </Route>
 
-          </Route>
+            <Route exact path='/myposts'>
 
-          <Route exact path='/user/:id'>
+            </Route>
 
-          </Route>
+            <Route exact path='/mylikes'>
 
-          <Route exact path='/hashtag/:hashtag'>
+            </Route>
 
-          </Route>
-        </>
-      </Switch>
+            <Route exact path='/user/:id'>
+
+            </Route>
+
+            <Route exact path='/hashtag/:hashtag'>
+
+            </Route>
+          </>
+        </Switch>
+      </UserContext.Provider>
     </BrowserRouter>
     </S.App>
   );

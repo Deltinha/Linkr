@@ -7,6 +7,8 @@ const SignUp = styled.div`
     position: relative;
 `;
 
+const LogIn = SignUp;
+
 const WoodmarkContainer = styled.div`
     background-color: #151515;
     width: calc(100vw - 535px);
@@ -124,6 +126,7 @@ const Form = styled.form`
 
 export {
     SignUp,
+    LogIn,
     WoodmarkContainer,
     TextContainer,
     Form,
