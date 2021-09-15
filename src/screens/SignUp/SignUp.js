@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { postSignUp } from '../../services/linkr-api';
-import * as S from '../../components/SignLogStyled';
+import * as S from '../../components/shared/SignLogStyled';
 
 
 
