@@ -12,7 +12,7 @@ export default function App() {
           
         </Route>
 
-        <Route exact path='/cadastro'>
+        <Route exact path='/sign-up'>
           <SignUp />
         </Route>
 
