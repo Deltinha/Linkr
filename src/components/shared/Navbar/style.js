@@ -40,8 +40,29 @@ const NavbarMenu = styled.div`
     }
 `;
 
+const NavbarLinks = styled.div`
+    width: 150px;
+    background-color: #171717;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    align-items: center;
+    border-radius: 0 0 0 20px;
+    position: absolute;
+    right: 0;
+    top: 72px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+    a {
+        color: white;
+        font-size: 17px;
+        text-decoration: none;
+    }
+`;
 
 export {
     Navbar,
     NavbarMenu,
+    NavbarLinks,
 };

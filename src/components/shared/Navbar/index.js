@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { UserContext } from "../../../contexts/UserContext";
 import { getUserInfo } from "../../../services/linkr-api";
@@ -22,11 +23,16 @@ export default function Navbar (){
             <S.Navbar>
                 <span>linkr</span>
     
-                <S.NavbarMenu>
+                <S.NavbarMenu className='click-outside-listener'>
                     <FaAngleDown />
                     
                     <img src={`${userAvatar}`} alt='User Avatar'/>
                 </S.NavbarMenu>
+                <S.NavbarLinks>
+                    <Link>My posts</Link>
+                    <Link>My likes</Link>
+                    <Link>Logout</Link>
+                </S.NavbarLinks>
             </S.Navbar>
         );
 }
