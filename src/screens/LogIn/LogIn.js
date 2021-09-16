@@ -1,8 +1,8 @@
 import * as S from '../../components/shared/SignLogStyled';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { useContext, useState } from 'react';
-import { postLogIn } from '../../services/linkr-api';
+import { useContext, useEffect, useState } from 'react';
+import { postLogIn, getTrendingHashtags } from '../../services/linkr-api';
 import { UserContext } from '../../contexts/UserContext';
 
 export default function LogIn() {
@@ -11,16 +11,24 @@ export default function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [inputDisabled, setInputDisabled] = useState(false);
-    const {setUserData, setToken} = useContext(UserContext);
+    const {setUserData, token} = useContext(UserContext);
+
+    function checkIfTokenIsValid(){
+        if (token){
+            getTrendingHashtags(token)
+                .then(()=>history.push('/timeline'))
+                .catch((res)=>res.response.status === 403 ? alert('sua sessão expirou. logue-se novamente') : '')
+          }
+    }
 
     function saveDataAndToken(data){
         setUserData(data.user);
-        setToken(data.token);
+        localStorage.setItem('token', data.token);
     }
 
     function processError(status){
         if (status === 403){
-            alert('User not found. Invalid email or password');
+            alert('falha no login. email ou senha inválidos');
         }
         setInputDisabled(false);
     }
@@ -49,12 +57,14 @@ export default function LogIn() {
         e.preventDefault();
 
         if (emptyInputExist()){
-            alert('all inputs must be filled out before loging')
+            alert('todos os campos devem ser preenchidos')
         }
         else {
             logInUser();
         }
     }
+
+    useEffect(checkIfTokenIsValid,[]);
 
     return (
         <S.LogIn>

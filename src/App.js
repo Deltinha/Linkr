@@ -8,12 +8,12 @@ import { useState } from 'react';
 
 export default function App() {
   const [userData, setUserData] = useState('');
-  const [token, setToken] = useState('');
+  const token = localStorage.getItem('token');
 
   return (
     <S.App>
       <BrowserRouter>
-        <UserContext.Provider value={{userData, setUserData, token, setToken}}>
+        <UserContext.Provider value={{userData, setUserData, token}}>
           <Switch>
             <Route exact path='/'>
               <LogIn />
