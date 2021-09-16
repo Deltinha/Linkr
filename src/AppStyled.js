@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 const App = styled.div`
-    width: 100%;
+    background-color: #333333;
+    position: absolute;
     height: 100%;
+    width: 100%;
 `;
 
 export {

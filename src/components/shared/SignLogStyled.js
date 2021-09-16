@@ -1,16 +1,21 @@
 import styled from 'styled-components';
 
 const SignUp = styled.div`
-    background-color: #333333;
-    width: 100%;
+    display: flex;
     height: 100%;
-    position: relative;
+    @media (max-width: 1230px){
+        flex-direction: column;
+        gap: 40px;
+    }
+    
 `;
+
+const LogIn = SignUp;
 
 const WoodmarkContainer = styled.div`
     background-color: #151515;
     width: calc(100vw - 535px);
-    height: 100%;
+    
     box-sizing: border-box;
     box-shadow: 4px 0 4px 0 rgba(0,0,0,0.25);
  
@@ -26,9 +31,11 @@ const WoodmarkContainer = styled.div`
 const TextContainer = styled.div`
     font-weight: 700;
     color: white;
-    position: absolute;
-    top: 301px;
-    left: calc((100vw - 535px) * 0.1);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: calc((100vw - 535px) * 0.1);
 
     h1 {
         font-size: 106px;
@@ -43,11 +50,10 @@ const TextContainer = styled.div`
 
     @media (max-width: 1230px){
         height: 100%;
-        position: static;
-        display: flex;
+        padding: 0%;
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        
+        
 
         h1 {
             font-size: 76px;
@@ -60,14 +66,25 @@ const TextContainer = styled.div`
     }
 `;
 
+const FormContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 535px;
+    padding-bottom: 40px;
+    background-color: #333333;
+
+    @media (max-width: 1230px){
+        width: 100%;
+    }
+    
+`;
+
 const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 13px;
-    position: absolute;
-    right: calc((535px - 429px) / 2); /* Centers the form in the right gray space */
-    top: 274px;
 
     input {
         width: 429px;
@@ -92,6 +109,9 @@ const Form = styled.form`
         background-color: #1877F2;
         cursor: pointer;
         color: white;
+        :disabled {
+            opacity: 0.7;
+        }
     }
 
     a {
@@ -102,8 +122,6 @@ const Form = styled.form`
     }
 
     @media (max-width: 1230px){
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     @media (max-width: 480px){
@@ -127,7 +145,9 @@ const Form = styled.form`
 
 export {
     SignUp,
+    LogIn,
     WoodmarkContainer,
     TextContainer,
     Form,
+    FormContainer
 };
