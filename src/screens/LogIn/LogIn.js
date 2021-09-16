@@ -11,7 +11,7 @@ export default function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [inputDisabled, setInputDisabled] = useState(false);
-    const {setUserData, token} = useContext(UserContext);
+    const {userID, token} = useContext(UserContext);
 
     function checkIfTokenIsValid(){
         if (token){
@@ -25,7 +25,7 @@ export default function LogIn() {
     }
 
     function saveDataAndToken(data){
-        setUserData(data.user);
+        localStorage.setItem('userID', data.user.id)
         localStorage.setItem('token', data.token);
     }
 

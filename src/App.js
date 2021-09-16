@@ -4,16 +4,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SignUp from './screens/SignUp/SignUp';
 import LogIn from './screens/LogIn/LogIn';
 import { UserContext } from './contexts/UserContext';
-import { useState } from 'react';
 
 export default function App() {
-  const [userData, setUserData] = useState('');
+  const userID = localStorage.getItem('userID');
   const token = localStorage.getItem('token');
 
   return (
     <S.App>
       <BrowserRouter>
-        <UserContext.Provider value={{userData, setUserData, token}}>
+        <UserContext.Provider value={{userID, token}}>
           <Switch>
             <Route exact path='/'>
               <LogIn />
