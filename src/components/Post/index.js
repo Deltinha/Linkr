@@ -26,10 +26,10 @@ export default function Post({ data, poster, likes }) {
 	function toggleLikeButton(isSelected) {
 		if (isSelected) {
 			// post deslike
-			console.log("deslike"); // TODO not yet implemented
+			// TODO not yet implemented
 		} else {
 			//post like
-			console.log("like"); // TODO not yet implemented
+			// TODO not yet implemented
 		}
 	}
 
