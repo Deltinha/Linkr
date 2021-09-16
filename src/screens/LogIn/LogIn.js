@@ -17,7 +17,10 @@ export default function LogIn() {
         if (token){
             getTrendingHashtags(token)
                 .then(()=>history.push('/timeline'))
-                .catch((res)=>res.response.status === 403 ? alert('sua sessão expirou. logue-se novamente') : '')
+                .catch((res)=>{
+                    if (res.response.status === 403){
+                        alert('sua sessão expirou. logue-se novamente');
+                    }});
           }
     }
 
@@ -64,7 +67,7 @@ export default function LogIn() {
         }
     }
 
-    useEffect(checkIfTokenIsValid,[]);
+    useEffect(checkIfTokenIsValid,[history, token]);
 
     return (
         <S.LogIn>
