@@ -67,21 +67,22 @@ export default function LogIn() {
                     </h2>
                 </S.TextContainer>
             </S.WoodmarkContainer>
-
-            <S.Form onSubmit={inspectInputs}>
-                <input 
-                disabled={inputDisabled} 
-                onChange={(e)=>setEmail(e.target.value)} 
-                value={email} type='email'
-                placeholder='e-mail'/>
-                <input 
-                disabled={inputDisabled} 
-                onChange={(e)=>setPassword(e.target.value)} 
-                value={password} type='password'
-                placeholder='password'/>
-                <input disabled={inputDisabled} type="submit" value="Log In" />
-                <Link to='/sign-up'>First time? Create an account!</Link>
-            </S.Form>
+            <S.FormContainer>
+                <S.Form onSubmit={inspectInputs}>
+                    <input 
+                    disabled={inputDisabled} 
+                    onChange={(e)=>setEmail(e.target.value)} 
+                    value={email} type='email'
+                    placeholder='e-mail'/>
+                    <input 
+                    disabled={inputDisabled} 
+                    onChange={(e)=>setPassword(e.target.value)} 
+                    value={password} type='password'
+                    placeholder='password'/>
+                    <input disabled={inputDisabled} type="submit" value="Log In" />
+                    <Link to='/sign-up'>First time? Create an account!</Link>
+                </S.Form>
+            </S.FormContainer>
         </S.LogIn>
     );
 }

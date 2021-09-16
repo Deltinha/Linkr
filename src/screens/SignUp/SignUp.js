@@ -66,30 +66,33 @@ export default function SignUp (){
                 </S.TextContainer>
             </S.WoodmarkContainer>
 
-            <S.Form onSubmit={inspectInputs}>
-                <input 
-                disabled={inputDisabled} 
-                onChange={(e)=>setEmail(e.target.value)} 
-                value={email} type='email'
-                placeholder='e-mail'/>
-                <input 
-                disabled={inputDisabled} 
-                onChange={(e)=>setPassword(e.target.value)} 
-                value={password} type='password'
-                placeholder='password'/>
-                <input 
-                disabled={inputDisabled} 
-                onChange={(e)=>setUsername(e.target.value)} 
-                value={username} type='text'
-                placeholder='username'/>
-                <input 
-                disabled={inputDisabled} 
-                onChange={(e)=>setPictureUrl(e.target.value)} 
-                value={pictureUrl} type='url'
-                placeholder='picture url'/>
-                <input disabled={inputDisabled} type="submit" value="Sign Up" />
-                <Link to='/'>Switch back to log in</Link>
-            </S.Form>
+            <S.FormContainer>
+                <S.Form onSubmit={inspectInputs}>
+                    <input 
+                    disabled={inputDisabled} 
+                    onChange={(e)=>setEmail(e.target.value)} 
+                    value={email} type='email'
+                    placeholder='e-mail'/>
+                    <input 
+                    disabled={inputDisabled} 
+                    onChange={(e)=>setPassword(e.target.value)} 
+                    value={password} type='password'
+                    placeholder='password'/>
+                    <input 
+                    disabled={inputDisabled} 
+                    onChange={(e)=>setUsername(e.target.value)} 
+                    value={username} type='text'
+                    placeholder='username'/>
+                    <input 
+                    disabled={inputDisabled} 
+                    onChange={(e)=>setPictureUrl(e.target.value)} 
+                    value={pictureUrl} type='url'
+                    placeholder='picture url'/>
+                    <input disabled={inputDisabled} type="submit" value="Sign Up" />
+                    <Link to='/'>Switch back to log in</Link>
+                </S.Form>
+            </S.FormContainer>
+                
         </S.SignUp>
     );
 }
