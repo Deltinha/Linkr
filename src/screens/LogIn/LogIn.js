@@ -11,7 +11,7 @@ export default function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [inputDisabled, setInputDisabled] = useState(false);
-    const {userID, token} = useContext(UserContext);
+    const {token} = useContext(UserContext);
 
     function checkIfTokenIsValid(){
         if (token){

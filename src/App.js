@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SignUp from './screens/SignUp/SignUp';
 import LogIn from './screens/LogIn/LogIn';
 import { UserContext } from './contexts/UserContext';
+import Navbar from './components/shared/Navbar';
 
 export default function App() {
   const userID = localStorage.getItem('userID');
@@ -23,7 +24,7 @@ export default function App() {
             </Route>
 
             <>
-              {/* NAVBAR */}
+              <Navbar />
               {/* SIDEBAR */}
               <Route exact path='/timeline'>
                 
