@@ -21,11 +21,11 @@ const PageTitle = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: left;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 
-	@media screen and(max-width: 800px) {
-		margin-top: 19px;
-		margin-bottom: 19px;
+	@media screen and (max-width: 800px) {
+		margin-bottom: 12px;
+		padding-left: 12px;
 	} ;
 `;
 

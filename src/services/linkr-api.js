@@ -17,4 +17,10 @@ function getAllPosts({ token }) {
 	return promise;
 }
 
+function getHashTag({ token, hashtag }) {
+	const config = formatToBearer(token);
+	const promise = axios.get(`${BASE_URL}/hashtags/${hashtag}/posts`, config);
+	return promise;
+}
+
 export { postSignUp, getAllPosts };

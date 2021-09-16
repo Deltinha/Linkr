@@ -5,7 +5,14 @@ import UserContext from "../../contexts/UserContext";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import Header from "../../components/Header";
-import { PageWrapper, PageTitle } from "../../components/shared/TimeLineStyled";
+import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
+import {
+	MainContainer,
+	TrendingContainer,
+	PostsContainer,
+	NewPostContainer,
+	TimelineWrapper,
+} from "./style";
 
 export default function Timeline() {
 	const { userData } = useContext(UserContext);
@@ -16,13 +23,10 @@ export default function Timeline() {
 		() =>
 			getAllPosts({ token: userData.token }).then(
 				(res) => {
-					console.log("response getAllPosts ", res.data);
 					setTimelinePosts(res.data.posts);
 					setIsLoading(false);
 				},
 				(err) => {
-					console.log("err getAllPosts", err.response.data);
-					console.log(userData.token);
 					alert("Houve uma falha ao obter os posts, por favor atualize a página");
 					setIsLoading(false);
 				}
@@ -37,7 +41,7 @@ export default function Timeline() {
 				<PageTitle>timeline</PageTitle>
 				<MainContainer>
 					<PostsContainer>
-						<NewPostContainer />
+						<NewPostContainer /> {/*TO-DO */}
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
@@ -48,39 +52,9 @@ export default function Timeline() {
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer />
+					<TrendingContainer /> {/*TO-DO */}
 				</MainContainer>
 			</TimelineWrapper>
 		</PageWrapper>
 	);
 }
-
-const TimelineWrapper = styled.div`
-	width: 920px;
-	height: 100%;
-	padding-top: 70px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const NewPostContainer = styled.div`
-	border: 2px solid white;
-	width: 611px;
-	height: 209px;
-	margin-bottom: 29px;
-`;
-
-const PostsContainer = styled.div`
-	margin-right: 25px;
-`;
-
-const TrendingContainer = styled.div`
-	width: 301px;
-	height: 406px;
-	border: 2px solid red;
-`;
-
-const MainContainer = styled.div`
-	display: flex;
-`;
