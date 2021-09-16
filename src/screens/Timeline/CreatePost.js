@@ -1,38 +1,80 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { postPostUser } from "../../services/linkr-api";
+import axios from 'axios';
 
 export default function CreatePost() {
     const [url, setUrl] = useState("");
     const [description, setDescription] = useState("");
-    console.log(url, description);
+    const [waiting, setWaiting] = useState(false);
 
-    function printa(event) {
-        event.preventDefault();
-        let matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
-        let res = matcher.test(url);
-        console.log("res: ", res);
-
-        if(res) {
-            console.log("funcionando");
-        } else {
-            console.log("nao funcionando");
+    const user = {
+        token: "509e97dc-3b67-4f9d-b526-38bd6489345c",
+        user: {
+            avatar: "https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/628/avatar",
+            email: "s@s.com",
+            id: 628
         }
+    };
+
+    function sendingPost(event) {
+        setWaiting(true)
+        event.preventDefault();
+
+        if(validateUrl(url)) {
+            const body = {
+                text: description,
+                link: url
+            }
+            const promise = postPostUser(body, user.token);          
+            promise.then((resp) => {
+                console.log(resp.data);
+                setDescription("");
+                setUrl("");
+            }).catch(() => {
+                alert("Houve um erro ao publicar seu link");
+            })
+        } else {
+            alert("Insira uma URL válida");
+        }
+        setWaiting(false);
     }
     
 
     return (
         <InfoPost>
-            <img src="https://img.elo7.com.br/product/zoom/1CED18C/quadro-decorativo-caveira-arte-moderna-com-moldura-021-quadro-justiceiro.jpg" alt="profile"/>
+            <img src={user.user.avatar} alt="profile"/>
             <FormDescription>
                 <h6>O que você tem pra favoritar hoje?</h6>
-                <Form onSubmit={printa}>
-                    <input type="text" value={url} placeholder="http://..." onChange={(e) => setUrl(e.target.value)} required/>
-                    <input type="text" value={description} placeholder="Muito irado esse link falando de #javascript" onChange={(e) => setDescription(e.target.value)} required/>
-                    <button type="submit">Publicar</button>
+                <Form onSubmit={sendingPost}>
+                    <input
+                        type="text" 
+                        value={url}
+                        placeholder="http://..." 
+                        onChange={(e) => setUrl(e.target.value)} 
+                        disabled={waiting}
+                        required
+                    />
+                    <input 
+                        type="text"
+                        value={description} 
+                        placeholder="Muito irado esse link falando de #javascript" 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        disabled={waiting} 
+                        required
+                     />
+                    <button type="submit" disabled={waiting}>
+                        {waiting ? "Publishing..." : "Publicar"}
+                    </button>
                 </Form>
             </FormDescription>
         </InfoPost>
     );
+}
+
+function validateUrl(url) {
+    let matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
+    return matcher.test(url);
 }
 
 const InfoPost = styled.div`

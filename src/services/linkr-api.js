@@ -7,6 +7,17 @@ function postSignUp(body) {
     return promise;
 }
 
+function postPostUser(body, token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promise = axios.post(`${BASE_URL}/posts`, body, config);
+    return promise;
+}
+
 export {
     postSignUp,
+    postPostUser,
 };
