@@ -1,49 +1,40 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { postPostUser } from "../../services/linkr-api";
-import axios from 'axios';
 
 export default function CreatePost() {
     const [url, setUrl] = useState("");
     const [description, setDescription] = useState("");
     const [waiting, setWaiting] = useState(false);
 
-    const user = {
-        token: "509e97dc-3b67-4f9d-b526-38bd6489345c",
-        user: {
-            avatar: "https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/628/avatar",
-            email: "s@s.com",
-            id: 628
-        }
-    };
-
     function sendingPost(event) {
-        setWaiting(true)
         event.preventDefault();
+        setWaiting(true)
 
         if(validateUrl(url)) {
             const body = {
                 text: description,
                 link: url
             }
-            const promise = postPostUser(body, user.token);          
+            const promise = postPostUser(body, "");          
             promise.then((resp) => {
                 console.log(resp.data);
                 setDescription("");
                 setUrl("");
+                setWaiting(false);
             }).catch(() => {
                 alert("Houve um erro ao publicar seu link");
+                setWaiting(false);
             })
         } else {
             alert("Insira uma URL válida");
+            setWaiting(false);
         }
-        setWaiting(false);
     }
     
-
     return (
         <InfoPost>
-            <img src={user.user.avatar} alt="profile"/>
+            <img src="https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/628/avatar" alt="profile"/>
             <FormDescription>
                 <h6>O que você tem pra favoritar hoje?</h6>
                 <Form onSubmit={sendingPost}>

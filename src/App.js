@@ -3,6 +3,7 @@ import './reset.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SignUp from './screens/SignUp/SignUp';
 import Timeline from './screens/Timeline/Timeline';
+import Hashtag from './screens/Hashtag/Hashtag';
 
 export default function App() {
   return (
@@ -37,7 +38,7 @@ export default function App() {
             </Route>
 
             <Route exact path='/hashtag/:hashtag'>
-
+              <Hashtag />
             </Route>
           </>
         </Switch>
