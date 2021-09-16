@@ -2,8 +2,9 @@ import axios from "axios";
 
 const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/linkr";
 
-function formatToBearer(token) {
-	return { headers: { Authorization: `Bearer ${token}` } };
+function createHeaders(token) {
+	const config = { headers: { Authorization: `Bearer ${token}` } };
+	return config;
 }
 
 function postSignUp(body) {
@@ -12,15 +13,20 @@ function postSignUp(body) {
 }
 
 function getAllPosts({ token }) {
-	const config = formatToBearer(token);
+	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/posts`, config);
 	return promise;
 }
 
-function getHashTag({ token, hashtag }) {
-	const config = formatToBearer(token);
-	const promise = axios.get(`${BASE_URL}/hashtags/${hashtag}/posts`, config);
+function postLogIn(body) {
+	const promise = axios.post(`${BASE_URL}/sign-in`, body);
 	return promise;
 }
 
-export { postSignUp, getAllPosts };
+function getTrendingHashtags(token) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/hashtags/trending`, config);
+	return promise;
+}
+
+export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts };

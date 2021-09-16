@@ -51,4 +51,18 @@ const MainContainer = styled.div`
 	display: flex;
 `;
 
-export { MainContainer, TrendingContainer, PostsContainer, NewPostContainer, TimelineWrapper };
+const WarningMessage = styled.div`
+	display: flex;
+	justify-content: center;
+	font-size: 20px;
+	color: white;
+`;
+
+export {
+	WarningMessage,
+	MainContainer,
+	TrendingContainer,
+	PostsContainer,
+	NewPostContainer,
+	TimelineWrapper,
+};

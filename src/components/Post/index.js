@@ -1,7 +1,7 @@
 import LikeButton from "./LikeButton";
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
-import UserContext from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import ReactHashtag from "react-hashtag";
 import {
 	Hashtag,
@@ -19,7 +19,7 @@ import {
 } from "./style";
 
 export default function Post({ data, poster, likes }) {
-	const userData = useContext(UserContext);
+	const { userData } = useContext(UserContext);
 	const { id, text, link, linkTitle, linkDescription, linkImage } = data;
 	const history = useHistory();
 
@@ -80,7 +80,7 @@ export default function Post({ data, poster, likes }) {
 						<LinkPreview onClick={openLink}>{link}</LinkPreview>
 					</LinkTextsContainer>
 
-					<img src={linkImage} onClick={openLink} />
+					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 				</LinkCard>
 			</MainPostContainer>
 		</PostWrapper>

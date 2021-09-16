@@ -1,10 +1,8 @@
 import { getAllPosts } from "../../services/linkr-api";
 import { useContext, useState, useEffect } from "react";
-import styled from "styled-components";
-import UserContext from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
-import Header from "../../components/Header";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
 import {
 	MainContainer,
@@ -12,16 +10,16 @@ import {
 	PostsContainer,
 	NewPostContainer,
 	TimelineWrapper,
+	WarningMessage,
 } from "./style";
 
 export default function Timeline() {
-	const { userData } = useContext(UserContext);
+	const { userData, token } = useContext(UserContext);
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
 	useEffect(
 		() =>
-			getAllPosts({ token: userData.token }).then(
+			getAllPosts({ token }).then(
 				(res) => {
 					setTimelinePosts(res.data.posts);
 					setIsLoading(false);
@@ -36,7 +34,6 @@ export default function Timeline() {
 
 	return (
 		<PageWrapper>
-			<Header />
 			<TimelineWrapper>
 				<PageTitle>timeline</PageTitle>
 				<MainContainer>
@@ -45,7 +42,7 @@ export default function Timeline() {
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
-							"Nenhum Post Encontrado"
+							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							timelinePosts.map((post) => (
 								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />

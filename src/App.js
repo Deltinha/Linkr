@@ -3,26 +3,22 @@ import "./reset.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import SignUp from "./screens/SignUp/SignUp";
 import Timeline from "./screens/Timeline";
+import LogIn from "./screens/LogIn/LogIn";
 import UserContext from "./contexts/UserContext";
 import { useState } from "react";
 
 export default function App() {
-	const [userData, setUserData] = useState({
-		token: "",
-		user: {
-			id: "",
-			email: "",
-			username: "",
-			avatar: "",
-		},
-	});
+	const [userData, setUserData] = useState("");
+	const token = localStorage.getItem("token");
 
 	return (
 		<S.App>
-			<UserContext.Provider value={{ userData, setUserData }}>
+			<UserContext.Provider value={{ userData, setUserData, token }}>
 				<BrowserRouter>
 					<Switch>
-						<Route exact path="/"></Route>
+						<Route exact path="/">
+							<LogIn />
+						</Route>
 
 						<Route exact path="/sign-up">
 							<SignUp />
