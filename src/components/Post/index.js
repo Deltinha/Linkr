@@ -1,7 +1,5 @@
 import LikeButton from "./LikeButton";
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import ReactHashtag from "react-hashtag";
 import {
 	Hashtag,

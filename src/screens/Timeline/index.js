@@ -18,20 +18,20 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(
-		() =>
-			getAllPosts({ token }).then(
-				(res) => {
-					setTimelinePosts(res.data.posts);
-					setIsLoading(false);
-				},
-				(err) => {
-					alert("Houve uma falha ao obter os posts, por favor atualize a página");
-					setIsLoading(false);
-				}
-			),
-		[]
-	);
+	useEffect(() => fetchPosts(), []);
+
+	function fetchPosts() {
+		getAllPosts({ token }).then(
+			(res) => {
+				setTimelinePosts(res.data.posts);
+				setIsLoading(false);
+			},
+			(err) => {
+				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				setIsLoading(false);
+			}
+		);
+	}
 
 	return (
 		<PageWrapper>
