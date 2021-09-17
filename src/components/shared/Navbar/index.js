@@ -1,7 +1,6 @@
 import { useEffect, Component } from "react";
 import { useHistory } from "react-router";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { getUserInfo } from "../../../services/linkr-api";
 import * as S from './style';
@@ -16,38 +15,27 @@ export default function Navbar (){
     const token = localStorage.getItem('token');
     const [menuOpened, setMenuOpened] = useState(false);
 
-    function toggleShowMenu(input) {
-        if (input){
-            setMenuOpened(true);
-            console.log('mostrei');
-        }
-        else {
-            setMenuOpened(false);
-            console.log('escondi');
-        }
-    }
-
     function logout(){
         localStorage.clear();
         history.push('/');
     }
 
     function goToRoute(route){
-        toggleShowMenu(false);
+        setMenuOpened(false);
         history.push(route);
     }
 
     const MenuHandler = (() => {
         class MenuHandler extends Component {
             handleClickOutside() {
-            toggleShowMenu(false);
+            setMenuOpened(false);
           }
     
           render() {
             if (menuOpened){
                 return (
                     <div>
-                        <S.NavbarMenu onClick={()=>toggleShowMenu(false)}>
+                        <S.NavbarMenu onClick={()=>setMenuOpened(false)}>
                             <FaAngleUp />
                             <img src={`${userAvatar}`} alt='User Avatar'/>
                         </S.NavbarMenu>
@@ -60,7 +48,7 @@ export default function Navbar (){
                     );
             }
             return (
-                <S.NavbarMenu onClick={()=>toggleShowMenu(true)}>
+                <S.NavbarMenu onClick={()=>setMenuOpened(true)}>
                             <FaAngleDown />
                             <img src={`${userAvatar}`} alt='User Avatar'/>
                 </S.NavbarMenu>
