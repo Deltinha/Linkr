@@ -14,9 +14,10 @@ import {
 } from "./style";
 
 export default function Timeline() {
-	const { userData, token } = useContext(UserContext);
+	const { token } = useContext(UserContext);
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+
 	useEffect(
 		() =>
 			getAllPosts({ token }).then(

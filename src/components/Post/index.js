@@ -19,7 +19,6 @@ import {
 } from "./style";
 
 export default function Post({ data, poster, likes }) {
-	const { userData } = useContext(UserContext);
 	const { id, text, link, linkTitle, linkDescription, linkImage } = data;
 	const history = useHistory();
 

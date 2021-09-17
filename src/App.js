@@ -1,20 +1,20 @@
-import * as S from "./AppStyled";
 import "./reset.css";
+import * as S from "./AppStyled";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import SignUp from "./screens/SignUp/SignUp";
 import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
-import UserContext from "./contexts/UserContext";
-import { useState } from "react";
+import { UserContext } from "./contexts/UserContext";
+import Navbar from "./components/shared/Navbar";
 
 export default function App() {
-	const [userData, setUserData] = useState("");
+	const userID = localStorage.getItem("userID");
 	const token = localStorage.getItem("token");
 
 	return (
 		<S.App>
-			<UserContext.Provider value={{ userData, setUserData, token }}>
-				<BrowserRouter>
+			<BrowserRouter>
+				<UserContext.Provider value={{ userID, token }}>
 					<Switch>
 						<Route exact path="/">
 							<LogIn />
@@ -25,10 +25,12 @@ export default function App() {
 						</Route>
 
 						<>
-							{/* NAVBAR */}
+							<Navbar />
 							{/* SIDEBAR */}
-							<Route exact path="/timeline"></Route>
-							<Timeline />
+							<Route exact path="/timeline">
+								<Timeline />
+							</Route>
+
 							<Route exact path="/myposts"></Route>
 
 							<Route exact path="/mylikes"></Route>
@@ -38,8 +40,8 @@ export default function App() {
 							<Route exact path="/hashtag/:hashtag"></Route>
 						</>
 					</Switch>
-				</BrowserRouter>
-			</UserContext.Provider>
+				</UserContext.Provider>
+			</BrowserRouter>
 		</S.App>
 	);
 }

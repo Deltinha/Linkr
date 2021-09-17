@@ -1,23 +1,22 @@
 import * as S from "../../components/shared/SignLogStyled";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { postLogIn, getTrendingHashtags } from "../../services/linkr-api";
-import { UserContext } from "../../contexts/UserContext";
 
 export default function LogIn() {
 	let history = useHistory();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [inputDisabled, setInputDisabled] = useState(false);
-	const { setUserData, token } = useContext(UserContext);
+	const token = localStorage.getItem("token");
 
 	function checkIfTokenIsValid() {
 		if (token) {
 			getTrendingHashtags(token)
 				.then(() => history.push("/timeline"))
-				.catch((err) => {
-					if (err.response.status === 403) {
+				.catch((res) => {
+					if (res.response.status === 403) {
 						alert("sua sessão expirou. logue-se novamente");
 					}
 				});
@@ -25,7 +24,7 @@ export default function LogIn() {
 	}
 
 	function saveDataAndToken(data) {
-		setUserData(data.user);
+		localStorage.setItem("userID", data.user.id);
 		localStorage.setItem("token", data.token);
 	}
 

@@ -29,4 +29,10 @@ function getTrendingHashtags(token) {
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts };
+function getUserInfo({ userID, token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/${userID}`, config);
+	return promise;
+}
+
+export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo };
