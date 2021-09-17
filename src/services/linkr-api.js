@@ -23,8 +23,15 @@ function getTrendingHashtags(token) {
     return promise;
 }
 
+function getUserInfo({userID, token}){
+    const config = createHeaders(token);
+    const promise = axios.get(`${BASE_URL}/users/${userID}`, config);
+    return promise;
+}
+
 export {
     postSignUp,
     postLogIn,
     getTrendingHashtags,
+    getUserInfo,
 };
