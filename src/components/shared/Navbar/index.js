@@ -6,7 +6,6 @@ import { getUserInfo } from "../../../services/linkr-api";
 import * as S from './style';
 import enhanceWithClickOutside from "react-click-outside";
 
-
 export default function Navbar (){
     
     let history = useHistory();
