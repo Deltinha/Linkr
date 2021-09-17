@@ -12,6 +12,12 @@ function postSignUp(body) {
 	return promise;
 }
 
+function getAllPosts({ token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/posts`, config);
+	return promise;
+}
+
 function postLogIn(body) {
 	const promise = axios.post(`${BASE_URL}/sign-in`, body);
 	return promise;
@@ -35,4 +41,4 @@ function getUserInfo({ token, userID }) {
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getUserPosts, getUserInfo };
+export { postSignUp, postLogIn, getAllPosts, getTrendingHashtags, getUserPosts, getUserInfo };

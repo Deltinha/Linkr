@@ -2,9 +2,10 @@ import "./reset.css";
 import * as S from "./AppStyled";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import SignUp from "./screens/SignUp/SignUp";
+import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
-import MyPosts from "./screens/MyPosts";
+import Navbar from "./components/shared/Navbar";
 import UserPosts from "./screens/UserPosts";
 
 export default function App() {
@@ -25,9 +26,11 @@ export default function App() {
 						</Route>
 
 						<>
-							{/* NAVBAR */}
+							<Navbar />
 							{/* SIDEBAR */}
-							<Route exact path="/timeline"></Route>
+							<Route exact path="/timeline">
+								<Timeline />
+							</Route>
 
 							<Route exact path="/myposts">
 								<MyPosts />
