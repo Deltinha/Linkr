@@ -17,7 +17,7 @@ import {
 } from "./style";
 
 export default function Post({ data, poster, likes }) {
-	const { id, text, link, linkTitle, linkDescription, linkImage } = data;
+	const { text, link, linkTitle, linkDescription, linkImage } = data;
 	const history = useHistory();
 
 	function toggleLikeButton(isSelected) {
