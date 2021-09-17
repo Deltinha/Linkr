@@ -18,7 +18,7 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => fetchPosts(), []);
+	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {
 		getAllPosts({ token }).then(
