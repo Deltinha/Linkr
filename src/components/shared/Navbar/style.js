@@ -54,7 +54,8 @@ const NavbarLinks = styled.div`
     padding-top: 10px;
     padding-bottom: 15px;
 
-    a {
+    a,
+    span {
         color: white;
         font-size: 17px;
         text-decoration: none;

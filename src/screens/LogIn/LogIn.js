@@ -1,9 +1,8 @@
 import * as S from '../../components/shared/SignLogStyled';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { postLogIn, getTrendingHashtags } from '../../services/linkr-api';
-import { UserContext } from '../../contexts/UserContext';
 
 export default function LogIn() {
 
@@ -11,7 +10,7 @@ export default function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [inputDisabled, setInputDisabled] = useState(false);
-    const {token} = useContext(UserContext);
+    const token = localStorage.getItem('token');
 
     function checkIfTokenIsValid(){
         if (token){
