@@ -14,7 +14,7 @@ const Navbar = styled.div`
     box-sizing: border-box;
     color: white;
     
-    span {
+    & > span {
         font-size: 49px;
         font-weight: 700;
     }

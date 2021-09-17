@@ -27,50 +27,50 @@ export default function Navbar (){
         }
     }
 
-    const style = {
-        backgroundColor: '#green',
-        border: '2px solid #f0f',
-      };
-
-  const MenuHandler = (() => {
-    class MenuHandler extends Component {
-        handleClickOutside() {
-        toggleShowMenu(false);
-      }
-
-      render() {
-        if (menuOpened){
-            return (
-                <div style={style}>
-                    <S.NavbarMenu onClick={()=>toggleShowMenu(false)}>
-                        <FaAngleDown />
-                        <img src={`${userAvatar}`} alt='User Avatar'/>
-                    </S.NavbarMenu>
-                    <S.NavbarLinks>
-                                <Link to='/myposts'>My posts</Link>
-                                <Link to='/mylikes'>My likes</Link>
-                                <span onClick={()=>logout()}>Logout</span>
-                    </S.NavbarLinks>
-                </div>
-                );
-        }
-        return (
-            <S.NavbarMenu onClick={()=>toggleShowMenu(true)}>
-                        <FaAngleDown />
-                        <img src={`${userAvatar}`} alt='User Avatar'/>
-            </S.NavbarMenu>
-        );
-      }
-    }
-    return enhanceWithClickOutside(MenuHandler);
-  })();
-
     function logout(){
         localStorage.clear();
         history.push('/');
     }
 
-    function loadAvatar (){
+    function goToRoute(route){
+        toggleShowMenu(false);
+        history.push(route);
+    }
+
+    const MenuHandler = (() => {
+        class MenuHandler extends Component {
+            handleClickOutside() {
+            toggleShowMenu(false);
+          }
+    
+          render() {
+            if (menuOpened){
+                return (
+                    <div>
+                        <S.NavbarMenu onClick={()=>toggleShowMenu(false)}>
+                            <FaAngleDown />
+                            <img src={`${userAvatar}`} alt='User Avatar'/>
+                        </S.NavbarMenu>
+                        <S.NavbarLinks>
+                                    <span onClick={()=>goToRoute('/myposts')} >My posts</span>
+                                    <span onClick={()=>goToRoute('/mylikes')} >My likes</span>
+                                    <span onClick={()=>logout()}>Logout</span>
+                        </S.NavbarLinks>
+                    </div>
+                    );
+            }
+            return (
+                <S.NavbarMenu onClick={()=>toggleShowMenu(true)}>
+                            <FaAngleDown />
+                            <img src={`${userAvatar}`} alt='User Avatar'/>
+                </S.NavbarMenu>
+            );
+          }
+        }
+        return enhanceWithClickOutside(MenuHandler);
+      })();
+
+      function loadAvatar (){
         getUserInfo({userID, token})
             .then((res)=>setUserAvatar(res.data.user.avatar))
             .catch((res)=>{
@@ -81,7 +81,7 @@ export default function Navbar (){
             });
     }
 
-    useEffect(loadAvatar,[userID, token, history]);
+      useEffect(loadAvatar,[userID, token, history]);
 
         return (
             <S.Navbar>
