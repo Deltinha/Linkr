@@ -1,6 +1,6 @@
 import { useEffect, Component } from "react";
 import { useHistory } from "react-router";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import { getUserInfo } from "../../../services/linkr-api";
@@ -48,7 +48,7 @@ export default function Navbar (){
                 return (
                     <div>
                         <S.NavbarMenu onClick={()=>toggleShowMenu(false)}>
-                            <FaAngleDown />
+                            <FaAngleUp />
                             <img src={`${userAvatar}`} alt='User Avatar'/>
                         </S.NavbarMenu>
                         <S.NavbarLinks>
