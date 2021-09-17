@@ -21,24 +21,24 @@ export default function UserPosts() {
 	const [isLoading, setIsLoading] = useState(true);
 	const { token } = useContext(UserContext);
 
+	useEffect(fetchPosts, [token, id]);
+
+	function fetchPosts() {
+		getUserPosts({ token, userID: id }).then(
+			(res) => {
+				setPosts(res.data.posts);
+				setIsLoading(false);
+			},
+			() => {
+				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				setIsLoading(false);
+			}
+		);
+	}
+
 	getUserInfo({ token, userID: id }).then(
 		(res) => setName(res.data.user.username),
 		() => alert("Houve uma falha ao encontrar o usuário buscado")
-	);
-
-	useEffect(
-		() =>
-			getUserPosts({ token, userID: id }).then(
-				(res) => {
-					setPosts(res.data.posts);
-					setIsLoading(false);
-				},
-				() => {
-					alert("Houve uma falha ao obter os posts, por favor atualize a página");
-					setIsLoading(false);
-				}
-			),
-		[]
 	);
 
 	return (

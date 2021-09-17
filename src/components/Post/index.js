@@ -61,7 +61,9 @@ export default function Post({ data, poster, likes }) {
 				<PostText>
 					<ReactHashtag
 						renderHashtag={(hashtagValue) => (
-							<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
+							<Hashtag onClick={() => openHashtag(hashtagValue)} key={hashtagValue}>
+								{hashtagValue}
+							</Hashtag>
 						)}
 					>
 						{text}

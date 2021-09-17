@@ -7,6 +7,7 @@ import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/shared/Navbar";
 import UserPosts from "./screens/UserPosts";
+import MyPosts from "./screens/MyPosts";
 
 export default function App() {
 	const userID = localStorage.getItem("userID");

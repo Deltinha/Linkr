@@ -1,5 +1,5 @@
 import { UserContext } from "../../contexts/UserContext";
-import { useContext, useState, useParams, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import {
@@ -18,20 +18,20 @@ export default function MyPosts() {
 	const [isLoading, setIsLoading] = useState(true);
 	const { token, userID } = useContext(UserContext);
 
-	useEffect(
-		() =>
-			getUserPosts({ token, userID }).then(
-				(res) => {
-					setPosts(res.data.posts);
-					setIsLoading(false);
-				},
-				() => {
-					alert("Houve uma falha ao obter os posts, por favor atualize a página");
-					setIsLoading(false);
-				}
-			),
-		[]
-	);
+	useEffect(fetchPosts, [token, userID]);
+
+	function fetchPosts() {
+		getUserPosts({ token, userID }).then(
+			(res) => {
+				setPosts(res.data.posts);
+				setIsLoading(false);
+			},
+			() => {
+				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				setIsLoading(false);
+			}
+		);
+	}
 
 	return (
 		<PageWrapper>
