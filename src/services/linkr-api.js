@@ -35,4 +35,10 @@ function getUserInfo({ userID, token }) {
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo };
+function getLikedPosts({ token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/posts/liked`, config);
+	return promise;
+}
+
+export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, getLikedPosts };

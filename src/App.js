@@ -6,6 +6,7 @@ import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/shared/Navbar";
+import MyLikes from "./screens/MyLikes";
 
 export default function App() {
 	const userID = localStorage.getItem("userID");
@@ -33,7 +34,9 @@ export default function App() {
 
 							<Route exact path="/myposts"></Route>
 
-							<Route exact path="/mylikes"></Route>
+							<Route exact path="/mylikes">
+								<MyLikes />
+							</Route>
 
 							<Route exact path="/user/:id"></Route>
 
