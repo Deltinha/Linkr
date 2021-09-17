@@ -9,9 +9,9 @@ import {
 	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
-	TimelineWrapper,
+	PageContentWrapper,
 	WarningMessage,
-} from "./style";
+} from "../../components/shared/CommonStyled";
 
 export default function Timeline() {
 	const { token } = useContext(UserContext);
@@ -35,7 +35,7 @@ export default function Timeline() {
 
 	return (
 		<PageWrapper>
-			<TimelineWrapper>
+			<PageContentWrapper>
 				<PageTitle>timeline</PageTitle>
 				<MainContainer>
 					<PostsContainer>
@@ -52,7 +52,7 @@ export default function Timeline() {
 					</PostsContainer>
 					<TrendingContainer /> {/*TO-DO */}
 				</MainContainer>
-			</TimelineWrapper>
+			</PageContentWrapper>
 		</PageWrapper>
 	);
 }

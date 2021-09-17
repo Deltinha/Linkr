@@ -29,7 +29,7 @@ const PageTitle = styled.div`
 	} ;
 `;
 
-const TimelineWrapper = styled.div`
+const PageContentWrapper = styled.div`
 	width: 930px;
 	height: 100%;
 	padding-top: 40px;
@@ -93,7 +93,7 @@ export {
 	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
-	TimelineWrapper,
+	PageContentWrapper,
 	PageWrapper,
 	PageTitle,
 };

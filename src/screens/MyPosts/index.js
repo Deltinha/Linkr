@@ -8,7 +8,7 @@ import {
 	MainContainer,
 	TrendingContainer,
 	PostsContainer,
-	TimelineWrapper,
+	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
 import { getUserPosts } from "../../services/linkr-api";
@@ -35,7 +35,7 @@ export default function MyPosts() {
 
 	return (
 		<PageWrapper>
-			<TimelineWrapper>
+			<PageContentWrapper>
 				<PageTitle>{`my posts`}</PageTitle>
 				<MainContainer>
 					<PostsContainer>
@@ -51,7 +51,7 @@ export default function MyPosts() {
 					</PostsContainer>
 					<TrendingContainer /> {/*TO-DO */}
 				</MainContainer>
-			</TimelineWrapper>
+			</PageContentWrapper>
 		</PageWrapper>
 	);
 }
