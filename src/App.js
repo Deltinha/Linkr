@@ -6,6 +6,7 @@ import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/shared/Navbar";
+import Hashtag from "./screens/Hashtag";
 
 export default function App() {
 	const userID = localStorage.getItem("userID");
@@ -37,7 +38,9 @@ export default function App() {
 
 							<Route exact path="/user/:id"></Route>
 
-							<Route exact path="/hashtag/:hashtag"></Route>
+							<Route exact path="/hashtag/:hashtag">
+								<Hashtag/>
+							</Route>
 						</>
 					</Switch>
 				</UserContext.Provider>
