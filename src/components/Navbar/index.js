@@ -71,7 +71,7 @@ export default function Navbar (){
 
         return (
             <S.Navbar>
-                <span>linkr</span>
+                <span onClick={()=>goToRoute('/timeline')}>linkr</span>
                 <MenuHandler />
             </S.Navbar>
         );
