@@ -15,23 +15,45 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import { postDislike, postLike } from "../../services/linkr-api";
+import { useEffect, useState } from "react";
 
 export default function Post({ data, poster, likes }) {
-	const { text, link, linkTitle, linkDescription, linkImage } = data;
+	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
 	const history = useHistory();
+	const token = localStorage.getItem('token');
+	const userID = localStorage.getItem('userID');
+	const [likedByMe, setLikedByMe] = useState(false);
+	const [likesCount, setLikesCount] = useState(likes.length);
 
-	function toggleLikeButton(isSelected) {
-		if (isSelected) {
-			// post deslike
-			// TODO not yet implemented
+	function toggleLikeButton() {
+		if (likedByMe) {
+			setLikesCount(likesCount - 1);
+			setLikedByMe(false);
+			postDislike({id, token})
+				.then(()=>console.log('disliked'))
+				.catch(()=>{
+					setLikedByMe(true);
+					setLikesCount(likesCount + 1);
+				});
 		} else {
-			//post like
-			// TODO not yet implemented
+			setLikesCount(likesCount + 1);
+			setLikedByMe(true);
+			postLike({id, token})
+				.then(()=>console.log('liked'))
+				.catch(()=>{
+					setLikedByMe(false);
+					setLikesCount(likesCount - 1);
+				});
 		}
 	}
-
-	function wasLikedByMe() {
-		return false; // TODO not yet implemented
+	
+	function fillLikedByMe() {
+		likes.map((like)=>{
+			if (like.userId === Number(userID)) {
+				setLikedByMe(true);
+			}
+		});
 	}
 
 	function goToPosterPage() {
@@ -47,12 +69,14 @@ export default function Post({ data, poster, likes }) {
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
 
+	useEffect(fillLikedByMe,[]);
+
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
 				<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
-				<LikeButton toggleSelection={toggleLikeButton} wasLikedByMe={wasLikedByMe} />
-				{likes.length} likes
+				<LikeButton toggleSelection={toggleLikeButton} likedByMe={likedByMe} setLikedByMe={setLikedByMe}/>
+				{likesCount} likes
 			</AvatarAndLikesContainer>
 
 			<MainPostContainer>
