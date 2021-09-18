@@ -1,5 +1,5 @@
-import { postNewPost } from "../../services/linkr-api";
-import { useState } from "react";
+import { getUserInfo, postNewPost } from "../../services/linkr-api";
+import { useState, useEffect } from "react";
 import { Container, BoxDescription, BoxPost, Form } from "./style";
 
 export default function CreatePost({fetchPosts}) {
@@ -7,7 +7,18 @@ export default function CreatePost({fetchPosts}) {
     const [url, setUrl] = useState("");
     const [description, setDescription] = useState("");
     const [waiting, setWaiting] = useState(false);
+    const [userAvatar, setUserAvatar] = useState('');
+    const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
+
+    function loadAvatar (){
+        getUserInfo({userID, token})
+            .then((res)=>setUserAvatar(res.data.user.avatar))
+            .catch((res)=>{
+                alert("Erro");
+            });
+    }
+    useEffect(loadAvatar,[]);
 
     function sendPost(event) {
         event.preventDefault();
@@ -39,7 +50,7 @@ export default function CreatePost({fetchPosts}) {
     return (
             <Container>
                <BoxPost>
-                    <img src="https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/628/avatar" alt="profile"/>
+                    <img src={userAvatar} alt="profile"/>
                     <BoxDescription>
                         <h6>O que você tem pra favoritar hoje?</h6>
                         <Form onSubmit={sendPost}>
