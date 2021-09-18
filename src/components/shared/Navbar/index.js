@@ -1,7 +1,6 @@
-import { useEffect, Component } from "react";
+import { useEffect, Component, useState } from "react";
 import { useHistory } from "react-router";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { useState } from "react/cjs/react.development";
 import { getUserInfo } from "../../../services/linkr-api";
 import * as S from './style';
 import enhanceWithClickOutside from "react-click-outside";
