@@ -1,6 +1,5 @@
 import { getAllPosts } from "../../services/linkr-api";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
@@ -14,10 +13,10 @@ import {
 } from "./style";
 
 export default function Timeline() {
-	const { token } = useContext(UserContext);
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
+	const token = localStorage.getItem('token');
+	
 	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {

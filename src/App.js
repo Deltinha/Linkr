@@ -8,8 +8,8 @@ import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/shared/Navbar";
 
 export default function App() {
-	const userID = localStorage.getItem("userID");
-	const token = localStorage.getItem("token");
+	let userID = localStorage.getItem("userID");
+	let token = localStorage.getItem("token");
 
 	return (
 		<S.App>
