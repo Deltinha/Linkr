@@ -17,6 +17,7 @@ const Navbar = styled.div`
     & > span {
         font-size: 49px;
         font-weight: 700;
+        cursor: pointer;
     }
 `;
 
@@ -54,8 +55,8 @@ const NavbarLinks = styled.div`
     padding-top: 10px;
     padding-bottom: 15px;
 
-    a,
     span {
+        cursor: pointer;
         color: white;
         font-size: 17px;
         text-decoration: none;
