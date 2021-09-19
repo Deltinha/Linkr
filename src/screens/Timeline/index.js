@@ -52,6 +52,7 @@ export default function Timeline() {
 							))
 						)}
 					</PostsContainer>
+					<TrendingContainer /> 
 				</MainContainer>
 			</TimelineWrapper>
 		</PageWrapper>
