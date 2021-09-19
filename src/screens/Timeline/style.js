@@ -36,6 +36,17 @@ const PostsContainer = styled.div`
 	}
 `;
 
+const TrendingContainer = styled.div`
+	width: 301px;
+	height: 406px;
+	border: 2px solid red;
+	border-radius: 11px;
+
+	@media screen and (max-width: 800px) {
+		display: none;
+	}
+`;
+
 const MainContainer = styled.div`
 	display: flex;
 `;
@@ -50,6 +61,7 @@ const WarningMessage = styled.div`
 export {
 	WarningMessage,
 	MainContainer,
+	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
 	TimelineWrapper,

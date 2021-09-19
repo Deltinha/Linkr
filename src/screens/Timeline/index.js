@@ -3,15 +3,14 @@ import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
-import TrendingContainer from "../../components/TrendingContainer";
 import {
 	MainContainer,
+	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
 	TimelineWrapper,
 	WarningMessage,
 } from "./style";
-
 
 export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
