@@ -26,7 +26,7 @@ export default function App() {
 
 						<>
 							<Navbar />
-							{/* SIDEBAR */}
+
 							<Route exact path="/timeline">
 								<Timeline />
 							</Route>
