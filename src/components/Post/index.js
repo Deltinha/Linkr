@@ -83,11 +83,11 @@ export default function Post({ data, poster, likes }) {
 		}
 		if (likesCount === 2) {
 			const findUser = (likes.find((like)=>like['user.id'] !== Number(userID))['user.username']);
-			const findAnotherUser = (likes.find((like)=>(like['user.id'] !== Number(userID) && like['user.username'] !== findUser))['user.username']);
 			if (likedByMe) {
 				setTooltipText(`Você e ${findUser}.`)	
 			}
 			else {
+				const findAnotherUser = (likes.find((like)=>(like['user.id'] !== Number(userID) && like['user.username'] !== findUser))['user.username']);
 				setTooltipText(`${findUser} e ${findAnotherUser}.`)
 			}
 		}
