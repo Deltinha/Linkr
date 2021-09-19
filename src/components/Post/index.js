@@ -15,10 +15,12 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import DeleteButton from "./DeleteButton";
 
 export default function Post({ data, poster, likes }) {
-	const { text, link, linkTitle, linkDescription, linkImage } = data;
+	const { text, link, linkTitle, linkDescription, linkImage, user, id } = data;
 	const history = useHistory();
+	const userID = localStorage.getItem('userID')
 
 	function toggleLikeButton(isSelected) {
 		if (isSelected) {
@@ -47,12 +49,14 @@ export default function Post({ data, poster, likes }) {
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
 
+	
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
 				<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
 				<LikeButton toggleSelection={toggleLikeButton} wasLikedByMe={wasLikedByMe} />
 				{likes.length} likes
+				{( user.id === Number(userID) ) && <DeleteButton id={id}/>}
 			</AvatarAndLikesContainer>
 
 			<MainPostContainer>

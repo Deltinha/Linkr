@@ -35,4 +35,10 @@ function getUserInfo({ userID, token }) {
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo };
+function deletePost({ id, token }){
+	const config = createHeaders(token);
+	const promise = axios.delete(`${BASE_URL}/posts/${id}`, config);
+	return promise;
+}
+
+export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, deletePost };
