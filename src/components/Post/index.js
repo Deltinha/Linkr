@@ -122,7 +122,7 @@ export default function Post({ data, poster, likes }) {
 								{likesCount} likes
 							</p>
 							<ReactTooltip id={`tolltip${id}`} effect='solid' place='bottom'>
-								<span style={{ display: 'inline-block', width: '100px' }}>{tooltipText}</span>
+								<span style={{ display: 'flex', justifyContent: 'center', width:'100px' }}>{tooltipText}</span>
 							</ReactTooltip>
 						</div>
 					:
