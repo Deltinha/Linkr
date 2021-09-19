@@ -52,7 +52,6 @@ export default function Timeline() {
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> {/*TO-DO */}
 				</MainContainer>
 			</TimelineWrapper>
 		</PageWrapper>
