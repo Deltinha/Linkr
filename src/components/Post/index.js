@@ -56,7 +56,6 @@ export default function Post({ data, poster, likes }) {
 				<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
 				<LikeButton toggleSelection={toggleLikeButton} wasLikedByMe={wasLikedByMe} />
 				{likes.length} likes
-				{( user.id === Number(userID) ) && <DeleteButton id={id}/>}
 			</AvatarAndLikesContainer>
 
 			<MainPostContainer>
@@ -84,6 +83,8 @@ export default function Post({ data, poster, likes }) {
 					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 				</LinkCard>
 			</MainPostContainer>
+
+			{( user.id === Number(userID) ) && <DeleteButton id={id}/>}
 		</PostWrapper>
 	);
 }
