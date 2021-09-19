@@ -106,6 +106,7 @@ export default function Post({ data, poster, likes }) {
 
 	useEffect(generatelikeTooltipText,[likesCount])
 	
+	
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
@@ -116,10 +117,12 @@ export default function Post({ data, poster, likes }) {
 				{
 					(likesCount > 0) ?
 						<div>
-							<p data-tip={tooltipText}>
+							<p data-tip data-for={`tolltip${id}`}>
 								{likesCount} likes
 							</p>
-							<ReactTooltip effect='solid' place='bottom'/>
+							<ReactTooltip id={`tolltip${id}`} effect='solid' place='bottom'>
+								<span style={{ display: 'inline-block', width: '100px' }}>{tooltipText}</span>
+							</ReactTooltip>
 						</div>
 					:
 					<span>{likesCount} likes</span>
