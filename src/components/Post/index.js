@@ -33,7 +33,7 @@ export default function Post({ data, poster, likes }) {
 			setLikesCount(likesCount - 1);
 			setLikedByMe(false);
 			postDislike({id, token})
-				.then(()=>console.log('disliked'))
+				.then(()=>null)
 				.catch(()=>{
 					setLikedByMe(true);
 					setLikesCount(likesCount + 1);
@@ -42,7 +42,7 @@ export default function Post({ data, poster, likes }) {
 			setLikesCount(likesCount + 1);
 			setLikedByMe(true);
 			postLike({id, token})
-				.then(()=>console.log('liked'))
+				.then(()=>null)
 				.catch(()=>{
 					setLikedByMe(false);
 					setLikesCount(likesCount - 1);
