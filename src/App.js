@@ -5,11 +5,11 @@ import SignUp from "./screens/SignUp/SignUp";
 import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
-import Navbar from "./components/shared/Navbar";
+import Navbar from "./components/Navbar";
 
 export default function App() {
-	const userID = localStorage.getItem("userID");
-	const token = localStorage.getItem("token");
+	let userID = localStorage.getItem("userID");
+	let token = localStorage.getItem("token");
 
 	return (
 		<S.App>
