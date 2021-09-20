@@ -10,15 +10,14 @@ export default function DeleteButton({id, fetchPosts}){
     const [isOpen, setIsOpen] = useState(false);
     const [requestLoading, setRequestLoading] = useState(false);
 
-    function sendDeleteRequest(){
+    function sendDeleteRequest(e){
+            e.preventDefault();
             setRequestLoading(true);
-            deletePost({id, token})
-            .then(()=>{
+            deletePost({id, token}).then(()=>{
                 setIsOpen(false);
                 setRequestLoading(false);
                 fetchPosts();
-            })
-            .catch(()=>{
+            }).catch(()=>{
                 setIsOpen(false);
                 setRequestLoading(false);
                 alert('não foi possível excluir o post.');
