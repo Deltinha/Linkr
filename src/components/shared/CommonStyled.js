@@ -21,8 +21,9 @@ const PageTitle = styled.div`
 	justify-content: left;
 	margin-bottom: 30px;
 
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		margin-bottom: 12px;
+		width: 611px;
 		padding-left: 12px;
 	} ;
 `;
@@ -34,7 +35,7 @@ const PageContentWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		width: 100vw;
 		max-width: 100vw;
 		padding-top: 20px;
@@ -47,7 +48,7 @@ const NewPostContainer = styled.div`
 	height: 209px;
 	margin-bottom: 29px;
 	border-radius: 11px;
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		width: 100vw;
 		height: 164px;
 	}
@@ -55,7 +56,7 @@ const NewPostContainer = styled.div`
 
 const PostsContainer = styled.div`
 	margin-right: 25px;
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		margin-right: 0px;
 	}
 `;
@@ -65,7 +66,7 @@ const TrendingContainer = styled.div`
 	height: 406px;
 	border: 2px solid red;
 	border-radius: 11px;
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		display: none;
 	}
 `;
