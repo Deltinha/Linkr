@@ -2,7 +2,6 @@ import { getAllPosts } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
-import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
 import {
 	PageWrapper,
