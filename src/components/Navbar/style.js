@@ -17,6 +17,12 @@ const Navbar = styled.div`
     & > span {
         font-size: 49px;
         font-weight: 700;
+        cursor: pointer;
+        
+        
+        @media (max-width: 1230px){
+            font-size: 45px;
+        }
     }
 `;
 
@@ -29,6 +35,10 @@ const NavbarMenu = styled.div`
         font-size: 25px;
         transform: rotate(0);
         cursor: pointer;
+
+        @media (max-width: 1230px){
+            font-size: 20.5px;
+        }
     }
 
     img {
@@ -37,6 +47,11 @@ const NavbarMenu = styled.div`
         height: 53px;
         object-fit: cover;
         border-radius: 50%;
+        
+        @media (max-width: 1230px){
+            width: 44px;
+            height: 44px;
+        }
     }
 `;
 
@@ -54,11 +69,19 @@ const NavbarLinks = styled.div`
     padding-top: 10px;
     padding-bottom: 15px;
 
-    a,
+    @media (max-width: 1230px){
+        gap: 9px;
+    }
+
     span {
+        cursor: pointer;
         color: white;
         font-size: 17px;
         text-decoration: none;
+
+        @media (max-width: 1230px){
+            font-size: 15px;
+        }
     }
 `;
 

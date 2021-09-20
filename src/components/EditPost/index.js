@@ -1,10 +1,10 @@
-import styled from "styled-components";
 import ReactHashtag from "react-hashtag"
 import { FaPencilAlt } from "react-icons/fa";
 import { useState, useRef, useEffect } from "react";
 import { Hashtag, PostText } from "../Post/style";
 import { useHistory } from "react-router-dom";
 import { releasePost } from "../../services/linkr-api";
+import { IconBox, BoxForm, Form } from "./style";
 
 export default function EditPost({data, fetchPosts}) {
 
@@ -30,7 +30,7 @@ export default function EditPost({data, fetchPosts}) {
         }    
     }, [clicked]);
 
-    function printa(){
+    function changeValues(){
         setCliked(!clicked);
         setText(data.text)
     }
@@ -62,7 +62,7 @@ export default function EditPost({data, fetchPosts}) {
 
     return (<>
         <IconBox>
-            <FaPencilAlt onClick={printa} /> 
+            <FaPencilAlt onClick={changeValues} /> 
         </IconBox>
         <PostText>
             {clicked ?
@@ -92,45 +92,3 @@ export default function EditPost({data, fetchPosts}) {
 
     </>);
 }
-
-const IconBox = styled.div`
-    background-color: red;
-    position: absolute;
-    right: 25px;
-    top: 5px;
-    cursor: pointer;
-`;
-
-const BoxForm = styled.div `
-    width:100%;
-    background-color: #fff;
-    border-radius: 7px;
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column; 
-
-    textarea {
-        font-family: Lato;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 17px;
-        min-height: 44px;
-        padding-left: 13px;
-        border-radius: 5px;
-        margin-bottom: 5px;
-        border: none;
-        background-color: #fff;
-        color: #4C4C4C;
-
-        :focus {
-            box-shadow: 0 0 0 0;
-            outline: 0;   
-        }
-    }
-    @media screen and (max-width: 600px) {
-		width: 100%;
-		height: 164px;
-	}
-`;

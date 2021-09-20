@@ -16,11 +16,12 @@ import {
 	PostWrapper,
 } from "./style";
 import EditPost from "../EditPost";
+import DeleteButton from "./DeleteButton";
 
-export default function Post({ data, poster, likes, fetchPosts}) {
-	const { text, link, linkTitle, linkDescription, linkImage } = data;
+export default function Post({ data, poster, likes, fetchPosts }) {
+	const { text, link, linkTitle, linkDescription, linkImage, user, id } = data;
 	const history = useHistory();
-    const userID = localStorage.getItem('userID');
+	const userID = localStorage.getItem('userID')
 
 	function toggleLikeButton(isSelected) {
 		if (isSelected) {
@@ -49,6 +50,7 @@ export default function Post({ data, poster, likes, fetchPosts}) {
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
 
+	
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
@@ -60,7 +62,10 @@ export default function Post({ data, poster, likes, fetchPosts}) {
 			<MainPostContainer>
 				<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
 				{data.user.id === Number(userID) ? 
-					<EditPost data={data} fetchPosts={fetchPosts}/> 
+					<>
+						<EditPost data={data} fetchPosts={fetchPosts}/> 
+						<DeleteButton fetchPosts={fetchPosts} id={id}/>
+					</>
 					: 
 					<PostText>
 						<ReactHashtag
@@ -72,6 +77,7 @@ export default function Post({ data, poster, likes, fetchPosts}) {
 						</ReactHashtag>
 					</PostText>
 				}
+
 				<LinkCard>
 					<LinkTextsContainer>
 						<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
@@ -84,6 +90,7 @@ export default function Post({ data, poster, likes, fetchPosts}) {
 					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 				</LinkCard>
 			</MainPostContainer>
+
 		</PostWrapper>
 	);
 }
