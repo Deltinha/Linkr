@@ -29,7 +29,13 @@ function getTrendingHashtags({token}) {
 	return promise;
 }
 
-function getUserInfo({ userID, token }) {
+function getUserPosts({ token, userID }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/${userID}/posts`, config);
+	return promise;
+}
+
+function getUserInfo({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/${userID}`, config);
 	return promise;
@@ -41,4 +47,4 @@ function deletePost({ id, token }){
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, deletePost };
+export { postSignUp, postLogIn, getAllPosts, getTrendingHashtags, getUserPosts, getUserInfo, deletePost };

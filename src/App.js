@@ -8,7 +8,8 @@ import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/Navbar";
 import { ModalProvider } from "styled-react-modal";
 import { ModalBackground } from "./components/Post/DeleteButton/style";
-
+import UserPosts from "./screens/UserPosts";
+import MyPosts from "./screens/MyPosts";
 
 export default function App() {
 	let userID = localStorage.getItem("userID");
@@ -35,11 +36,15 @@ export default function App() {
 									<Timeline />
 								</Route>
 
-								<Route exact path="/myposts"></Route>
+							<Route exact path="/myposts">
+								<MyPosts />
+							</Route>
 
 								<Route exact path="/mylikes"></Route>
 
-								<Route exact path="/user/:id"></Route>
+							<Route exact path="/user/:id">
+								<UserPosts />
+							</Route>
 
 								<Route exact path="/hashtag/:hashtag"></Route>
 							</>
