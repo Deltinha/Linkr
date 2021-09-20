@@ -29,7 +29,13 @@ function getTrendingHashtags({token}) {
 	return promise;
 }
 
-function getUserInfo({ userID, token }) {
+function getUserPosts({ token, userID }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/${userID}/posts`, config);
+	return promise;
+}
+
+function getUserInfo({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/${userID}`, config);
 	return promise;
