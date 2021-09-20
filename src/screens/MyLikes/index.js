@@ -1,5 +1,6 @@
-import { UserContext } from "../../contexts/UserContext";
+import { getLikedPosts } from "../../services/linkr-api";
 import { useContext, useState, useEffect } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import {
@@ -11,22 +12,21 @@ import {
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
-import { getUserPosts } from "../../services/linkr-api";
 
-export default function MyPosts() {
-	const [posts, setPosts] = useState([]);
+export default function MyLikes() {
+	const { token } = useContext(UserContext);
+	const [likedPosts, setLikedPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const { token, userID } = useContext(UserContext);
 
-	useEffect(fetchPosts, [token, userID]);
+	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {
-		getUserPosts({ token, userID }).then(
+		getLikedPosts({ token }).then(
 			(res) => {
-				setPosts(res.data.posts);
+				setLikedPosts(res.data.posts);
 				setIsLoading(false);
 			},
-			() => {
+			(err) => {
 				alert("Houve uma falha ao obter os posts, por favor atualize a página");
 				setIsLoading(false);
 			}
@@ -36,20 +36,20 @@ export default function MyPosts() {
 	return (
 		<PageWrapper>
 			<PageContentWrapper>
-				<PageTitle>{`my posts`}</PageTitle>
+				<PageTitle>my likes</PageTitle>
 				<MainContainer>
 					<PostsContainer>
 						{isLoading ? (
 							<Loader />
-						) : posts.length === 0 ? (
+						) : likedPosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							posts.map((post) => (
+							likedPosts.map((post) => (
 								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer />
+					<TrendingContainer /> {/*TO-DO */}
 				</MainContainer>
 			</PageContentWrapper>
 		</PageWrapper>

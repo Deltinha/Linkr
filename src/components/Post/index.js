@@ -5,7 +5,7 @@ import EditPost from "../EditPost";
 import DeleteButton from "./DeleteButton";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 import {
 	Hashtag,
 	LinkPreview,
@@ -24,36 +24,38 @@ import {
 export default function Post({ data, poster, likes, fetchPosts }) {
 	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
 	const history = useHistory();
-	const token = localStorage.getItem('token');
-	const userID = localStorage.getItem('userID');
-	const [likedByMe, setLikedByMe] = useState(Boolean(likes.find((like)=>like['user.id'] === Number(userID))));
+	const token = localStorage.getItem("token");
+	const userID = localStorage.getItem("userID");
+	const [likedByMe, setLikedByMe] = useState(
+		Boolean(likes.find((like) => like["user.id"] === Number(userID)))
+	);
 	const [likesCount, setLikesCount] = useState(likes.length);
-	const [tooltipText, setTooltipText] = useState('');
+	const [tooltipText, setTooltipText] = useState("");
 
 	function toggleLikeButton() {
 		if (likedByMe) {
 			setLikesCount(likesCount - 1);
 			setLikedByMe(false);
-			postDislike({id, token})
-				.then(()=>null)
-				.catch(()=>{
+			postDislike({ id, token })
+				.then(() => null)
+				.catch(() => {
 					setLikedByMe(true);
 					setLikesCount(likesCount + 1);
 				});
 		} else {
 			setLikesCount(likesCount + 1);
 			setLikedByMe(true);
-			postLike({id, token})
-				.then(()=>null)
-				.catch(()=>{
+			postLike({ id, token })
+				.then(() => null)
+				.catch(() => {
 					setLikedByMe(false);
 					setLikesCount(likesCount - 1);
 				});
 		}
 	}
-	
+
 	function fillLikedByMe() {
-		likes.map((like)=>{
+		likes.map((like) => {
 			if (like.userId === Number(userID)) {
 				setLikedByMe(true);
 			}
@@ -74,70 +76,76 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
 
-	function generatelikeTooltipText(){
+	function generatelikeTooltipText() {
 		if (likesCount === 1) {
 			if (likedByMe) {
-				setTooltipText('Você.');
-			}
-			else {
+				setTooltipText("Você.");
+			} else {
 				setTooltipText(likes[0]["user.username"]);
 			}
 		}
 		if (likesCount === 2) {
-			const findUser = (likes.find((like)=>like['user.id'] !== Number(userID))['user.username']);
+			const findUser = likes.find((like) => like["user.id"] !== Number(userID))["user.username"];
 			if (likedByMe) {
-				setTooltipText(`Você e ${findUser}.`)	
-			}
-			else {
-				const findAnotherUser = (likes.find((like)=>(like['user.id'] !== Number(userID) && like['user.username'] !== findUser))['user.username']);
-				setTooltipText(`${findUser} e ${findAnotherUser}.`)
+				setTooltipText(`Você e ${findUser}.`);
+			} else {
+				const findAnotherUser = likes.find(
+					(like) => like["user.id"] !== Number(userID) && like["user.username"] !== findUser
+				)["user.username"];
+				setTooltipText(`${findUser} e ${findAnotherUser}.`);
 			}
 		}
-		if (likesCount >= 3){
-			const findUser = (likes.find((like)=>like['user.id'] !== Number(userID))['user.username']);
-			const findAnotherUser = (likes.find((like)=>(like['user.id'] !== Number(userID) && like['user.username'] !== findUser))['user.username']);
+		if (likesCount >= 3) {
+			const findUser = likes.find((like) => like["user.id"] !== Number(userID))["user.username"];
+			const findAnotherUser = likes.find(
+				(like) => like["user.id"] !== Number(userID) && like["user.username"] !== findUser
+			)["user.username"];
 			if (likedByMe) {
-				setTooltipText(`Você, ${findUser} e outras ${likesCount - 2} pessoas.`)	
-			}
-			else {
-				setTooltipText(`${findUser}, ${findAnotherUser} e outras ${likesCount - 2} pessoas.`)
+				setTooltipText(`Você, ${findUser} e outras ${likesCount - 2} pessoas.`);
+			} else {
+				setTooltipText(`${findUser}, ${findAnotherUser} e outras ${likesCount - 2} pessoas.`);
 			}
 		}
 	}
 
-	useEffect(fillLikedByMe,[]);
-	useEffect(generatelikeTooltipText,[likesCount])
-	
+	useEffect(fillLikedByMe, []);
+	useEffect(generatelikeTooltipText, [likesCount]);
+
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
 				<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
 
-				<LikeButton toggleSelection={toggleLikeButton} likedByMe={likedByMe} setLikedByMe={setLikedByMe}/>
+				<LikeButton
+					toggleSelection={toggleLikeButton}
+					likedByMe={likedByMe}
+					setLikedByMe={setLikedByMe}
+				/>
 
-				{
-					(likesCount > 0) ?
-						<div>
-							<p data-tip data-for={`tolltip${id}`}>
-								{likesCount} likes
-							</p>
-							<ReactTooltip id={`tolltip${id}`} effect='solid' place='bottom'>
-								<span style={{ display: 'flex', justifyContent: 'center', width:'100px' }}>{tooltipText}</span>
-							</ReactTooltip>
-						</div>
-					:
+				{likesCount > 0 ? (
+					<div>
+						<p data-tip data-for={`tolltip${id}`}>
+							{likesCount} likes
+						</p>
+						<ReactTooltip id={`tolltip${id}`} effect="solid" place="bottom">
+							<span style={{ display: "flex", justifyContent: "center", width: "100px" }}>
+								{tooltipText}
+							</span>
+						</ReactTooltip>
+					</div>
+				) : (
 					<span>{likesCount} likes</span>
-				}
+				)}
 			</AvatarAndLikesContainer>
 
 			<MainPostContainer>
 				<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-				{data.user.id === Number(userID) ? 
+				{data.user.id === Number(userID) ? (
 					<>
-						<EditPost data={data} fetchPosts={fetchPosts}/> 
-						<DeleteButton fetchPosts={fetchPosts} id={id}/>
+						<EditPost data={data} fetchPosts={fetchPosts} />
+						<DeleteButton fetchPosts={fetchPosts} id={id} />
 					</>
-					: 
+				) : (
 					<PostText>
 						<ReactHashtag
 							renderHashtag={(hashtagValue) => (
@@ -147,7 +155,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 							{text}
 						</ReactHashtag>
 					</PostText>
-				}
+				)}
 
 				<LinkCard>
 					<LinkTextsContainer>
@@ -161,7 +169,6 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 				</LinkCard>
 			</MainPostContainer>
-
 		</PostWrapper>
 	);
 }
