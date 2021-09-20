@@ -47,7 +47,7 @@ function getPostsHashtag(hashtag, token) {
 	return promise;
 }
 
-function postNewPost(body, token) {
+function postNewPost(body, token){
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts`, body, config);
 	return promise;
@@ -65,15 +65,29 @@ function deletePost({ id, token }){
 	return promise;
 }
 
+function postLike({id, token}){
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
+	return promise;
+}
+
+function postDislike({id, token}){
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts/${id}/dislike`, {}, config);
+	return promise;
+}
+
 export { 
 	postSignUp, 
-	postLogIn, 
-	getTrendingHashtags, 
+	postLogIn,
 	getAllPosts, 
+	getTrendingHashtags,  
 	getUserInfo, 
 	postNewPost, 
 	getUserPosts,
 	getPostsHashtag, 
+	postLike, 
+	postDislike,
 	releasePost,
 	deletePost 
 };
