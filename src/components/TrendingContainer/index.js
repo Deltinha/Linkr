@@ -13,7 +13,6 @@ export default function TrendingContainer(){
             .catch(()=>null)
     },[]);
 
-    console.log(hashtagsArray);
     return (
         <S.TrendingContainer>
             <S.Title>trending</S.Title>
@@ -21,9 +20,9 @@ export default function TrendingContainer(){
                 {hashtagsArray.length !== 0 ?
                 hashtagsArray.map((hashtag)=>(
                     <Link 
-                    to={`/hashtag/${hashtag.name}`} 
-                    key={hashtag.id}>
-                        {`# ${hashtag.name}`}
+                        to={`/hashtag/${hashtag.name}`} 
+                        key={hashtag.id}>
+                            {`# ${hashtag.name}`}
                     </Link>
                 ))
                 :

@@ -41,6 +41,24 @@ function getUserInfo({ token, userID }) {
 	return promise;
 }
 
+function getPostsHashtag(hashtag, token) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/hashtags/${hashtag}/posts`, config);
+	return promise;
+}
+
+function postNewPost(body, token){
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts`, body, config);
+	return promise;
+}
+
+function deletePost({ id, token }){
+	const config = createHeaders(token);
+	const promise = axios.delete(`${BASE_URL}/posts/${id}`, config);
+	return promise;
+}
+
 function postLike({id, token}){
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
@@ -53,5 +71,17 @@ function postDislike({id, token}){
 	return promise;
 }
 
-export { postSignUp, postLogIn, getAllPosts, getTrendingHashtags, getUserPosts, getUserInfo, postLike, postDislike };
+export { 
+	postSignUp, 
+	postLogIn,
+	getAllPosts, 
+	getTrendingHashtags, 
+	getUserPosts, 
+	getUserInfo, 
+	getPostsHashtag,
+	postNewPost, 
+	deletePost, 
+	postLike, 
+	postDislike 
+};
 

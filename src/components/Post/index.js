@@ -1,6 +1,10 @@
 import LikeButton from "./LikeButton";
 import { useHistory } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
+import DeleteButton from "./DeleteButton";
+import { postDislike, postLike } from "../../services/linkr-api";
+import { useEffect, useState } from "react";
+import ReactTooltip from 'react-tooltip';
 import {
 	Hashtag,
 	LinkPreview,
@@ -15,11 +19,8 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
-import { postDislike, postLike } from "../../services/linkr-api";
-import { useEffect, useState } from "react";
-import ReactTooltip from 'react-tooltip';
 
-export default function Post({ data, poster, likes }) {
+export default function Post({ data, poster, likes, fetchPosts }) {
 	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
 	const history = useHistory();
 	const token = localStorage.getItem('token');
@@ -104,9 +105,7 @@ export default function Post({ data, poster, likes }) {
 	}
 
 	useEffect(fillLikedByMe,[]);
-
 	useEffect(generatelikeTooltipText,[likesCount])
-	
 	
 	return (
 		<PostWrapper>
@@ -157,6 +156,8 @@ export default function Post({ data, poster, likes }) {
 					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 				</LinkCard>
 			</MainPostContainer>
+
+			{( data.user.id === Number(userID) ) && <DeleteButton fetchPosts={fetchPosts} id={id}/>}
 		</PostWrapper>
 	);
 }
