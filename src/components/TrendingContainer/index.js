@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 import { getTrendingHashtags } from '../../services/linkr-api';
 import * as S from './style'
 
