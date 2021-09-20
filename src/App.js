@@ -9,8 +9,8 @@ import Navbar from "./components/shared/Navbar";
 import MyLikes from "./screens/MyLikes";
 
 export default function App() {
-	const userID = localStorage.getItem("userID");
-	const token = localStorage.getItem("token");
+	let userID = localStorage.getItem("userID");
+	let token = localStorage.getItem("token");
 
 	return (
 		<S.App>
@@ -27,7 +27,7 @@ export default function App() {
 
 						<>
 							<Navbar />
-							{/* SIDEBAR */}
+
 							<Route exact path="/timeline">
 								<Timeline />
 							</Route>

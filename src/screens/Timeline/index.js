@@ -1,13 +1,13 @@
 import { getAllPosts } from "../../services/linkr-api";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
+import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 import {
 	PageWrapper,
 	PageTitle,
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
@@ -15,9 +15,9 @@ import {
 } from "../../components/shared/CommonStyled";
 
 export default function Timeline() {
-	const { token } = useContext(UserContext);
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const token = localStorage.getItem("token");
 
 	useEffect(fetchPosts, [token]);
 
@@ -28,7 +28,9 @@ export default function Timeline() {
 				setIsLoading(false);
 			},
 			(err) => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
@@ -51,7 +53,7 @@ export default function Timeline() {
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> {/*TO-DO */}
+					<TrendingContainer />
 				</MainContainer>
 			</PageContentWrapper>
 		</PageWrapper>

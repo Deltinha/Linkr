@@ -13,13 +13,9 @@ export default function LogIn() {
 
 	function checkIfTokenIsValid() {
 		if (token) {
-			getTrendingHashtags(token)
+			getTrendingHashtags({token})
 				.then(() => history.push("/timeline"))
-				.catch((res) => {
-					if (res.response.status === 403) {
-						alert("sua sessão expirou. logue-se novamente");
-					}
-				});
+				.catch(() => null);
 		}
 	}
 
