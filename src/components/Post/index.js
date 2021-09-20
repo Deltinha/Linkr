@@ -17,7 +17,7 @@ import {
 } from "./style";
 import DeleteButton from "./DeleteButton";
 
-export default function Post({ data, poster, likes }) {
+export default function Post({ data, poster, likes, fetchPosts }) {
 	const { text, link, linkTitle, linkDescription, linkImage, user, id } = data;
 	const history = useHistory();
 	const userID = localStorage.getItem('userID')
@@ -84,7 +84,7 @@ export default function Post({ data, poster, likes }) {
 				</LinkCard>
 			</MainPostContainer>
 
-			{( user.id === Number(userID) ) && <DeleteButton id={id}/>}
+			{( user.id === Number(userID) ) && <DeleteButton fetchPosts={fetchPosts} id={id}/>}
 		</PostWrapper>
 	);
 }

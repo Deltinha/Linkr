@@ -47,7 +47,7 @@ export default function Timeline() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							timelinePosts.map((post) => (
-								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post fetchPosts={fetchPosts} key={post.id} data={post} poster={post.user} likes={post.likes} />
 							))
 						)}
 					</PostsContainer>

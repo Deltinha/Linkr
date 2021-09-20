@@ -44,11 +44,12 @@ const DeleteModal = Modal.styled`
     border: none;
     font-size: 18px;
     font-weight: 700;
+    cursor: pointer;
   }
 
 `
 const ConfirmButton = styled.button`
-  background-color: #1877F2;
+  background-color: ${({lightColor})=>lightColor ? 'rgba(24, 119, 242, 0.4)' : 'rgb(24, 119, 242)'};
   color: white;
 `;
 
@@ -65,8 +66,7 @@ left: 0;
 width: 100vw;
 height: 100vh;
 z-index: 30;
-opacity: 0.9;
-background-color: white;
+background-color: rgba(255,255,255,0.9);
 `;
 
 export {DeleteButtonWrapper, DeleteModal, ModalBackground, ConfirmButton, CancelButton};
