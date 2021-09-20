@@ -15,7 +15,6 @@ const LogIn = SignUp;
 const WoodmarkContainer = styled.div`
     background-color: #151515;
     width: calc(100vw - 535px);
-    
     box-sizing: border-box;
     box-shadow: 4px 0 4px 0 rgba(0,0,0,0.25);
  
@@ -41,11 +40,13 @@ const TextContainer = styled.div`
         font-size: 106px;
         margin: 0;
         margin-bottom: 20px;
+        font-family: 'Passion One', cursive;
     }
 
     h2 {
         font-size: 43px;
         margin: 0;
+        font-family: 'Oswald', sans-serif;
     }
 
     @media (max-width: 1230px){
@@ -81,6 +82,7 @@ const FormContainer = styled.div`
 `;
 
 const Form = styled.form`
+    font-family: 'Oswald', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,6 +117,7 @@ const Form = styled.form`
     }
 
     a {
+        font-family: 'Lato', sans-serif;
         text-decoration: underline;
         color: white;
         font-size: 20px;
