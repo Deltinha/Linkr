@@ -8,9 +8,9 @@ import {
 	MainContainer,
 	PostsContainer,
 	NewPostContainer,
-	TimelineWrapper,
+	PageContentWrapper,
 	WarningMessage,
-} from "./style";
+} from "../../components/shared/CommonStyled";
 
 
 export default function Timeline() {
@@ -37,7 +37,7 @@ export default function Timeline() {
 
 	return (
 		<PageWrapper>
-			<TimelineWrapper>
+			<PageContentWrapper>
 				<PageTitle>timeline</PageTitle>
 				<MainContainer>
 					<PostsContainer>
@@ -54,7 +54,7 @@ export default function Timeline() {
 					</PostsContainer>
 					<TrendingContainer /> 
 				</MainContainer>
-			</TimelineWrapper>
+			</PageContentWrapper>
 		</PageWrapper>
 	);
 }

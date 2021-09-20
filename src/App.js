@@ -6,6 +6,8 @@ import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/Navbar";
+import UserPosts from "./screens/UserPosts";
+import MyPosts from "./screens/MyPosts";
 
 export default function App() {
 	let userID = localStorage.getItem("userID");
@@ -31,11 +33,15 @@ export default function App() {
 								<Timeline />
 							</Route>
 
-							<Route exact path="/myposts"></Route>
+							<Route exact path="/myposts">
+								<MyPosts />
+							</Route>
 
 							<Route exact path="/mylikes"></Route>
 
-							<Route exact path="/user/:id"></Route>
+							<Route exact path="/user/:id">
+								<UserPosts />
+							</Route>
 
 							<Route exact path="/hashtag/:hashtag"></Route>
 						</>
