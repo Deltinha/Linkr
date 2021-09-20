@@ -19,7 +19,7 @@ export default function UserPosts() {
 	const [posts, setPosts] = useState([]);
 	const [name, setName] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
-	const { token } = useContext(UserContext);
+	const token = localStorage.getItem("token");
 
 	useEffect(fetchPosts, [token, id]);
 
