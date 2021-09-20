@@ -13,7 +13,6 @@ export default function TrendingContainer(){
             .catch(()=>null)
     },[]);
 
-    console.log(hashtagsArray);
     return (
         <S.TrendingContainer>
             <S.Title>trending</S.Title>
