@@ -7,11 +7,11 @@ import {
 	PageWrapper,
 	PageTitle,
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 
 export default function MyLikes() {
 	const { token } = useContext(UserContext);
