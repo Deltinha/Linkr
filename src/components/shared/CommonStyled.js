@@ -27,8 +27,9 @@ const PageTitle = styled.div`
 		padding-left: 12px;
 	} ;
 
-	@media screen and (max-width: 611px) {
+	@media screen and (max-width: 600px) {
 		width: 100%;
+		font-size: 33px;
 	} ;
 `;
 
