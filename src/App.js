@@ -10,8 +10,8 @@ import UserPosts from "./screens/UserPosts";
 import MyPosts from "./screens/MyPosts";
 
 export default function App() {
-	const userID = localStorage.getItem("userID");
-	const token = localStorage.getItem("token");
+	let userID = localStorage.getItem("userID");
+	let token = localStorage.getItem("token");
 
 	return (
 		<S.App>
@@ -28,7 +28,7 @@ export default function App() {
 
 						<>
 							<Navbar />
-							{/* SIDEBAR */}
+
 							<Route exact path="/timeline">
 								<Timeline />
 							</Route>
