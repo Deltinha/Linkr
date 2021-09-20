@@ -16,7 +16,8 @@ import { getUserPosts } from "../../services/linkr-api";
 export default function MyPosts() {
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const { token, userID } = useContext(UserContext);
+	const token = localStorage.getItem("token");
+	const userID = localStorage.getItem('userID')
 
 	useEffect(fetchPosts, [token, userID]);
 
