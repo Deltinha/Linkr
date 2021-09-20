@@ -53,6 +53,7 @@ const PostUserName = styled.div`
 	font-size: 19px;
 	font-weight: bold;
 	cursor: pointer;
+	width: calc(100% - 70px);
 `;
 
 const PostText = styled.div`
