@@ -29,6 +29,10 @@ const DeleteModal = Modal.styled`
     font-weight: 700;
     font-size: 34px;
     text-align: center;
+
+    @media (max-width: 640px){
+      font-size: 27px;
+    }
   }
 
   div {
@@ -47,7 +51,19 @@ const DeleteModal = Modal.styled`
     cursor: pointer;
   }
 
+  @media (max-width: 640px){
+    width: 355px;
+    height: 210px;
+    padding: 30px 10px 40px 10px;
+
+    button {
+      font-size: 14px;
+      width: 107px;
+      height: 30px;
+    }
+  }
 `
+
 const ConfirmButton = styled.button`
   background-color: ${({lightColor})=>lightColor ? 'rgba(24, 119, 242, 0.4)' : 'rgb(24, 119, 242)'};
   color: white;

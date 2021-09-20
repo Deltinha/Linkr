@@ -46,7 +46,7 @@ export default function DeleteButton({id, fetchPosts}){
                         onClick={sendDeleteRequest}>
                             {
                                 requestLoading ?
-                                <Loader type="ThreeDots" color="#FFF" height={37} />
+                                <Loader type="ThreeDots" color="#FFF" height={30} />
                                 :
                                 'Sim, excluir'
                             }
