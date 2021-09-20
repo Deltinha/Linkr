@@ -13,13 +13,11 @@ export default function DeleteButton({id, fetchPosts}){
     function sendDeleteRequest(e){
             e.preventDefault();
             setRequestLoading(true);
-            deletePost({id, token}).then((res)=>{
-                console.log(res.data);
+            deletePost({id, token}).then(()=>{
                 setIsOpen(false);
                 setRequestLoading(false);
                 fetchPosts();
-            }).catch((err)=>{
-                console.log(err.response);
+            }).catch(()=>{
                 setIsOpen(false);
                 setRequestLoading(false);
                 alert('não foi possível excluir o post.');
