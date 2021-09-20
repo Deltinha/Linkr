@@ -30,7 +30,9 @@ export default function UserPosts() {
 				setIsLoading(false);
 			},
 			() => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
