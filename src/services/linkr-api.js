@@ -23,7 +23,7 @@ function postLogIn(body) {
 	return promise;
 }
 
-function getTrendingHashtags(token) {
+function getTrendingHashtags({token}) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/hashtags/trending`, config);
 	return promise;
@@ -41,4 +41,10 @@ function postNewPost(body, token) {
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, postNewPost };
+function deletePost({ id, token }){
+	const config = createHeaders(token);
+	const promise = axios.delete(`${BASE_URL}/posts/${id}`, config);
+	return promise;
+}
+
+export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, postNewPost, deletePost };

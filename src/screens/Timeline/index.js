@@ -1,23 +1,23 @@
 import { getAllPosts } from "../../services/linkr-api";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
 import Loader from "../../components/Loader";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 import {
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	TimelineWrapper,
 	WarningMessage,
 } from "./style";
 
+
 export default function Timeline() {
-	const { token } = useContext(UserContext);
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
+	const token = localStorage.getItem('token');
+	
 	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {
@@ -27,7 +27,9 @@ export default function Timeline() {
 				setIsLoading(false);
 			},
 			(err) => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
@@ -46,11 +48,11 @@ export default function Timeline() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							timelinePosts.map((post) => (
-								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post fetchPosts={fetchPosts} key={post.id} data={post} poster={post.user} likes={post.likes} />
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> {/*TO-DO */}
+					<TrendingContainer /> 
 				</MainContainer>
 			</TimelineWrapper>
 		</PageWrapper>
