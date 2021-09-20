@@ -5,7 +5,7 @@ import SignUp from "./screens/SignUp/SignUp";
 import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
-import Navbar from "./components/shared/Navbar";
+import Navbar from "./components/Navbar";
 import UserPosts from "./screens/UserPosts";
 import MyPosts from "./screens/MyPosts";
 
