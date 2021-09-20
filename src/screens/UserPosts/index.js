@@ -38,10 +38,13 @@ export default function UserPosts() {
 		);
 	}
 
-	getUserInfo({ token, userID: id }).then(
-		(res) => setName(res.data.user.username),
-		() => alert("Houve uma falha ao encontrar o usuário buscado")
-	);
+	getUserInfo({ token, userID: id })
+		.then((res) => setName(res.data.user.username))
+		.catch(()=>{
+			if (token) {
+				alert("Houve uma falha ao encontrar o usuário buscado");	
+			}	
+		});
 
 	return (
 		<PageWrapper>
