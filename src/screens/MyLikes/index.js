@@ -14,7 +14,7 @@ import {
 import TrendingContainer from "../../components/TrendingContainer";
 
 export default function MyLikes() {
-	const { token } = useContext(UserContext);
+	const token = localStorage.getItem("token");
 	const [likedPosts, setLikedPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -27,7 +27,9 @@ export default function MyLikes() {
 				setIsLoading(false);
 			},
 			(err) => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
