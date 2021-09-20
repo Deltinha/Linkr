@@ -1,6 +1,5 @@
-import { postNewPoster } from "../../services/linkr-api";
-import { useState, useEffect } from "react";
-import { ProfilePic } from "../Post/style";
+import { postNewPost } from "../../services/linkr-api";
+import { useState } from "react";
 import { Container, BoxDescription, BoxPost, Form } from "./style";
 
 export default function CreatePost({fetchPosts}) {
@@ -8,7 +7,6 @@ export default function CreatePost({fetchPosts}) {
     const [url, setUrl] = useState("");
     const [description, setDescription] = useState("");
     const [waiting, setWaiting] = useState(false);
-    const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
 
     function sendPost(event) {
@@ -22,7 +20,7 @@ export default function CreatePost({fetchPosts}) {
                 link: url
             }
 
-            postNewPoster(body, token)
+            postNewPost(body, token)
                 .then((resp) => {
                     setDescription("");
                     setUrl("");
@@ -41,7 +39,7 @@ export default function CreatePost({fetchPosts}) {
     return (
             <Container>
                <BoxPost>
-                    <ProfilePic avatar="https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/628/avatar" />
+                    <img src="https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/628/avatar" alt="profile"/>
                     <BoxDescription>
                         <h6>O que você tem pra favoritar hoje?</h6>
                         <Form onSubmit={sendPost}>
@@ -72,6 +70,6 @@ export default function CreatePost({fetchPosts}) {
 }
 
 function validateUrl(url) {
-    let matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
+    let matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;// eslint-disable-line
     return matcher.test(url);
 }

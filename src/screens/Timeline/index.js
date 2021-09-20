@@ -9,7 +9,6 @@ import {
 	MainContainer,
 	TrendingContainer,
 	PostsContainer,
-	NewPostContainer,
 	TimelineWrapper,
 	WarningMessage,
 } from "./style";

@@ -35,10 +35,10 @@ function getUserInfo({ userID, token }) {
 	return promise;
 }
 
-function postNewPoster(body, token) {
+function postNewPost(body, token) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts`, body, config);
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, postNewPoster };
+export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, postNewPost };

@@ -12,7 +12,8 @@ const Container = styled.div`
 
 	@media screen and (max-width: 600px) {
 		width: 100%;
-		max-width: 100vw;
+        max-width: 100vw;
+        border-radius: 0;
 	}
 `;
 
@@ -20,20 +21,20 @@ const BoxPost = styled.div`
     display: flex;
     justify-content: space-around;
     height: 209px;
-    width: 611px;
-    border-radius: 16px;
-    background-color: #fff;
+    width: 100%;
     padding-top: 16px;
     box-shadow: 0px 4px 4px 0px #00000040;
     img {
         height: 50px;
         width: 50px;
-        margin-top: 16px;
         border-radius: 26.5px;
     }
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 600px) {
 		width: 100%;
 		height: 164px;
+        img {
+            display: none;
+        }
 	}
 `;
 
@@ -49,7 +50,13 @@ const BoxDescription = styled.div`
         line-height: 24px;
         margin-bottom: 10px;
         color: #707070;
-    }                                                   
+    }       
+    @media screen and (max-width: 600px) {
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }                                            
 `;
 
 const Form = styled.form`
@@ -96,6 +103,18 @@ const Form = styled.form`
         border: none;
         align-self: flex-end;
     }
+    @media screen and (max-width: 600px) {
+		width: 100%;
+		height: 164px;
+        input:not(:first-child) {
+            height: 47px;
+            padding-bottom: 20px;
+        }
+        button {
+            height: 22px;
+            margin-bottom: 20px;
+        }
+	}
 `;
 
 export {
