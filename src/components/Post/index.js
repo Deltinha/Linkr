@@ -15,23 +15,48 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import { postDislike, postLike } from "../../services/linkr-api";
+import { useEffect, useState } from "react";
+import ReactTooltip from 'react-tooltip';
 
 export default function Post({ data, poster, likes }) {
-	const { text, link, linkTitle, linkDescription, linkImage } = data;
+	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
 	const history = useHistory();
+	const token = localStorage.getItem('token');
+	const userID = localStorage.getItem('userID');
+	const [likedByMe, setLikedByMe] = useState(Boolean(likes.find((like)=>like['user.id'] === Number(userID))));
+	const [likesCount, setLikesCount] = useState(likes.length);
+	const [tooltipText, setTooltipText] = useState('');
 
-	function toggleLikeButton(isSelected) {
-		if (isSelected) {
-			// post deslike
-			// TODO not yet implemented
+	function toggleLikeButton() {
+		if (likedByMe) {
+			setLikesCount(likesCount - 1);
+			setLikedByMe(false);
+			postDislike({id, token})
+				.then(()=>null)
+				.catch(()=>{
+					setLikedByMe(true);
+					setLikesCount(likesCount + 1);
+				});
 		} else {
-			//post like
-			// TODO not yet implemented
+			setLikesCount(likesCount + 1);
+			setLikedByMe(true);
+			postLike({id, token})
+				.then(()=>null)
+				.catch(()=>{
+					setLikedByMe(false);
+					setLikesCount(likesCount - 1);
+				});
 		}
 	}
-
-	function wasLikedByMe() {
-		return false; // TODO not yet implemented
+	
+	function fillLikedByMe() {
+		likes.map((like)=>{
+			if (like.userId === Number(userID)) {
+				setLikedByMe(true);
+			}
+		});
+		generatelikeTooltipText();
 	}
 
 	function goToPosterPage() {
@@ -47,12 +72,62 @@ export default function Post({ data, poster, likes }) {
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
 
+	function generatelikeTooltipText(){
+		if (likesCount === 1) {
+			if (likedByMe) {
+				setTooltipText('Você.');
+			}
+			else {
+				setTooltipText(likes[0]["user.username"]);
+			}
+		}
+		if (likesCount === 2) {
+			const findUser = (likes.find((like)=>like['user.id'] !== Number(userID))['user.username']);
+			if (likedByMe) {
+				setTooltipText(`Você e ${findUser}.`)	
+			}
+			else {
+				const findAnotherUser = (likes.find((like)=>(like['user.id'] !== Number(userID) && like['user.username'] !== findUser))['user.username']);
+				setTooltipText(`${findUser} e ${findAnotherUser}.`)
+			}
+		}
+		if (likesCount >= 3){
+			const findUser = (likes.find((like)=>like['user.id'] !== Number(userID))['user.username']);
+			const findAnotherUser = (likes.find((like)=>(like['user.id'] !== Number(userID) && like['user.username'] !== findUser))['user.username']);
+			if (likedByMe) {
+				setTooltipText(`Você, ${findUser} e outras ${likesCount - 2} pessoas.`)	
+			}
+			else {
+				setTooltipText(`${findUser}, ${findAnotherUser} e outras ${likesCount - 2} pessoas.`)
+			}
+		}
+	}
+
+	useEffect(fillLikedByMe,[]);
+
+	useEffect(generatelikeTooltipText,[likesCount])
+	
+	
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
 				<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
-				<LikeButton toggleSelection={toggleLikeButton} wasLikedByMe={wasLikedByMe} />
-				{likes.length} likes
+
+				<LikeButton toggleSelection={toggleLikeButton} likedByMe={likedByMe} setLikedByMe={setLikedByMe}/>
+
+				{
+					(likesCount > 0) ?
+						<div>
+							<p data-tip data-for={`tolltip${id}`}>
+								{likesCount} likes
+							</p>
+							<ReactTooltip id={`tolltip${id}`} effect='solid' place='bottom'>
+								<span style={{ display: 'flex', justifyContent: 'center', width:'100px' }}>{tooltipText}</span>
+							</ReactTooltip>
+						</div>
+					:
+					<span>{likesCount} likes</span>
+				}
 			</AvatarAndLikesContainer>
 
 			<MainPostContainer>
