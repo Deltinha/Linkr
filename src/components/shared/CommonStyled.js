@@ -26,6 +26,10 @@ const PageTitle = styled.div`
 		width: 611px;
 		padding-left: 12px;
 	} ;
+
+	@media screen and (max-width: 611px) {
+		width: 100%;
+	} ;
 `;
 
 const PageContentWrapper = styled.div`
