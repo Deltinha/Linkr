@@ -6,6 +6,9 @@ import Timeline from "./screens/Timeline";
 import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
 import Navbar from "./components/Navbar";
+import { ModalProvider } from "styled-react-modal";
+import { ModalBackground } from "./components/Post/DeleteButton/style";
+
 
 export default function App() {
 	let userID = localStorage.getItem("userID");
@@ -14,33 +17,35 @@ export default function App() {
 	return (
 		<S.App>
 			<BrowserRouter>
-				<UserContext.Provider value={{ userID, token }}>
-					<Switch>
-						<Route exact path="/">
-							<LogIn />
-						</Route>
-
-						<Route exact path="/sign-up">
-							<SignUp />
-						</Route>
-
-						<>
-							<Navbar />
-							{/* SIDEBAR */}
-							<Route exact path="/timeline">
-								<Timeline />
+				<ModalProvider backgroundComponent={ModalBackground}>
+					<UserContext.Provider value={{ userID, token }}>
+						<Switch>
+							<Route exact path="/">
+								<LogIn />
 							</Route>
 
-							<Route exact path="/myposts"></Route>
+							<Route exact path="/sign-up">
+								<SignUp />
+							</Route>
 
-							<Route exact path="/mylikes"></Route>
+							<>
+								<Navbar />
+								{/* SIDEBAR */}
+								<Route exact path="/timeline">
+									<Timeline />
+								</Route>
 
-							<Route exact path="/user/:id"></Route>
+								<Route exact path="/myposts"></Route>
 
-							<Route exact path="/hashtag/:hashtag"></Route>
-						</>
-					</Switch>
-				</UserContext.Provider>
+								<Route exact path="/mylikes"></Route>
+
+								<Route exact path="/user/:id"></Route>
+
+								<Route exact path="/hashtag/:hashtag"></Route>
+							</>
+						</Switch>
+					</UserContext.Provider>
+				</ModalProvider>
 			</BrowserRouter>
 		</S.App>
 	);
