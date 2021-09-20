@@ -58,7 +58,7 @@ export default function UserPosts() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							posts.map((post) => (
-								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post fetchPosts={fetchPosts} key={post.id} data={post} poster={post.user} likes={post.likes} />
 							))
 						)}
 					</PostsContainer>
