@@ -1,6 +1,5 @@
 import { getLikedPosts } from "../../services/linkr-api";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import {
@@ -47,7 +46,13 @@ export default function MyLikes() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							likedPosts.map((post) => (
-								<Post fetchPosts={fetchPosts} key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post
+									fetchPosts={fetchPosts}
+									key={post.id}
+									data={post}
+									poster={post.user}
+									likes={post.likes}
+								/>
 							))
 						)}
 					</PostsContainer>

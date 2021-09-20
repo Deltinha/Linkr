@@ -1,5 +1,4 @@
-import { UserContext } from "../../contexts/UserContext";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
@@ -40,10 +39,10 @@ export default function UserPosts() {
 
 	getUserInfo({ token, userID: id })
 		.then((res) => setName(res.data.user.username))
-		.catch(()=>{
+		.catch(() => {
 			if (token) {
-				alert("Houve uma falha ao encontrar o usuário buscado");	
-			}	
+				alert("Houve uma falha ao encontrar o usuário buscado");
+			}
 		});
 
 	return (
@@ -58,7 +57,13 @@ export default function UserPosts() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							posts.map((post) => (
-								<Post fetchPosts={fetchPosts} key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post
+									fetchPosts={fetchPosts}
+									key={post.id}
+									data={post}
+									poster={post.user}
+									likes={post.likes}
+								/>
 							))
 						)}
 					</PostsContainer>
