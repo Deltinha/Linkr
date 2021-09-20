@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
-	@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 	font-family: "Lato", sans-serif;
 	font-weight: 400;
 	width: 100%;
@@ -12,7 +11,6 @@ const PageWrapper = styled.div`
 `;
 
 const PageTitle = styled.div`
-	@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
 	font-family: "Oswald", sans-serif;
 	color: white;
 	line-height: 64px;

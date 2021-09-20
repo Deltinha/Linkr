@@ -9,6 +9,7 @@ const PostWrapper = styled.div`
 	color: white;
 	margin-bottom: 26px;
 	word-break: break-word;
+	position: relative;
 
 	@media screen and (max-width: 600px) {
 		width: 100%;
@@ -41,6 +42,7 @@ const ProfilePic = styled.div`
 `;
 
 const MainPostContainer = styled.div`
+	position: relative;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -52,6 +54,7 @@ const PostUserName = styled.div`
 	font-size: 19px;
 	font-weight: bold;
 	cursor: pointer;
+	width: calc(100% - 70px);
 `;
 
 const PostText = styled.div`
