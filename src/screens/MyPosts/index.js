@@ -6,11 +6,11 @@ import {
 	PageWrapper,
 	PageTitle,
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 import { getUserPosts } from "../../services/linkr-api";
 
 export default function MyPosts() {
@@ -49,7 +49,7 @@ export default function MyPosts() {
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> {/*TO-DO */}
+					<TrendingContainer />
 				</MainContainer>
 			</PageContentWrapper>
 		</PageWrapper>
