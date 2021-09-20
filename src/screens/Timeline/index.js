@@ -3,14 +3,15 @@ import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 import {
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
-	TimelineWrapper,
+	PageContentWrapper,
 	WarningMessage,
-} from "./style";
+} from "../../components/shared/CommonStyled";
+
 
 export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
@@ -36,7 +37,7 @@ export default function Timeline() {
 
 	return (
 		<PageWrapper>
-			<TimelineWrapper>
+			<PageContentWrapper>
 				<PageTitle>timeline</PageTitle>
 				<MainContainer>
 					<PostsContainer>
@@ -51,9 +52,9 @@ export default function Timeline() {
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> {/*TO-DO */}
+					<TrendingContainer /> 
 				</MainContainer>
-			</TimelineWrapper>
+			</PageContentWrapper>
 		</PageWrapper>
 	);
 }
