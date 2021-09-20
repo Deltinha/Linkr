@@ -16,6 +16,7 @@ const TrendingContainer = styled.div`
 `;
 
 const Title = styled.span`
+    font-family: Oswald;
     height: 61px;
     border-bottom: 1px solid #484848;
     font-size: 27px;

@@ -15,6 +15,10 @@ const Navbar = styled.div`
     color: white;
     
     & > span {
+        font-family: Passion One;
+        line-height: 54px;
+        letter-spacing: 0.05em;
+        font-family: Passion One;
         font-size: 49px;
         font-weight: 700;
         cursor: pointer;
@@ -74,6 +78,10 @@ const NavbarLinks = styled.div`
     }
 
     span {
+        font-family: Lato;
+        font-weight: 700;
+        line-height: 20px;
+        letter-spacing: 0.05em;
         cursor: pointer;
         color: white;
         font-size: 17px;
