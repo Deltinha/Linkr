@@ -23,17 +23,6 @@ const DeleteModal = Modal.styled`
   transform: translate(-50%,-50%);
   padding: 38px 113px 66px 113px;
   border-radius: 50px;
-  
-  span {
-    color: white;
-    font-weight: 700;
-    font-size: 34px;
-    text-align: center;
-
-    @media (max-width: 640px){
-      font-size: 27px;
-    }
-  }
 
   div {
     display: flex;
@@ -64,6 +53,17 @@ const DeleteModal = Modal.styled`
   }
 `
 
+const ModalText = styled.span`
+    color: white;
+    font-weight: 700;
+    font-size: 34px;
+    text-align: center;
+
+    @media (max-width: 640px){
+      font-size: 27px;
+    }
+`;
+
 const ConfirmButton = styled.button`
   background-color: ${({lightColor})=>lightColor ? 'rgba(24, 119, 242, 0.4)' : 'rgb(24, 119, 242)'};
   color: white;
@@ -85,4 +85,4 @@ z-index: 30;
 background-color: rgba(255,255,255,0.9);
 `;
 
-export {DeleteButtonWrapper, DeleteModal, ModalBackground, ConfirmButton, CancelButton};
+export {DeleteButtonWrapper, DeleteModal, ModalBackground, ConfirmButton, CancelButton, ModalText};
