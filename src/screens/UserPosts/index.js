@@ -19,7 +19,7 @@ export default function UserPosts() {
 	const [posts, setPosts] = useState([]);
 	const [name, setName] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
-	const { token } = useContext(UserContext);
+	const token = localStorage.getItem("token");
 
 	useEffect(fetchPosts, [token, id]);
 
@@ -30,16 +30,21 @@ export default function UserPosts() {
 				setIsLoading(false);
 			},
 			() => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
 	}
 
-	getUserInfo({ token, userID: id }).then(
-		(res) => setName(res.data.user.username),
-		() => alert("Houve uma falha ao encontrar o usuário buscado")
-	);
+	getUserInfo({ token, userID: id })
+		.then((res) => setName(res.data.user.username))
+		.catch(()=>{
+			if (token) {
+				alert("Houve uma falha ao encontrar o usuário buscado");	
+			}	
+		});
 
 	return (
 		<PageWrapper>
