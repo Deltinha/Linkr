@@ -3,21 +3,21 @@ import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
 import Loader from "../../components/Loader";
-import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
 import {
+	PageWrapper,
+	PageTitle,
 	MainContainer,
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
 
-
 export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const token = localStorage.getItem('token');
-	
+	const token = localStorage.getItem("token");
+
 	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {
@@ -41,18 +41,24 @@ export default function Timeline() {
 				<PageTitle>timeline</PageTitle>
 				<MainContainer>
 					<PostsContainer>
-						<CreatePost fetchPosts={fetchPosts}/>	
+						<CreatePost fetchPosts={fetchPosts} />
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							timelinePosts.map((post) => (
-								<Post fetchPosts={fetchPosts} key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post
+									fetchPosts={fetchPosts}
+									key={post.id}
+									data={post}
+									poster={post.user}
+									likes={post.likes}
+								/>
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> 
+					<TrendingContainer />
 				</MainContainer>
 			</PageContentWrapper>
 		</PageWrapper>

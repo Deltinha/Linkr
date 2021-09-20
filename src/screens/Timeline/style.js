@@ -8,7 +8,7 @@ const TimelineWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		width: 100vw;
 		max-width: 100vw;
 		padding-top: 20px;
@@ -18,7 +18,7 @@ const TimelineWrapper = styled.div`
 const PostsContainer = styled.div`
 	margin-right: 25px;
 
-	@media screen and (max-width: 800px) {
+	@media screen and (max-width: 1230px) {
 		margin-right: 0px;
 	}
 `;
@@ -34,9 +34,4 @@ const WarningMessage = styled.div`
 	color: white;
 `;
 
-export {
-	WarningMessage,
-	MainContainer,
-	PostsContainer,
-	TimelineWrapper,
-};
+export { WarningMessage, MainContainer, PostsContainer, TimelineWrapper };

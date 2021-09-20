@@ -8,9 +8,11 @@ import LogIn from "./screens/LogIn/LogIn";
 import { UserContext } from "./contexts/UserContext";
 import Hashtag from "./screens/Hashtag";
 import Navbar from "./components/Navbar";
+import MyLikes from "./screens/MyLikes";
 import { ModalProvider } from "styled-react-modal";
 import { ModalBackground } from "./components/Post/DeleteButton/style";
-import MyPosts from "./screens/MyPosts"
+import UserPosts from "./screens/UserPosts";
+import MyPosts from "./screens/MyPosts";
 
 export default function App() {
 	let userID = localStorage.getItem("userID");
@@ -38,18 +40,22 @@ export default function App() {
 								</Route>
 
 								<Route exact path="/myposts">
-									<MyPosts/>
+									<MyPosts />
 								</Route>
 
-								<Route exact path="/mylikes"></Route>
+								<Route exact path="/mylikes">
+									<MyLikes />
+								</Route>
 
-								<Route exact path="/user/:id"></Route>
+								<Route exact path="/user/:id">
+									<UserPosts />
+								</Route>
 
-							<Route exact path="/hashtag/:hashtag">
-								<Hashtag/>
-							</Route>
-						</>
-					</Switch>
+								<Route exact path="/hashtag/:hashtag">
+									<Hashtag />
+								</Route>
+							</>
+						</Switch>
 					</UserContext.Provider>
 				</ModalProvider>
 			</BrowserRouter>

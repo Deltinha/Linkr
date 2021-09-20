@@ -7,11 +7,11 @@ import {
 	PageWrapper,
 	PageTitle,
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 import { getUserPosts, getUserInfo } from "../../services/linkr-api";
 
 export default function UserPosts() {
