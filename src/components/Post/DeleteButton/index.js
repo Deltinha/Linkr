@@ -27,8 +27,9 @@ export default function DeleteButton({id, fetchPosts}){
     
     return (
         <DeleteButtonWrapper >
+    
             <FaTrash onClick={()=>setIsOpen(true)}/>
-
+    
             <DeleteModal
             isOpen={isOpen}
             onBackgroundClick={()=>setIsOpen(false)}

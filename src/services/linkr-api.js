@@ -53,6 +53,12 @@ function postNewPost(body, token){
 	return promise;
 }
 
+function releasePost(id, body, token) {
+	const config = createHeaders(token);
+	const promise = axios.put(`${BASE_URL}/posts/${id}`, body, config);
+	return promise;
+}
+
 function deletePost({ id, token }){
 	const config = createHeaders(token);
 	const promise = axios.delete(`${BASE_URL}/posts/${id}`, config);
@@ -75,13 +81,13 @@ export {
 	postSignUp, 
 	postLogIn,
 	getAllPosts, 
-	getTrendingHashtags, 
-	getUserPosts, 
+	getTrendingHashtags,  
 	getUserInfo, 
-	getPostsHashtag,
 	postNewPost, 
-	deletePost, 
+	getUserPosts,
+	getPostsHashtag, 
 	postLike, 
-	postDislike 
+	postDislike,
+	releasePost,
+	deletePost 
 };
-

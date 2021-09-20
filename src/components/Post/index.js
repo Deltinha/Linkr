@@ -1,6 +1,7 @@
 import LikeButton from "./LikeButton";
 import { useHistory } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
+import EditPost from "../EditPost";
 import DeleteButton from "./DeleteButton";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
@@ -131,18 +132,22 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 			<MainPostContainer>
 				<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-
-				<PostText>
-					<ReactHashtag
-						renderHashtag={(hashtagValue) => (
-							<Hashtag onClick={() => openHashtag(hashtagValue)} key={hashtagValue}>
-								{hashtagValue}
-							</Hashtag>
-						)}
-					>
-						{text}
-					</ReactHashtag>
-				</PostText>
+				{data.user.id === Number(userID) ? 
+					<>
+						<EditPost data={data} fetchPosts={fetchPosts}/> 
+						<DeleteButton fetchPosts={fetchPosts} id={id}/>
+					</>
+					: 
+					<PostText>
+						<ReactHashtag
+							renderHashtag={(hashtagValue) => (
+								<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
+							)}
+						>
+							{text}
+						</ReactHashtag>
+					</PostText>
+				}
 
 				<LinkCard>
 					<LinkTextsContainer>
@@ -157,7 +162,6 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 				</LinkCard>
 			</MainPostContainer>
 
-			{( data.user.id === Number(userID) ) && <DeleteButton fetchPosts={fetchPosts} id={id}/>}
 		</PostWrapper>
 	);
 }

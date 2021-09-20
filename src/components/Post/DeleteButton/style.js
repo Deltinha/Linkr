@@ -5,8 +5,9 @@ const DeleteButtonWrapper = styled.div`
     font-size: 14px;
     cursor: pointer;
     position: absolute;
-    right: 22px;
-    top: 23px;
+    right: 0px;
+    top: 5px;
+    height: 20px;
 `;
 
 const DeleteModal = Modal.styled`
@@ -51,7 +52,7 @@ const DeleteModal = Modal.styled`
       height: 30px;
     }
   }
-`
+`;
 
 const ModalText = styled.span`
     color: white;
@@ -85,4 +86,11 @@ z-index: 30;
 background-color: rgba(255,255,255,0.9);
 `;
 
-export {DeleteButtonWrapper, DeleteModal, ModalBackground, ConfirmButton, CancelButton, ModalText};
+export {
+  DeleteButtonWrapper,
+  DeleteModal, 
+  ModalBackground, 
+  ConfirmButton, 
+  CancelButton, 
+  ModalText
+};
