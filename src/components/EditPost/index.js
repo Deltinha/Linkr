@@ -5,8 +5,10 @@ import ReactHashtag from "react-hashtag"
 import axios from "axios";
 import { Hashtag, PostText } from "../Post/style";
 import { useHistory } from "react-router-dom";
+import Modal from "react-modal";
 
 export default function EditPost({data}) {
+    Modal.setAppElement('#root');
 
     const [clicked,setCliked]=useState(false);
     const [waiting, setWaiting] = useState(false);
@@ -16,20 +18,24 @@ export default function EditPost({data}) {
    
     useEffect(() => {
         if (clicked) {
-          console.log(inputRef.current);
-          inputRef.current.focus()
-          
+            inputRef.current.focus()        
+            const handleEsc = (e) => {
+                if (e.keyCode === 27) {
+                  setCliked(!clicked)
+                }
+            };
+            window.addEventListener('keydown', handleEsc);
+            return () => {
+                window.removeEventListener('keydown', handleEsc);
+            };
         }    
     }, [clicked]);
 
-    
     function printa(){
-        setCliked(true);
+        setCliked(!clicked);
         setText(data.text)
-        console.log("apertou")
     }
     
-
     function openHashtag(hashtag) {
 		const formattedHashtag = hashtag.substring(1, hashtag.length);
 		history.push(`/hashtag/${formattedHashtag}`);
@@ -40,7 +46,12 @@ export default function EditPost({data}) {
         console.log("salvou")
     }
 
+   function teste(e) {
+        if(e.which === 13) saveEdition()
+        console.log(e.which)
+    }
     console.log(text)
+
     return (<>
         <IconBox>
             <FaPencilAlt onClick={printa} /> 
@@ -56,6 +67,7 @@ export default function EditPost({data}) {
                         value={text}
                         disabled={waiting}
                         onChange={(e) => setText(e.target.value)}
+                        onKeyPress={(e) => teste(e)}
                     />
                     </Form>
                 </BoxForm>
