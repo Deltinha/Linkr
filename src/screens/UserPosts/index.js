@@ -9,6 +9,8 @@ import {
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
+	UserName,
+	FollowButton,
 } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
 import { getUserPosts, getUserInfo } from "../../services/linkr-api";
@@ -48,7 +50,10 @@ export default function UserPosts() {
 	return (
 		<PageWrapper>
 			<PageContentWrapper>
-				<PageTitle>{`${name}'s posts`}</PageTitle>
+				<PageTitle>
+					<UserName>{`${name}'s posts`}</UserName>
+					<FollowButton>Seguir</FollowButton>
+				</PageTitle>
 				<MainContainer>
 					<PostsContainer>
 						{isLoading ? (
