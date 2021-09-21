@@ -1,19 +1,16 @@
 import styled from "styled-components";
-import { FaPencilAlt} from "react-icons/fa";
-import {useState,useRef,useEffect } from "react";
 import ReactHashtag from "react-hashtag"
-import axios from "axios";
+import { FaPencilAlt } from "react-icons/fa";
+import { useState, useRef, useEffect } from "react";
 import { Hashtag, PostText } from "../Post/style";
 import { useHistory } from "react-router-dom";
-import Modal from "react-modal";
 import { releasePost } from "../../services/linkr-api";
 
 export default function EditPost({data, fetchPosts}) {
-    Modal.setAppElement('#root');
 
     const [clicked,setCliked]=useState(false);
     const [waiting, setWaiting] = useState(false);
-    const [text,setText]=useState("");
+    const [text,setText] = useState("");
     const history = useHistory();
     const inputRef = useRef();
     const token = localStorage.getItem('token');
@@ -50,7 +47,6 @@ export default function EditPost({data, fetchPosts}) {
         setWaiting(true)
         releasePost(data.id, body, token)
             .then((res) => {
-                console.log(res);
                 setCliked(!clicked);
                 fetchPosts();
             })
@@ -58,14 +54,11 @@ export default function EditPost({data, fetchPosts}) {
                 setWaiting(false);
                 alert("Erro ao atualizar post");
             })
-        console.log("salvou")
     }
 
-   function teste(e) {
-        if(e.which === 13) saveEdition()
-        console.log(e.which)
+   function verifyKey(e) {
+        if(e.which === 13) saveEdition();
     }
-    console.log(data.id)
 
     return (<>
         <IconBox>
@@ -75,15 +68,15 @@ export default function EditPost({data, fetchPosts}) {
             {clicked ?
                 <BoxForm>
                     <Form onSubmit={saveEdition}>
-                    <textarea 
-                        cols="10" 
-                        wrap="soft" 
-                        ref={inputRef}
-                        value={text}
-                        disabled={waiting}
-                        onChange={(e) => setText(e.target.value)}
-                        onKeyPress={(e) => teste(e)}
-                    />
+                        <textarea 
+                            cols="10" 
+                            wrap="soft" 
+                            ref={inputRef}
+                            value={text}
+                            disabled={waiting}
+                            onChange={(e) => setText(e.target.value)}
+                            onKeyPress={(e) => verifyKey(e)}
+                        />
                     </Form>
                 </BoxForm>
             : 
@@ -100,8 +93,6 @@ export default function EditPost({data, fetchPosts}) {
     </>);
 }
 
-
-
 const IconBox = styled.div`
     background-color: red;
     position: absolute;
@@ -115,7 +106,6 @@ const BoxForm = styled.div `
     background-color: #fff;
     border-radius: 7px;
 `;
-
 
 const Form = styled.form`
     display: flex;
@@ -142,9 +132,5 @@ const Form = styled.form`
     @media screen and (max-width: 600px) {
 		width: 100%;
 		height: 164px;
-        input:not(:first-child) {
-            height: 47px;
-            padding-bottom: 20px;
-        }
 	}
 `;

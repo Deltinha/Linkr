@@ -48,7 +48,7 @@ export default function Post({ data, poster, likes, fetchPosts}) {
 		const formattedHashtag = hashtag.substring(1, hashtag.length);
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
-	if(data.user.id === Number(userID)){ console.log("do user")}
+
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
@@ -59,17 +59,19 @@ export default function Post({ data, poster, likes, fetchPosts}) {
 
 			<MainPostContainer>
 				<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-				{data.user.id === Number(userID) ? <EditPost data={data} fetchPosts={fetchPosts}/> : ""}
-				<PostText>
-					<ReactHashtag
-						renderHashtag={(hashtagValue) => (
-							<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
-						)}
-					>
-						{text}
-					</ReactHashtag>
-				</PostText>
-
+				{data.user.id === Number(userID) ? 
+					<EditPost data={data} fetchPosts={fetchPosts}/> 
+					: 
+					<PostText>
+						<ReactHashtag
+							renderHashtag={(hashtagValue) => (
+								<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
+							)}
+						>
+							{text}
+						</ReactHashtag>
+					</PostText>
+				}
 				<LinkCard>
 					<LinkTextsContainer>
 						<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
