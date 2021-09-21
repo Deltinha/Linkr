@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
@@ -14,6 +14,7 @@ import {
 } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
 import { getUserPosts, getUserInfo } from "../../services/linkr-api";
+import UserContext from "../../contexts/UserContext";
 
 export default function UserPosts() {
 	const { id } = useParams();
@@ -21,8 +22,13 @@ export default function UserPosts() {
 	const [name, setName] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
+	const {updateFollowedUsers} = useContext(UserContext);
+	const followedUsers = useContext(UserContext);
 
-	useEffect(fetchPosts, [token, id]);
+	useEffect(()=>{
+		fetchPosts();
+		updateFollowedUsers();
+	}, [token, id]);
 
 	function fetchPosts() {
 		getUserPosts({ token, userID: id }).then(

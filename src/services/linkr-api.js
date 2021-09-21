@@ -83,6 +83,12 @@ function postDislike({ id, token }) {
 	return promise;
 }
 
+function getFollowedByMe({token}){
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/follows`, config);
+	return promise;	
+}
+
 export {
 	postSignUp,
 	postLogIn,
@@ -97,4 +103,5 @@ export {
 	releasePost,
 	getLikedPosts,
 	deletePost,
+	getFollowedByMe,
 };
