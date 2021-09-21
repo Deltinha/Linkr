@@ -6,8 +6,9 @@ import axios from "axios";
 import { Hashtag, PostText } from "../Post/style";
 import { useHistory } from "react-router-dom";
 import Modal from "react-modal";
+import { releasePost } from "../../services/linkr-api";
 
-export default function EditPost({data}) {
+export default function EditPost({data, fetchPosts}) {
     Modal.setAppElement('#root');
 
     const [clicked,setCliked]=useState(false);
@@ -15,7 +16,8 @@ export default function EditPost({data}) {
     const [text,setText]=useState("");
     const history = useHistory();
     const inputRef = useRef();
-   
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
         if (clicked) {
             inputRef.current.focus()        
@@ -42,7 +44,20 @@ export default function EditPost({data}) {
 	}
 
     function saveEdition(){
-        setCliked(false);
+        const body = {
+            text,
+        }
+        setWaiting(true)
+        releasePost(data.id, body, token)
+            .then((res) => {
+                console.log(res);
+                setCliked(!clicked);
+                fetchPosts();
+            })
+            .catch(() => {
+                setWaiting(false);
+                alert("Erro ao atualizar post");
+            })
         console.log("salvou")
     }
 
@@ -50,7 +65,7 @@ export default function EditPost({data}) {
         if(e.which === 13) saveEdition()
         console.log(e.which)
     }
-    console.log(text)
+    console.log(data.id)
 
     return (<>
         <IconBox>

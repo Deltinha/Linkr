@@ -41,4 +41,18 @@ function postNewPost(body, token) {
 	return promise;
 }
 
-export { postSignUp, postLogIn, getTrendingHashtags, getAllPosts, getUserInfo, postNewPost };
+function releasePost(id, body, token) {
+	const config = createHeaders(token);
+	const promise = axios.put(`${BASE_URL}/posts/${id}`, body, config);
+	return promise;
+}
+
+export { 
+	postSignUp, 
+	postLogIn, 
+	getTrendingHashtags, 
+	getAllPosts, 
+	getUserInfo, 
+	postNewPost, 
+	releasePost
+};

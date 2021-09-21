@@ -17,7 +17,7 @@ import {
 } from "./style";
 import EditPost from "../EditPost";
 
-export default function Post({ data, poster, likes }) {
+export default function Post({ data, poster, likes, fetchPosts}) {
 	const { text, link, linkTitle, linkDescription, linkImage } = data;
 	const history = useHistory();
     const userID = localStorage.getItem('userID');
@@ -59,7 +59,7 @@ export default function Post({ data, poster, likes }) {
 
 			<MainPostContainer>
 				<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-				{data.user.id === Number(userID) ? <EditPost data={data}/> : ""}
+				{data.user.id === Number(userID) ? <EditPost data={data} fetchPosts={fetchPosts}/> : ""}
 				<PostText>
 					<ReactHashtag
 						renderHashtag={(hashtagValue) => (
