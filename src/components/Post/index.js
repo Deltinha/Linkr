@@ -6,6 +6,7 @@ import DeleteButton from "./DeleteButton";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
+import getYouTubeID from 'get-youtube-id';
 import {
 	Hashtag,
 	LinkPreview,
@@ -19,6 +20,7 @@ import {
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
+	YTLinkPreview,
 } from "./style";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
@@ -157,17 +159,36 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 					</PostText>
 				)}
 
-				<LinkCard>
-					<LinkTextsContainer>
-						<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
+				{
+					link.includes('www.youtube.com/watch?v=')
+					? <>
+					<iframe 
+					width="501" 
+					height="281" 
+					src={`https://www.youtube-nocookie.com/embed/${getYouTubeID(link)}`}
+					title="YouTube video player" 
+					frameborder="0" 
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+					allowfullscreen></iframe>
+					<YTLinkPreview onClick={openLink}>{link}</YTLinkPreview>
+					</>
+					: <LinkCard>
+						<LinkTextsContainer>
+							<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
 
-						<LinkDescription>{linkDescription}</LinkDescription>
+							<LinkDescription>{linkDescription}</LinkDescription>
 
-						<LinkPreview onClick={openLink}>{link}</LinkPreview>
-					</LinkTextsContainer>
+							<LinkPreview onClick={openLink}>{link}</LinkPreview>
+						</LinkTextsContainer>
 
-					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
-				</LinkCard>
+						<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
+					</LinkCard>
+						
+	
+				}
+
+
+				
 			</MainPostContainer>
 		</PostWrapper>
 	);
