@@ -4,6 +4,8 @@ import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
+import useInterval from "react-useinterval";
+
 import {
 	PageWrapper,
 	PageTitle,
@@ -17,13 +19,20 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
+	const [delay, setDelay] = useState(15000);
 
 	useEffect(fetchPosts, [token]);
+
+	useInterval(() => {
+		setIsLoading(true);
+		fetchPosts();
+	}, delay);
 
 	function fetchPosts() {
 		getAllPosts({ token }).then(
 			(res) => {
 				setTimelinePosts(res.data.posts);
+				console.log(res.data.posts);
 				setIsLoading(false);
 			},
 			(err) => {
