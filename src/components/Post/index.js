@@ -29,6 +29,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	const history = useHistory();
 	const token = localStorage.getItem("token");
 	const userID = localStorage.getItem("userID");
+
 	const [likedByMe, setLikedByMe] = useState(
 		Boolean(likes.find((like) => like["user.id"] === Number(userID)))
 	);
@@ -117,10 +118,16 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	return (
 		<>
 			<PostContents>
-				<RepostUser>
-					<MdRepeat fontSize="20px"/>
-         			<p>Re-posted by <span>you</span></p>
-				</RepostUser>
+				{data.repostCount != 0 ? 
+						<RepostUser fetchPosts={fetchPosts}>
+							<MdRepeat fontSize="20px"/>
+							<p>Re-posted by <span>{
+								data.repostedBy ? (data.repostedBy.id === Number(userID) ? "you" : data.repostedBy.username) : "you"}</span>
+							</p>
+						</RepostUser>
+					:
+						"" 
+				}
 				<PostWrapper>
 					<AvatarAndLikesContainer>
 						<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
@@ -146,7 +153,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 							<span>{likesCount} likes</span>
 						)}
 
-						<RePost data={data}/>
+						<RePost data={data} fetchPosts={fetchPosts}/>
 
 					</AvatarAndLikesContainer>
 
@@ -172,9 +179,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						<LinkCard>
 							<LinkTextsContainer>
 								<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
-
 								<LinkDescription>{linkDescription}</LinkDescription>
-
 								<LinkPreview onClick={openLink}>{link}</LinkPreview>
 							</LinkTextsContainer>
 
