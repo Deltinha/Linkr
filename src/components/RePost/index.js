@@ -1,4 +1,4 @@
-import { CancelButton, ConfirmButton, DeleteModal, ModalText } from "./style";
+import { CancelButton, ConfirmButton, DeleteModal, ModalText } from "../shared/CommonStyled";
 import { useState } from "react";
 import { MdRepeat } from 'react-icons/md';
 import styled from "styled-components";
@@ -35,7 +35,6 @@ export default function RePost({data, fetchPosts}) {
                 onBackgroundClick={()=>setClicked(false)}
                 onEscapeKeydown={()=>setClicked(false)}
             >
-
                 <ModalText>Do you want to re-post this link?</ModalText>
                 <div>
                     <CancelButton disabled={waiting} onClick={()=> setClicked(false)}>No, cancel</CancelButton>
