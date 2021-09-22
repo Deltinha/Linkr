@@ -19,8 +19,9 @@ const PageTitle = styled.div`
 	font-weight: 700;
 	width: 100%;
 	display: flex;
-	justify-content: left;
+	justify-content: space-between;
 	margin-bottom: 30px;
+	align-items: center;
 
 	@media screen and (max-width: 1230px) {
 		margin-bottom: 12px;
@@ -32,6 +33,11 @@ const PageTitle = styled.div`
 		width: 100%;
 		font-size: 33px;
 	} ;
+`;
+
+const UserName = styled.span`
+	width: calc(100% - 112px - 25px);
+	word-wrap: break-word;
 `;
 
 const PageContentWrapper = styled.div`
@@ -179,5 +185,6 @@ export {
 	ModalBackground, 
 	ConfirmButton, 
 	CancelButton, 
-	ModalText
+	ModalText,
+	UserName,
 };
