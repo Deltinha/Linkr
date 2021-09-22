@@ -18,14 +18,16 @@ export default function Timeline() {
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
 
+	//////////////////////////////
 	const [followers, setFollowers] = useState([]);
-
+	// TO-DO temporario!!! moises irá colocar os followers no context
 	function fetchFollowers() {
 		getFollowers({ token }).then(
 			(res) => setFollowers(res.data),
 			(err) => console.log(err.response.message)
 		);
 	}
+	///////////////////////////////
 
 	useEffect(fetchPosts, [token]);
 
