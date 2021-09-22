@@ -35,8 +35,7 @@ const Hashtags = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
-	padding: 22px 0 30px 16px;
-
+	padding: 22px 0 20px 16px;
 	a {
 		color: white;
 		font-size: 19px;
