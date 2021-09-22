@@ -23,7 +23,7 @@ export default function App() {
 
 	function updateFollowedUsers(){
 		getFollowedByMe({token})
-			.then((res)=>setFollowedUsers(res.data))
+			.then((res)=>{setFollowedUsers(res.data.users)})
 			.catch((err)=>console.log(err.response))
 	}
 

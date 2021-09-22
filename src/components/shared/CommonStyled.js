@@ -39,19 +39,6 @@ const UserName = styled.span`
 	word-wrap: break-word;
 `;
 
-const FollowButton = styled.button`
-	font-family: "Lato", sans-serif;
-	font-size: 14px;
-	width: 112px;
-	height: 31px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-
-	background-color: blue;
-	color: white;
-`;
-
 const PageContentWrapper = styled.div`
 	width: 930px;
 	height: 100%;
@@ -105,5 +92,4 @@ export {
 	PageWrapper,
 	PageTitle,
 	UserName,
-	FollowButton,
 };
