@@ -1,4 +1,4 @@
-import { getAllPosts } from "../../services/linkr-api";
+import { getFollowingPosts, getFollowers } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
@@ -18,10 +18,19 @@ export default function Timeline() {
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
 
+	const [followers, setFollowers] = useState([]);
+
+	function fetchFollowers() {
+		getFollowers({ token }).then(
+			(res) => setFollowers(res.data),
+			(err) => console.log(err.response.message)
+		);
+	}
+
 	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {
-		getAllPosts({ token }).then(
+		getFollowingPosts({ token }).then(
 			(res) => {
 				setTimelinePosts(res.data.posts);
 				setIsLoading(false);
@@ -45,7 +54,13 @@ export default function Timeline() {
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
-							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
+							followers.length === 0 ? (
+								<WarningMessage>
+									Você não segue ninguém ainda, procure por perfis na busca
+								</WarningMessage>
+							) : (
+								<WarningMessage>Nenhuma publicação encontrada</WarningMessage>
+							)
 						) : (
 							timelinePosts.map((post) => (
 								<Post
