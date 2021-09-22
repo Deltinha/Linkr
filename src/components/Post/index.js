@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
 import EditPost from "../EditPost";
 import DeleteButton from "./DeleteButton";
+import RePost from "../RePost";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
@@ -136,6 +137,9 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 				) : (
 					<span>{likesCount} likes</span>
 				)}
+
+				<RePost/>
+
 			</AvatarAndLikesContainer>
 
 			<MainPostContainer>
