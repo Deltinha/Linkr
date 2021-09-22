@@ -107,7 +107,7 @@ const LinkPreview = styled.div`
 	cursor: pointer;
 `;
 
-const YTLinkPreview = styled.span`
+const YtLink = styled.span`
 	font-size: 17px;
 	color: #B7B7B7;
 	margin-top: 6px;
@@ -133,5 +133,5 @@ export {
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
-	YTLinkPreview
+	YtLink,
 };

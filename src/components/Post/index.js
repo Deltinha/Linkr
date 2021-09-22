@@ -6,7 +6,7 @@ import DeleteButton from "./DeleteButton";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
-import getYouTubeID from 'get-youtube-id';
+import YtEmbedVideo from "./YtEmbedVideo";
 import {
 	Hashtag,
 	LinkPreview,
@@ -20,7 +20,7 @@ import {
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
-	YTLinkPreview,
+	YtLink,
 } from "./style";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
@@ -158,19 +158,12 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						</ReactHashtag>
 					</PostText>
 				)}
-
+				
 				{
 					link.includes('www.youtube.com/watch?v=')
 					? <>
-					<iframe 
-					width="501" 
-					height="281" 
-					src={`https://www.youtube-nocookie.com/embed/${getYouTubeID(link)}`}
-					title="YouTube video player" 
-					frameborder="0" 
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen></iframe>
-					<YTLinkPreview onClick={openLink}>{link}</YTLinkPreview>
+					<YtEmbedVideo link={link}/>
+					<YtLink onClick={openLink}>{link}</YtLink>
 					</>
 					: <LinkCard>
 						<LinkTextsContainer>
@@ -183,12 +176,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 						<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 					</LinkCard>
-						
-	
-				}
-
-
-				
+				}			
 			</MainPostContainer>
 		</PostWrapper>
 	);
