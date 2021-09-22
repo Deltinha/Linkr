@@ -13,10 +13,10 @@ const Navbar = styled.div`
 	padding-right: 17px;
 	box-sizing: border-box;
 	color: white;
-	font-family: "Lato", sans-serif;
 	font-weight: 700;
 
 	& > span {
+		font-family: 'Passion One', cursive;
 		font-size: 49px;
 		font-weight: 700;
 		cursor: pointer;
@@ -28,6 +28,7 @@ const Navbar = styled.div`
 `;
 
 const NavbarMenu = styled.div`
+	font-family: "Lato", sans-serif;
 	display: flex;
 	align-items: center;
 	gap: 18px;
@@ -57,6 +58,7 @@ const NavbarMenu = styled.div`
 `;
 
 const NavbarLinks = styled.div`
+	font-family: "Lato", sans-serif;
 	width: 150px;
 	background-color: #171717;
 	display: flex;

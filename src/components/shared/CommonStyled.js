@@ -25,6 +25,11 @@ const PageTitle = styled.div`
 		margin-bottom: 12px;
 		width: 611px;
 		padding-left: 12px;
+	}
+
+	@media screen and (max-width: 600px) {
+		width: 100%;
+		font-size: 33px;
 	} ;
 `;
 
@@ -61,16 +66,6 @@ const PostsContainer = styled.div`
 	}
 `;
 
-const TrendingContainer = styled.div`
-	width: 301px;
-	height: 406px;
-	border: 2px solid red;
-	border-radius: 11px;
-	@media screen and (max-width: 1230px) {
-		display: none;
-	}
-`;
-
 const MainContainer = styled.div`
 	display: flex;
 `;
@@ -85,7 +80,6 @@ const WarningMessage = styled.div`
 export {
 	WarningMessage,
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
 	PageContentWrapper,

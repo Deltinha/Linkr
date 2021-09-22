@@ -1,5 +1,4 @@
-import { UserContext } from "../../contexts/UserContext";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
@@ -19,7 +18,7 @@ export default function UserPosts() {
 	const [posts, setPosts] = useState([]);
 	const [name, setName] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
-	const { token } = useContext(UserContext);
+	const token = localStorage.getItem("token");
 
 	useEffect(fetchPosts, [token, id]);
 
@@ -30,16 +29,21 @@ export default function UserPosts() {
 				setIsLoading(false);
 			},
 			() => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
 	}
 
-	getUserInfo({ token, userID: id }).then(
-		(res) => setName(res.data.user.username),
-		() => alert("Houve uma falha ao encontrar o usuário buscado")
-	);
+	getUserInfo({ token, userID: id })
+		.then((res) => setName(res.data.user.username))
+		.catch(() => {
+			if (token) {
+				alert("Houve uma falha ao encontrar o usuário buscado");
+			}
+		});
 
 	return (
 		<PageWrapper>
@@ -53,7 +57,13 @@ export default function UserPosts() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							posts.map((post) => (
-								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post
+									fetchPosts={fetchPosts}
+									key={post.id}
+									data={post}
+									poster={post.user}
+									likes={post.likes}
+								/>
 							))
 						)}
 					</PostsContainer>

@@ -127,8 +127,8 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						<p data-tip data-for={`tolltip${id}`}>
 							{likesCount} likes
 						</p>
-						<ReactTooltip id={`tolltip${id}`} effect="solid" place="bottom">
-							<span style={{ display: "flex", justifyContent: "center", width: "100px" }}>
+						<ReactTooltip id={`tolltip${id}`} effect="solid" place="bottom" type='light'>
+							<span style={{ display: "flex", justifyContent: "center", width: "100px", fontWeight:'700', fontSize:'11px' }}>
 								{tooltipText}
 							</span>
 						</ReactTooltip>

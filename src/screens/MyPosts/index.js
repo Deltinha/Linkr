@@ -1,5 +1,4 @@
-import { UserContext } from "../../contexts/UserContext";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import {
@@ -16,7 +15,8 @@ import { getUserPosts } from "../../services/linkr-api";
 export default function MyPosts() {
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const { token, userID } = useContext(UserContext);
+	const token = localStorage.getItem("token");
+	const userID = localStorage.getItem("userID");
 
 	useEffect(fetchPosts, [token, userID]);
 
@@ -27,7 +27,9 @@ export default function MyPosts() {
 				setIsLoading(false);
 			},
 			() => {
-				alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			}
 		);
@@ -45,7 +47,13 @@ export default function MyPosts() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							posts.map((post) => (
-								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
+								<Post
+									fetchPosts={fetchPosts}
+									key={post.id}
+									data={post}
+									poster={post.user}
+									likes={post.likes}
+								/>
 							))
 						)}
 					</PostsContainer>
