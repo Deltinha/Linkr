@@ -9,18 +9,23 @@ import {
 	PostsContainer,
 	PageContentWrapper,
 	WarningMessage,
+	UserName,
 } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
 import { getUserPosts, getUserInfo } from "../../services/linkr-api";
+import FollowButton from "../../components/FollowButton";
 
 export default function UserPosts() {
 	const { id } = useParams();
+	const userID = localStorage.getItem("userID")
 	const [posts, setPosts] = useState([]);
 	const [name, setName] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
 
-	useEffect(fetchPosts, [token, id]);
+	useEffect(()=>{
+		fetchPosts();
+	}, [token, id]);
 
 	function fetchPosts() {
 		getUserPosts({ token, userID: id }).then(
@@ -48,7 +53,10 @@ export default function UserPosts() {
 	return (
 		<PageWrapper>
 			<PageContentWrapper>
-				<PageTitle>{`${name}'s posts`}</PageTitle>
+				<PageTitle>
+					<UserName>{`${name}'s posts`}</UserName>
+					{id !== userID && <FollowButton />}
+				</PageTitle>
 				<MainContainer>
 					<PostsContainer>
 						{isLoading ? (
@@ -67,7 +75,7 @@ export default function UserPosts() {
 							))
 						)}
 					</PostsContainer>
-					<TrendingContainer /> {/*TO-DO */}
+					<TrendingContainer />
 				</MainContainer>
 			</PageContentWrapper>
 		</PageWrapper>
