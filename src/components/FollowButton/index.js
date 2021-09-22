@@ -32,7 +32,7 @@ export default function FollowButton(){
 	}, [token, id, followedUsersString]);
 
     return (
-        <FollowButtonWrapper>
+        <FollowButtonWrapper disabled>
             Segue eu
         </FollowButtonWrapper>
     );

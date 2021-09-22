@@ -17,12 +17,11 @@ import FollowButton from "../../components/FollowButton";
 
 export default function UserPosts() {
 	const { id } = useParams();
-	const userID = localStorage.getItem("token")
+	const userID = localStorage.getItem("userID")
 	const [posts, setPosts] = useState([]);
 	const [name, setName] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
-	
 
 	useEffect(()=>{
 		fetchPosts();
@@ -56,7 +55,7 @@ export default function UserPosts() {
 			<PageContentWrapper>
 				<PageTitle>
 					<UserName>{`${name}'s posts`}</UserName>
-					<FollowButton />
+					{id !== userID && <FollowButton />}
 				</PageTitle>
 				<MainContainer>
 					<PostsContainer>
