@@ -78,14 +78,14 @@ const CancelButton = styled.button`
 `;
 
 const ModalBackground = styled.div`
-display: flex;
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-z-index: 30;
-background-color: rgba(255,255,255,0.9);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
+  background-color: rgba(255,255,255,0.9);
 `;
 
 export {

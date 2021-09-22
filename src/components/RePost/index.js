@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Modal from "react-modal";
 import Loader from "react-loader-spinner";
 
-export default function RePost() {
+export default function RePost({data}) {
 
     const [clicked,setClicked]=useState(false);
     const [waiting, setWaiting] = useState(false);
@@ -17,13 +17,14 @@ export default function RePost() {
     function printa(){
         setClicked(true)
         console.log("apertou");
+        console.log(data);
     }
 
     return (
         <>
         <IconBox>
             <MdRepeat fontSize="20px"  onClick={printa} />
-            <p>0 re-posts</p>
+            <p>{data.repostCount} re-posts</p>
         </IconBox>
             <DeleteModal
                 isOpen={clicked}
@@ -55,5 +56,4 @@ const IconBox = styled.div`
     align-items: center;
     position: absolute;
     bottom: 25px;
-    background-color: red;
 `;

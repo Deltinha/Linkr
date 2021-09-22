@@ -23,6 +23,7 @@ const BoxPost = styled.div`
     height: 209px;
     width: 100%;
     padding-top: 16px;
+    border-radius: 16px;
     box-shadow: 0px 4px 4px 0px #00000040;
     img {
         height: 50px;
