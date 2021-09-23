@@ -23,6 +23,7 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import CommentsButton from "./CommentButton";
 import Comments from "../Comments";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
@@ -116,8 +117,6 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	useEffect(fillLikedByMe, []);
 	useEffect(generatelikeTooltipText, [likesCount]);
 
-	console.log(data)
-
 	return (
 		<>
 			<PostContents>
@@ -157,9 +156,9 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						)}
 
 						<RePost data={data} fetchPosts={fetchPosts}/>
-						<Comments count={data.commentCount}/>
-					</AvatarAndLikesContainer>
+						<CommentsButton count={data.commentCount}/>
 
+					</AvatarAndLikesContainer>
 					<MainPostContainer>
 						<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
 						{data.user.id === Number(userID) ? (
@@ -190,6 +189,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						</LinkCard>
 					</MainPostContainer>
 				</PostWrapper>
+				{data.commentCount > 0 ? <Comments idPost={data.id} idUser={data.user.id}/> : ""}
 			</PostContents>
 		</>
 	);
@@ -199,6 +199,7 @@ const PostContents = styled.div`
 	background: #1E1E1E;
 	position: relative;
 	border-radius: 16px;
+	margin-bottom: 26px;
 `;
 
 const RepostUser = styled.div`

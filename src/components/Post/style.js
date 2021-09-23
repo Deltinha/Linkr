@@ -8,7 +8,6 @@ const PostWrapper = styled.div`
 	display: flex;
 	padding: 17px;
 	color: white;
-	margin-bottom: 26px;
 	word-break: break-word;
 	@media screen and (max-width: 600px) {
 		width: 100%;

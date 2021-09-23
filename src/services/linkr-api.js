@@ -107,6 +107,12 @@ function postUnfollowUser({token, userID}){
 	return promise;	
 }
 
+function getComments(id, token) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/posts/${id}/comments`, config);
+	return promise;
+}
+
 export {
 	postSignUp,
 	postLogIn,
@@ -125,4 +131,5 @@ export {
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,
+	getComments,
 };
