@@ -1,11 +1,10 @@
-import { getAllPosts } from "../../services/linkr-api";
+import { getFollowingPosts, getFollowingPostsEarlierThan } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
 import useInterval from "react-useinterval";
-import InfiniteScroll from "react-infinite-scroller";
 import {
 	PageWrapper,
 	PageTitle,
@@ -19,20 +18,21 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
-	const [delay, setDelay] = useState(15000);
+	const [delay, setDelay] = useState(10000);
 
 	useEffect(fetchPosts, [token]);
 
 	useInterval(() => {
-		setIsLoading(true);
-		fetchPosts();
+		console.log("piu");
+		updatePosts();
 	}, delay);
 
 	function fetchPosts() {
-		getAllPosts({ token }).then(
+		getFollowingPosts({ token }).then(
 			(res) => {
-				setTimelinePosts(res.data.posts);
+				setTimelinePosts([...res.data.posts]);
 				setIsLoading(false);
+				console.log(token);
 			},
 			(err) => {
 				if (token) {
@@ -41,6 +41,18 @@ export default function Timeline() {
 				setIsLoading(false);
 			}
 		);
+	}
+
+	function updatePosts() {
+		const firstPostID = timelinePosts[0].id;
+
+		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
+			if (!(res.data.posts.length === 0)) {
+				setIsLoading(true);
+				setTimelinePosts([...res.data.posts, ...timelinePosts]);
+				setTimeout(() => setIsLoading(false), 500);
+			}
+		});
 	}
 
 	return (
@@ -55,25 +67,15 @@ export default function Timeline() {
 						) : timelinePosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							<InfiniteScroll
-								pageStart={0}
-								loadMore={() => console.log("mais")}
-								hasMore={true}
-								initialLoad={true}
-								loader={<div>carregano</div>}
-							>
-								{() =>
-									timelinePosts.map((post) => (
-										<Post
-											fetchPosts={fetchPosts}
-											key={post.id}
-											data={post}
-											poster={post.user}
-											likes={post.likes}
-										/>
-									))
-								}
-							</InfiniteScroll>
+							timelinePosts.map((post) => (
+								<Post
+									fetchPosts={fetchPosts}
+									key={post.id}
+									data={post}
+									poster={post.user}
+									likes={post.likes}
+								/>
+							))
 						)}
 					</PostsContainer>
 					<TrendingContainer />

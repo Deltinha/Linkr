@@ -2,8 +2,21 @@ import axios from "axios";
 
 const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/linkr";
 
+/**
+ * Max number of posts that the API will send back from the GET request
+ */
+const RESPONSE_LIMIT = 50;
+
 function createHeaders(token) {
 	const config = { headers: { Authorization: `Bearer ${token}` } };
+	return config;
+}
+
+function createLimitHeaders(token) {
+	const config = {
+		params: { limit: RESPONSE_LIMIT },
+		headers: { Authorization: `Bearer ${token}` },
+	};
 	return config;
 }
 
@@ -101,7 +114,23 @@ function postUnfollowUser({ token, userID }) {
 	return promise;
 }
 
-function getPostsOlderThan({ token, lastPostID }) {}
+function getFollowingPosts({ token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts`, config);
+	return promise;
+}
+
+function getFollowingPostsOlderThan({ token, lastPostID }) {
+	const config = createLimitHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostID}`, config);
+	return promise;
+}
+
+function getFollowingPostsEarlierThan({ token, firstPostID }) {
+	const config = createLimitHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?earlierThan=${firstPostID}`, config);
+	return promise;
+}
 
 export {
 	postSignUp,
@@ -120,4 +149,7 @@ export {
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,
+	getFollowingPosts,
+	getFollowingPostsOlderThan,
+	getFollowingPostsEarlierThan,
 };
