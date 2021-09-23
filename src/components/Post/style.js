@@ -2,6 +2,7 @@ import styled from "styled-components";
 const PostWrapper = styled.div`
 	width: 611px;
 	max-height: fit-content;
+	min-height: 276px;
 	background-color: #171717;
 	border-radius: 16px;
 	display: flex;
@@ -9,8 +10,6 @@ const PostWrapper = styled.div`
 	color: white;
 	margin-bottom: 26px;
 	word-break: break-word;
-	position: relative;
-
 	@media screen and (max-width: 600px) {
 		width: 100%;
 		max-width: 100vw;
@@ -24,6 +23,7 @@ const AvatarAndLikesContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	font-size: 11px;
+	position: relative;
 `;
 
 const ProfilePic = styled.div`

@@ -90,6 +90,12 @@ function postDislike({ id, token }) {
 	return promise;
 }
 
+function postShare(id, token) {
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts/${id}/share`, {}, config);
+	return promise;
+}
+
 function getFollowedByMe({ token }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/follows`, config);
@@ -139,6 +145,7 @@ export {
 	releasePost,
 	getLikedPosts,
 	deletePost,
+	postShare,
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,

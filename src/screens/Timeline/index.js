@@ -18,7 +18,7 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
-	const refreshRate = 1500;
+	const refreshRate = 15000;
 
 	useEffect(fetchPosts, [token]);
 
@@ -27,18 +27,17 @@ export default function Timeline() {
 	}, refreshRate);
 
 	function fetchPosts() {
-		getFollowingPosts({ token }).then(
-			(res) => {
+		getFollowingPosts({ token })
+			.then((res) => {
 				setTimelinePosts([...res.data.posts]);
 				setIsLoading(false);
-			},
-			(err) => {
+			})
+			.catch((err) => {
 				if (token) {
 					alert("Houve uma falha ao obter os posts, por favor atualize a página");
 				}
 				setIsLoading(false);
-			}
-		);
+			});
 	}
 
 	function updatePosts() {
@@ -46,6 +45,7 @@ export default function Timeline() {
 
 		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
 			if (!(res.data.posts.length === 0)) {
+				console.log(res.data.posts);
 				setIsLoading(true);
 				setTimelinePosts([...res.data.posts, ...timelinePosts]);
 				setTimeout(() => setIsLoading(false), 500);
@@ -65,10 +65,10 @@ export default function Timeline() {
 						) : timelinePosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							timelinePosts.map((post) => (
+							timelinePosts.map((post, index) => (
 								<Post
 									fetchPosts={fetchPosts}
-									key={post.id}
+									key={index}
 									data={post}
 									poster={post.user}
 									likes={post.likes}
