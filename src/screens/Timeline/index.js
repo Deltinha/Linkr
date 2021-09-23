@@ -2,6 +2,8 @@ import { getFollowingPosts, getFollowers } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
 import {
@@ -17,17 +19,7 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
-
-	//////////////////////////////
-	const [followers, setFollowers] = useState([]);
-	// TO-DO temporario!!! moises irá colocar os followers no context
-	function fetchFollowers() {
-		getFollowers({ token }).then(
-			(res) => setFollowers(res.data),
-			(err) => console.log(err.response.message)
-		);
-	}
-	///////////////////////////////
+	const { followedUsers } = useContext(UserContext);
 
 	useEffect(fetchPosts, [token]);
 
@@ -56,7 +48,7 @@ export default function Timeline() {
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
-							followers.length === 0 ? (
+							followedUsers.length === 0 ? (
 								<WarningMessage>
 									Você não segue ninguém ainda, procure por perfis na busca
 								</WarningMessage>
