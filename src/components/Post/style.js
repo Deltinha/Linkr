@@ -110,8 +110,9 @@ const LinkPreview = styled.div`
 const YtLink = styled.span`
 	font-size: 17px;
 	color: #b7b7b7;
-	margin-top: 6px;
+	margin-top: 7px;
 	cursor: pointer;
+	word-break: break-all;
 `;
 
 const Hashtag = styled.span`
