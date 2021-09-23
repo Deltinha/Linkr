@@ -6,6 +6,7 @@ import DeleteButton from "./DeleteButton";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
+import YtEmbedVideo from "./YtEmbedVideo";
 import {
 	Hashtag,
 	LinkPreview,
@@ -19,6 +20,7 @@ import {
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
+	YtLink,
 } from "./style";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
@@ -156,18 +158,25 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						</ReactHashtag>
 					</PostText>
 				)}
+				
+				{
+					link.includes('www.youtube.com/watch?v=')
+					? <>
+					<YtEmbedVideo link={link}/>
+					<YtLink onClick={openLink}>{link}</YtLink>
+					</>
+					: <LinkCard>
+						<LinkTextsContainer>
+							<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
 
-				<LinkCard>
-					<LinkTextsContainer>
-						<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
+							<LinkDescription>{linkDescription}</LinkDescription>
 
-						<LinkDescription>{linkDescription}</LinkDescription>
+							<LinkPreview onClick={openLink}>{link}</LinkPreview>
+						</LinkTextsContainer>
 
-						<LinkPreview onClick={openLink}>{link}</LinkPreview>
-					</LinkTextsContainer>
-
-					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
-				</LinkCard>
+						<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
+					</LinkCard>
+				}			
 			</MainPostContainer>
 		</PostWrapper>
 	);
