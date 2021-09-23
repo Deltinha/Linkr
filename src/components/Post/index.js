@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import LikeButton from "./LikeButton";
-import { useHistory } from "react-router-dom";
 import ReactHashtag from "react-hashtag";
 import EditPost from "../EditPost";
 import DeleteButton from "./DeleteButton";
 import RePost from "../RePost";
+import { useHistory } from "react-router-dom";
 import { MdRepeat } from 'react-icons/md';
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
@@ -23,6 +23,7 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import Comments from "../Comments";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
 	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
@@ -115,6 +116,8 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	useEffect(fillLikedByMe, []);
 	useEffect(generatelikeTooltipText, [likesCount]);
 
+	console.log(data)
+
 	return (
 		<>
 			<PostContents>
@@ -154,7 +157,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						)}
 
 						<RePost data={data} fetchPosts={fetchPosts}/>
-
+						<Comments count={data.commentCount}/>
 					</AvatarAndLikesContainer>
 
 					<MainPostContainer>
