@@ -83,24 +83,25 @@ function postDislike({ id, token }) {
 	return promise;
 }
 
-function getFollowedByMe({token}){
+function getFollowedByMe({ token }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/follows`, config);
-	return promise;	
+	return promise;
 }
 
-function postFollowUser({token, userID}){
+function postFollowUser({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/users/${userID}/follow`, {}, config);
-	return promise;	
+	return promise;
 }
 
-function postUnfollowUser({token, userID}){
+function postUnfollowUser({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/users/${userID}/unfollow`, {}, config);
-	return promise;	
+	return promise;
 }
 
+function getPostsOlderThan({ token, lastPostID }) {}
 
 export {
 	postSignUp,

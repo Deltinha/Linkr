@@ -5,7 +5,7 @@ import CreatePost from "../../components/NewPost";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
 import useInterval from "react-useinterval";
-
+import InfiniteScroll from "react-infinite-scroller";
 import {
 	PageWrapper,
 	PageTitle,
@@ -32,7 +32,6 @@ export default function Timeline() {
 		getAllPosts({ token }).then(
 			(res) => {
 				setTimelinePosts(res.data.posts);
-				console.log(res.data.posts);
 				setIsLoading(false);
 			},
 			(err) => {
@@ -56,15 +55,25 @@ export default function Timeline() {
 						) : timelinePosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							timelinePosts.map((post) => (
-								<Post
-									fetchPosts={fetchPosts}
-									key={post.id}
-									data={post}
-									poster={post.user}
-									likes={post.likes}
-								/>
-							))
+							<InfiniteScroll
+								pageStart={0}
+								loadMore={() => console.log("mais")}
+								hasMore={true}
+								initialLoad={true}
+								loader={<div>carregano</div>}
+							>
+								{() =>
+									timelinePosts.map((post) => (
+										<Post
+											fetchPosts={fetchPosts}
+											key={post.id}
+											data={post}
+											poster={post.user}
+											likes={post.likes}
+										/>
+									))
+								}
+							</InfiniteScroll>
 						)}
 					</PostsContainer>
 					<TrendingContainer />
