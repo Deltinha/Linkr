@@ -18,19 +18,25 @@ const PageTitle = styled.div`
 	font-weight: 700;
 	width: 100%;
 	display: flex;
-	justify-content: left;
+	justify-content: space-between;
 	margin-bottom: 30px;
+	align-items: center;
 
 	@media screen and (max-width: 1230px) {
 		margin-bottom: 12px;
 		width: 611px;
 		padding-left: 12px;
-	} ;
+	}
 
 	@media screen and (max-width: 600px) {
 		width: 100%;
 		font-size: 33px;
 	} ;
+`;
+
+const UserName = styled.span`
+	width: calc(100% - 112px - 25px);
+	word-wrap: break-word;
 `;
 
 const PageContentWrapper = styled.div`
@@ -66,16 +72,6 @@ const PostsContainer = styled.div`
 	}
 `;
 
-const TrendingContainer = styled.div`
-	width: 301px;
-	height: 406px;
-	border: 2px solid red;
-	border-radius: 11px;
-	@media screen and (max-width: 1230px) {
-		display: none;
-	}
-`;
-
 const MainContainer = styled.div`
 	display: flex;
 `;
@@ -90,10 +86,10 @@ const WarningMessage = styled.div`
 export {
 	WarningMessage,
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
 	NewPostContainer,
 	PageContentWrapper,
 	PageWrapper,
 	PageTitle,
+	UserName,
 };
