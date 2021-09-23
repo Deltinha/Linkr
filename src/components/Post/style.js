@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const PostWrapper = styled.div`
 	width: 611px;
 	max-height: fit-content;
@@ -63,66 +64,26 @@ const PostText = styled.div`
 	color: #b7b7b7;
 `;
 
-const LinkCard = styled.div`
-	border: 1px solid #4d4d4d;
-	border-radius: 11px;
-	height: 100%;
-	display: flex;
-
-	img {
-		cursor: pointer;
-		width: 30%;
-		height: 100%;
-	}
-`;
-
-const LinkTextsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-	padding: 24px 18px;
-	flex: 1;
-`;
-
-const LinkTitle = styled.div`
-	color: #cecece;
-	font-size: 16px;
-	line-height: 19px;
-	cursor: pointer;
-`;
-
-const LinkDescription = styled.div`
-	font-size: 11px;
-	line-height: 13px;
-	color: #9b9595;
-	padding-top: 5px;
-	padding-bottom: 13px;
-`;
-
-const LinkPreview = styled.div`
-	font-size: 11px;
-	line-height: 13px;
-	color: #cecece;
-	cursor: pointer;
-`;
-
 const Hashtag = styled.span`
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
 `;
 
+
+const PostContents = styled.div`
+	background: #1E1E1E;
+	position: relative;
+	border-radius: 16px;
+`;
+
 export {
 	Hashtag,
-	LinkPreview,
-	LinkDescription,
-	LinkTitle,
-	LinkTextsContainer,
-	LinkCard,
 	PostText,
 	PostUserName,
 	MainPostContainer,
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
+	PostContents,
 };

@@ -1,22 +1,12 @@
 import styled from "styled-components";
 import LikeButton from "./LikeButton";
-import ReactHashtag from "react-hashtag";
-import EditPost from "../EditPost";
-import DeleteButton from "./DeleteButton";
-import RePost from "../RePost";
 import { useHistory } from "react-router-dom";
-import { MdRepeat } from 'react-icons/md';
+import RePost from "../RePost";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import {
-	Hashtag,
-	LinkPreview,
-	LinkDescription,
-	LinkTitle,
-	LinkTextsContainer,
-	LinkCard,
-	PostText,
+	PostContents,
 	PostUserName,
 	MainPostContainer,
 	ProfilePic,
@@ -26,11 +16,17 @@ import {
 import CommentsButton from "./CommentButton";
 import Comments from "../Comments";
 
+import LinksCard from "./LinkCard";
+import DescriptionPost from "./DescriptionPost";
+import HeadPost from "./HeadPost";
+
 export default function Post({ data, poster, likes, fetchPosts }) {
+
 	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
 	const history = useHistory();
 	const token = localStorage.getItem("token");
 	const userID = localStorage.getItem("userID");
+	const [clickComment, setClickComment] = useState(false);
 
 	const [likedByMe, setLikedByMe] = useState(
 		Boolean(likes.find((like) => like["user.id"] === Number(userID)))
@@ -77,11 +73,6 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		window.open(link);
 	}
 
-	function openHashtag(hashtag) {
-		const formattedHashtag = hashtag.substring(1, hashtag.length);
-		history.push(`/hashtag/${formattedHashtag}`);
-	}
-
 	function generatelikeTooltipText() {
 		if (likesCount === 1) {
 			if (likedByMe) {
@@ -120,26 +111,14 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	return (
 		<>
 			<PostContents>
-				{data.repostCount != 0 ? 
-						<RepostUser fetchPosts={fetchPosts}>
-							<MdRepeat fontSize="20px"/>
-							<p>Re-posted by <span>{
-								data.repostedBy ? (data.repostedBy.id === Number(userID) ? "you" : data.repostedBy.username) : "you"}</span>
-							</p>
-						</RepostUser>
-					:
-						"" 
-				}
+				<HeadPost data={data} fetchPosts={fetchPosts} userID={userID}/>
 				<PostWrapper>
 					<AvatarAndLikesContainer>
 						<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
-
-						<LikeButton
-							toggleSelection={toggleLikeButton}
-							likedByMe={likedByMe}
+						<LikeButton 
+							toggleSelection={toggleLikeButton} likedByMe={likedByMe}
 							setLikedByMe={setLikedByMe}
 						/>
-
 						{likesCount > 0 ? (
 							<div>
 								<p data-tip data-for={`tolltip${id}`}>
@@ -161,32 +140,14 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 					</AvatarAndLikesContainer>
 					<MainPostContainer>
 						<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-						{data.user.id === Number(userID) ? (
-							<>
-								<EditPost data={data} fetchPosts={fetchPosts} />
-								<DeleteButton fetchPosts={fetchPosts} id={id} />
-							</>
-						) : (
-							<PostText>
-								<ReactHashtag
-									renderHashtag={(hashtagValue) => (
-										<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
-									)}
-								>
-									{text}
-								</ReactHashtag>
-							</PostText>
-						)}
-
-						<LinkCard>
-							<LinkTextsContainer>
-								<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
-								<LinkDescription>{linkDescription}</LinkDescription>
-								<LinkPreview onClick={openLink}>{link}</LinkPreview>
-							</LinkTextsContainer>
-
-							<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
-						</LinkCard>
+						<DescriptionPost 
+							postId={data.user.id} userID={userID} data={data} 
+							fetchPosts={fetchPosts} id={id} text={text}
+						/>		
+						<LinksCard 
+							openLink={openLink} linkTitle={linkTitle} 
+							linkDescription={linkDescription} link={link} linkImage={linkImage}
+						/>
 					</MainPostContainer>
 				</PostWrapper>
 				{data.commentCount > 0 ? <Comments idPost={data.id} idUser={data.user.id}/> : ""}
@@ -194,36 +155,3 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		</>
 	);
 }
-
-const PostContents = styled.div`
-	background: #1E1E1E;
-	position: relative;
-	border-radius: 16px;
-	margin-bottom: 26px;
-`;
-
-const RepostUser = styled.div`
-	width: 611px;
-	background-color: #1E1E1E;
-	border-radius: 16px;
-	height: 33px;
-	display: flex;
-	align-items: center;
-	padding-left: 16px;
-	color: white;
-	font-family: Lato;
-	font-size: 11px;
-	font-weight: 400;
-	line-height: 13px;
-	p {
-		margin-left: 5px;
-	}
-	span {
-		font-weight: 700;
-	}
-	@media screen and (max-width: 600px) {
-		width: 100%;
-		max-width: 100vw;
-		border-radius: 0;
-	}
-`;
