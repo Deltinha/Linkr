@@ -5,13 +5,13 @@ import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
+import TrendingContainer from "../../components/TrendingContainer";
 import {
 	MainContainer,
-	TrendingContainer,
 	PostsContainer,
-	TimelineWrapper,
+	PageContentWrapper,
 	WarningMessage,
-} from "../Timeline/style";
+} from "../../components/shared/CommonStyled";
 
 export default function Hashtag() {
 
@@ -19,7 +19,6 @@ export default function Hashtag() {
     const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
     const { hashtag } = useParams();
-    console.log(hashtag)
 
     function fetchHashtagPosts() {
         getPostsHashtag(hashtag, token)
@@ -33,11 +32,11 @@ export default function Hashtag() {
             });
     }
     
-    useEffect(fetchHashtagPosts, [token]);
-
+    useEffect(fetchHashtagPosts, [hashtag]);
     return (
+        
         <PageWrapper>
-            <TimelineWrapper>
+            <PageContentWrapper>
                 <PageTitle># {hashtag}</PageTitle>
                 <MainContainer>
                     <PostsContainer>
@@ -51,9 +50,9 @@ export default function Hashtag() {
                             ))
                         )}
                     </PostsContainer>
-                    <TrendingContainer /> {/*TO-DO */}
+                    <TrendingContainer />
                 </MainContainer>
-            </TimelineWrapper>
+            </PageContentWrapper>
         </PageWrapper>
     );
 }

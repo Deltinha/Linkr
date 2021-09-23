@@ -15,10 +15,12 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import DeleteButton from "./DeleteButton";
 
-export default function Post({ data, poster, likes }) {
-	const { text, link, linkTitle, linkDescription, linkImage } = data;
+export default function Post({ data, poster, likes, fetchPosts }) {
+	const { text, link, linkTitle, linkDescription, linkImage, user, id } = data;
 	const history = useHistory();
+	const userID = localStorage.getItem('userID')
 
 	function toggleLikeButton(isSelected) {
 		if (isSelected) {
@@ -47,6 +49,7 @@ export default function Post({ data, poster, likes }) {
 		history.push(`/hashtag/${formattedHashtag}`);
 	}
 
+	
 	return (
 		<PostWrapper>
 			<AvatarAndLikesContainer>
@@ -61,7 +64,9 @@ export default function Post({ data, poster, likes }) {
 				<PostText>
 					<ReactHashtag
 						renderHashtag={(hashtagValue) => (
-							<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
+							<Hashtag onClick={() => openHashtag(hashtagValue)} key={hashtagValue}>
+								{hashtagValue}
+							</Hashtag>
 						)}
 					>
 						{text}
@@ -80,6 +85,8 @@ export default function Post({ data, poster, likes }) {
 					<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
 				</LinkCard>
 			</MainPostContainer>
+
+			{( user.id === Number(userID) ) && <DeleteButton fetchPosts={fetchPosts} id={id}/>}
 		</PostWrapper>
 	);
 }
