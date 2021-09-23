@@ -17,23 +17,23 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
+	
+	function fetchPosts() {
+		getAllPosts(token)
+			.then((res) => {
+				setTimelinePosts(res.data.posts);
+				setIsLoading(false);
+			})
+			.catch((err) =>{
+					if (token) {
+						alert("Houve uma falha ao obter os posts, por favor atualize a página");
+					}
+				setIsLoading(false);
+			});
+	}
 
 	useEffect(fetchPosts, [token]);
 
-	function fetchPosts() {
-		getAllPosts({ token }).then(
-			(res) => {
-				setTimelinePosts(res.data.posts);
-				setIsLoading(false);
-			},
-			(err) => {
-				if (token) {
-					alert("Houve uma falha ao obter os posts, por favor atualize a página");
-				}
-				setIsLoading(false);
-			}
-		);
-	}
 
 	return (
 		<PageWrapper>
@@ -47,10 +47,10 @@ export default function Timeline() {
 						) : timelinePosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							timelinePosts.map((post) => (
+							timelinePosts.map((post, index) => (
 								<Post
 									fetchPosts={fetchPosts}
-									key={post.id}
+									key={index}
 									data={post}
 									poster={post.user}
 									likes={post.likes}
