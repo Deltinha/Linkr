@@ -25,12 +25,6 @@ function postSignUp(body) {
 	return promise;
 }
 
-function getAllPosts({ token }) {
-	const config = createHeaders(token);
-	const promise = axios.get(`${BASE_URL}/posts`, config);
-	return promise;
-}
-
 function postLogIn(body) {
 	const promise = axios.post(`${BASE_URL}/sign-in`, body);
 	return promise;
@@ -135,7 +129,6 @@ function getFollowingPostsEarlierThan({ token, firstPostID }) {
 export {
 	postSignUp,
 	postLogIn,
-	getAllPosts,
 	getTrendingHashtags,
 	getUserInfo,
 	postNewPost,

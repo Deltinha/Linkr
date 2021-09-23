@@ -18,21 +18,19 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
-	const [delay, setDelay] = useState(10000);
+	const refreshRate = 1500;
 
 	useEffect(fetchPosts, [token]);
 
 	useInterval(() => {
-		console.log("piu");
 		updatePosts();
-	}, delay);
+	}, refreshRate);
 
 	function fetchPosts() {
 		getFollowingPosts({ token }).then(
 			(res) => {
 				setTimelinePosts([...res.data.posts]);
 				setIsLoading(false);
-				console.log(token);
 			},
 			(err) => {
 				if (token) {
