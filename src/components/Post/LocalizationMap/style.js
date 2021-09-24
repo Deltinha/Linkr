@@ -17,6 +17,7 @@ const MapModal = Modal.styled`
   border-radius: 20px;
 
   @media (max-width: 640px){
+    padding-top: 5px;
     width: 355px;
     height: 300px;
   }
@@ -35,6 +36,9 @@ const CloseIcon = styled.div`
     position: absolute;
     right: 0;
     top: 5px;
+    @media (max-width: 640px){
+        top: 3px;
+    }
 `;
 
 const Content = styled.div`
@@ -43,14 +47,28 @@ const Content = styled.div`
     font-size: 38px;
     line-height: 56px;
     color: #fff;
+    @media (max-width: 640px){
+        font-size: 12px;
+    }
 `;
 
 const Infos = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
     position: relative;
+    h6:first-child {
+        max-width: 71%;
+        text-overflow: ellipsis;        
+        overflow: hidden;      
+        white-space: nowrap;
+    }
+    h6 {
+        white-space: nowrap;
+    }
+    @media (max-width: 640px){
+        margin-bottom: 0;
+    }
 `;
 
 const ContentMap = styled.div`
@@ -58,7 +76,7 @@ const ContentMap = styled.div`
     width: 713px;
     @media (max-width: 640px){
         width: 100%;
-        height: 160px;
+        height: 210px;
     }
 `;
 
