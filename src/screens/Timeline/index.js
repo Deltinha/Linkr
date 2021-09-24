@@ -19,7 +19,7 @@ export default function Timeline() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isNewPostsLoading, setIsNewPostsLoading] = useState(false);
 	const token = localStorage.getItem("token");
-	const refreshRate = 5000;
+	const refreshRate = 15000;
 
 	useEffect(fetchPosts, [token]);
 
