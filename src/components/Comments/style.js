@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const IconBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,9 +23,8 @@ const ContainerComments = styled.div`
     }
 `;
 
-
 const Footer = styled.div`
-    width: 571px;
+    width: 93%;
     display: flex;
     align-items: center;
     position: relative;
@@ -42,7 +40,7 @@ const Footer = styled.div`
         font-weight: 400;
         line-height: 17px;
         height: 39px;
-        width: 510px;
+        width: 83%;
         padding-left: 15px;
         border-radius: 8px;
         color: #575757;
@@ -53,12 +51,25 @@ const Footer = styled.div`
             outline: none;
         }
     }
+    @media screen and (max-width: 600px) {
+        input {
+            width: 100%;
+	    	max-width: 100vw;
+        }
+		width: 100%;
+		max-width: 100vw;
+	}
 `;
 
 const CardComment = styled.div`
     margin-top: 12px;
     max-height: 205px;
     overflow-y: scroll;
+    @media screen and (max-width: 600px) {
+		width: 100%;
+		max-width: 100vw;
+        overflow-x: hidden;
+	}
 `;
 
 const ContentComment = styled.div`

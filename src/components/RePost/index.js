@@ -58,4 +58,5 @@ const IconBox = styled.div`
     position: absolute;
     top: 185px;
     cursor: pointer;
+    width: 100px;
 `;

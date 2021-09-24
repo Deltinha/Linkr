@@ -1,5 +1,4 @@
-import { useEffect, useContext } from "react";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { getComments, getFollowedByMe, postComment, getUserInfo } from "../../services/linkr-api";
 import { FiSend } from 'react-icons/fi';
 import { IconBox, ContainerComments, Footer } from "./style";
