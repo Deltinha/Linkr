@@ -32,6 +32,7 @@ const Footer = styled.div`
     form{
         margin-left: 14px;
         position: relative;
+        width: 100%;
     }
     input {
         font-family: Lato;
@@ -40,7 +41,7 @@ const Footer = styled.div`
         font-weight: 400;
         line-height: 17px;
         height: 39px;
-        width: 83%;
+        width: 100%;
         padding-left: 15px;
         border-radius: 8px;
         color: #575757;
