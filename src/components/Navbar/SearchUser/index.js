@@ -1,19 +1,17 @@
 import { SearchUserWrapper, SuggestionsList } from "./style";
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { getSearchUser } from "../../../services/linkr-api";
 import { DebounceInput } from "react-debounce-input";
 import { useHistory } from "react-router";
-import UserContext from "../../../contexts/UserContext";
 
 export default function SearchUser(){
     const token = localStorage.getItem('token');
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
-    const suggestionsString = JSON.stringify(suggestions);
     const history = useHistory();
 
     function gotoUserPage(userID){
-        setValue('');
+        setSuggestions([])
         history.push(`/user/${userID}`)
     }
 
@@ -38,9 +36,11 @@ export default function SearchUser(){
     return (
         <SearchUserWrapper>
             <DebounceInput 
+            value={value}
             minLength={3}
             debounceTimeout={300}
-            onChange={e => updateSuggestions(e)}/>
+            onChange={e => updateSuggestions(e)}
+            onFocus={e => updateSuggestions(e)}/>
 
             <SuggestionsList>
                 {suggestions.map((suggestion)=>(
@@ -51,18 +51,4 @@ export default function SearchUser(){
             </SuggestionsList>
         </SearchUserWrapper>
     );
-}
-
-
-
-
-
-function App() {
-  
-
-  return (
-    <div className='container'>
- 
-    </div>
-  );
 }
