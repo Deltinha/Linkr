@@ -71,10 +71,13 @@ export default function Navbar (){
       useEffect(loadAvatar,[userID, token, history]);
 
         return (
+            <>
             <S.Navbar>
                 <span onClick={()=>goToRoute('/timeline')}>linkr</span>
                 <SearchUser />
                 <MenuHandler />
             </S.Navbar>
+            <S.NavbarSpacer />
+            </>
         );
 }

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const SearchUserWrapper = styled.div`
-    position: relative;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     width: 563px;
     input {
         position: relative;
@@ -31,6 +33,18 @@ const SearchUserWrapper = styled.div`
         font-size: 23px;
         right: 15px;
         top: 11px;
+    }
+
+    @media (max-width: 1230px) {
+        width: 611px;
+        top: 82px;
+
+        input {
+            font-size: 17px;
+        }
+	}
+    @media (max-width: 631px) {  
+        width: calc(100vw - 26px);
     }
 `;
 
@@ -68,6 +82,24 @@ const SuggestionsList = styled.ul`
         object-fit: cover;
         border-radius: 50px;
         cursor: pointer;
+    }
+
+    @media (max-width: 1230px) {
+            width: 611px;
+            height: 400px;
+            
+            li {
+                font-size: 17px;
+                gap: 10px;
+            }
+
+            img {
+                width: 32px;
+                height: 32px;
+            }
+	}
+    @media (max-width: 631px) {  
+        width: calc(100vw - 26px);
     }
 `;
 
