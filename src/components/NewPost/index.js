@@ -36,6 +36,10 @@ export default function CreatePost({ fetchPosts }) {
 				.then((resp) => {
 					setDescription("");
 					setUrl("");
+					setGeolocation({
+						latitude: "",
+						longitude: ""
+					})
 					setWaiting(false);
 					fetchPosts();
 				})
@@ -48,8 +52,6 @@ export default function CreatePost({ fetchPosts }) {
 			setWaiting(false);
 		}
 	}
-
-	console.log(geolocation);
 
 	return (
 		<Container>

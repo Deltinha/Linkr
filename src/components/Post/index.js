@@ -9,6 +9,7 @@ import Comments from "../Comments";
 import LinksCard from "./LinkCard";
 import DescriptionPost from "./DescriptionPost";
 import HeadPost from "./HeadPost";
+import Localization from "./LocalizationMap";
 import {
 	PostContents,
 	PostUserName,
@@ -16,9 +17,8 @@ import {
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
+	HeadCard
 } from "./style";
-import Localization from "./LocalizationButton";
-import styled from "styled-components";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
 
@@ -106,7 +106,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 	useEffect(fillLikedByMe, []);
 	useEffect(generatelikeTooltipText, [likesCount]);
-	console.log(data)
+
 	return (
 		<>
 			<PostContents>
@@ -159,9 +159,3 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		</>
 	);
 }
-
-const HeadCard = styled.div`
-	display: flex;
-	justify-content: left;
-	max-width: 90%;
-`;

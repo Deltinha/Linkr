@@ -88,6 +88,12 @@ const PostContents = styled.div`
 	}
 `;
 
+const HeadCard = styled.div`
+	display: flex;
+	justify-content: left;
+	max-width: 90%;
+`;
+
 export {
 	Hashtag,
 	PostText,
@@ -97,4 +103,5 @@ export {
 	AvatarAndLikesContainer,
 	PostWrapper,
 	PostContents,
+	HeadCard,
 };
