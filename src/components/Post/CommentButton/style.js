@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const IconBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -9,7 +8,6 @@ const IconBox = styled.div`
     top: 130px;
     cursor: pointer;
 `;
-
 
 export {
     IconBox

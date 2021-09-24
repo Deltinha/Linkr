@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const IconBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,7 +22,6 @@ const ContainerComments = styled.div`
         border-radius: 304px;
     }
 `;
-
 
 const Footer = styled.div`
     width: 571px;
