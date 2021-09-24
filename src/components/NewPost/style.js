@@ -33,6 +33,7 @@ const BoxPost = styled.div`
     @media screen and (max-width: 600px) {
 		width: 100%;
 		height: 164px;
+        border-radius: 0;
         img {
             display: none;
         }

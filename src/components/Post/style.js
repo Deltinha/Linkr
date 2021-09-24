@@ -25,6 +25,11 @@ const AvatarAndLikesContainer = styled.div`
 	align-items: center;
 	font-size: 11px;
 	position: relative;
+    @media screen and (max-width: 600px) {
+		p {
+			font-size: 9px;
+		}
+	}
 `;
 
 const ProfilePic = styled.div`
@@ -76,6 +81,11 @@ const PostContents = styled.div`
 	background: #1E1E1E;
 	position: relative;
 	border-radius: 16px;
+	@media screen and (max-width: 600px) {
+		width: 100%;
+		max-width: 100vw;
+		border-radius: 0;
+	}
 `;
 
 export {
