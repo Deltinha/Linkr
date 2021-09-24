@@ -1,10 +1,14 @@
-import styled from "styled-components";
 import LikeButton from "./LikeButton";
 import { useHistory } from "react-router-dom";
 import RePost from "../RePost";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
+import CommentsButton from "./CommentButton";
+import Comments from "../Comments";
+import LinksCard from "./LinkCard";
+import DescriptionPost from "./DescriptionPost";
+import HeadPost from "./HeadPost";
 import {
 	PostContents,
 	PostUserName,
@@ -13,12 +17,6 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
-import CommentsButton from "./CommentButton";
-import Comments from "../Comments";
-
-import LinksCard from "./LinkCard";
-import DescriptionPost from "./DescriptionPost";
-import HeadPost from "./HeadPost";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
 
@@ -27,7 +25,6 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	const token = localStorage.getItem("token");
 	const userID = localStorage.getItem("userID");
 	const [clickComment, setClickComment] = useState(false);
-
 	const [likedByMe, setLikedByMe] = useState(
 		Boolean(likes.find((like) => like["user.id"] === Number(userID)))
 	);
@@ -112,13 +109,14 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		<>
 			<PostContents>
 				<HeadPost data={data} fetchPosts={fetchPosts} userID={userID}/>
-				<PostWrapper>
+				<PostWrapper margin = {!clickComment ? "26px" : "0"}>
 					<AvatarAndLikesContainer>
 						<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
 						<LikeButton 
 							toggleSelection={toggleLikeButton} likedByMe={likedByMe}
 							setLikedByMe={setLikedByMe}
 						/>
+
 						{likesCount > 0 ? (
 							<div>
 								<p data-tip data-for={`tolltip${id}`}>
@@ -135,7 +133,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						)}
 
 						<RePost data={data} fetchPosts={fetchPosts}/>
-						<CommentsButton count={data.commentCount}/>
+						<CommentsButton  state={clickComment} toggleButton={setClickComment} count={data.commentCount}/>
 
 					</AvatarAndLikesContainer>
 					<MainPostContainer>
@@ -150,7 +148,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 						/>
 					</MainPostContainer>
 				</PostWrapper>
-				{data.commentCount > 0 ? <Comments idPost={data.id} idUser={data.user.id}/> : ""}
+				{ clickComment ? <Comments idPost={data.id} idUser={poster.id} fetchPosts={fetchPosts}/> : ""}
 			</PostContents>
 		</>
 	);

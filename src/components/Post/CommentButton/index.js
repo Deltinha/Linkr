@@ -1,21 +1,12 @@
-import styled from "styled-components";
-import { AiOutlineComment, IoIosSend } from "react-icons/ai";
+import { AiOutlineComment } from "react-icons/ai";
+import { IconBox } from "./style"
 
-export default function CommentsButton({count}) {
+export default function CommentsButton({count, state, toggleButton}) {
 
     return (
-        <IconBox>
+        <IconBox onClick={() => toggleButton(!state)}>
             <AiOutlineComment fontSize="20px"/>
             <p>{count} {count != 1 ? "comments" : "comment"}</p>
         </IconBox>
     );
 }
-
-
-const IconBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    bottom: 80px;
-`;

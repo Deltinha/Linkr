@@ -113,6 +113,13 @@ function getComments(id, token) {
 	return promise;
 }
 
+function postComment(id, body, token){
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts/${id}/comment`, body, config);
+	return promise;	
+}
+
+
 export {
 	postSignUp,
 	postLogIn,
@@ -132,4 +139,5 @@ export {
 	postFollowUser,
 	postUnfollowUser,
 	getComments,
+	postComment,
 };

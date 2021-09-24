@@ -10,6 +10,7 @@ const PostWrapper = styled.div`
 	padding: 17px;
 	color: white;
 	word-break: break-word;
+	margin-bottom: ${(props) => props.margin};
 	@media screen and (max-width: 600px) {
 		width: 100%;
 		max-width: 100vw;
