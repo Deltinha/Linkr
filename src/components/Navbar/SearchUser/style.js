@@ -66,6 +66,10 @@ const SuggestionsList = styled.ul`
     gap: 16px;
     scrollbar-width: none;
 
+    ::-webkit-scrollbar {
+    display: none;
+}
+
 }
 
     li {
