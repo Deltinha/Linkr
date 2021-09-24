@@ -106,7 +106,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 	useEffect(fillLikedByMe, []);
 	useEffect(generatelikeTooltipText, [likesCount]);
-	//console.log(data.geolocation)
+	console.log(data)
 	return (
 		<>
 			<PostContents>
@@ -139,12 +139,11 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 					</AvatarAndLikesContainer>
 					<MainPostContainer>
-						<div>
-
-						</div>
-						<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-						<Localization coordinates={data.geolocation}/>
-
+						<HeadCard>
+							<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
+							<Localization coordinates={data.geolocation} user={data.user.username}/>
+						</HeadCard>
+						
 						<DescriptionPost 
 							postId={data.user.id} userID={userID} data={data} 
 							fetchPosts={fetchPosts} id={id} text={text}
@@ -161,4 +160,8 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	);
 }
 
-const headCard = styled.div``;
+const HeadCard = styled.div`
+	display: flex;
+	justify-content: left;
+	max-width: 90%;
+`;

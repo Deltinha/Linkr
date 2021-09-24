@@ -13,6 +13,7 @@
     "react-click-outside": "^3.0.1",
     "react-debounce-input": "^3.2.5",
     "react-dom": "16.14.0",
+    "react-google-maps": "^9.4.5",
     "react-hashtag": "^2.1.2",
     "react-icons": "^4.2.0",
     "react-loader-spinner": "^4.0.0",
