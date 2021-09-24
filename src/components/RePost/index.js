@@ -56,5 +56,7 @@ const IconBox = styled.div`
     flex-direction: column;
     align-items: center;
     position: absolute;
-    bottom: 25px;
+    top: 185px;
+    cursor: pointer;
+    width: 100px;
 `;
