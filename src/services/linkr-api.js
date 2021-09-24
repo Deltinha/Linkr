@@ -119,6 +119,11 @@ function postComment(id, body, token){
 	return promise;	
 }
 
+function getSearchUser({token, queryString}){
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/search?username=${queryString}`, config);
+	return promise;
+}
 
 export {
 	postSignUp,
@@ -140,4 +145,5 @@ export {
 	postUnfollowUser,
 	getComments,
 	postComment,
+	getSearchUser,
 };
