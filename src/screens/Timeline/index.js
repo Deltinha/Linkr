@@ -19,7 +19,7 @@ export default function Timeline() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isNewPostsLoading, setIsNewPostsLoading] = useState(false);
 	const token = localStorage.getItem("token");
-	const refreshRate = 15000;
+	const refreshRate = 5000;
 
 	useEffect(fetchPosts, [token]);
 
@@ -60,7 +60,7 @@ export default function Timeline() {
 		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
 			if (!(res.data.posts.length === 0)) {
 				setIsNewPostsLoading(true);
-				setTimeout(setIsNewPostsLoading(false), 500);
+				setTimeout(() => setIsNewPostsLoading(false), 500);
 				setTimelinePosts([...res.data.posts, ...timelinePosts]);
 			}
 		});
