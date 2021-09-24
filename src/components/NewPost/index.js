@@ -8,6 +8,7 @@ export default function CreatePost({ fetchPosts }) {
 	const [description, setDescription] = useState("");
 	const [waiting, setWaiting] = useState(false);
 	const [userAvatar, setUserAvatar] = useState("");
+	const [geolocation, setGeolocation] = useState({latitude: "", longitude: ""});
 	const userID = localStorage.getItem("userID");
 	const token = localStorage.getItem("token");
 
@@ -28,6 +29,7 @@ export default function CreatePost({ fetchPosts }) {
 			const body = {
 				text: description,
 				link: url,
+				geolocation
 			};
 
 			postNewPost(body, token)
@@ -46,6 +48,8 @@ export default function CreatePost({ fetchPosts }) {
 			setWaiting(false);
 		}
 	}
+
+	console.log(geolocation);
 
 	return (
 		<Container>
@@ -70,7 +74,7 @@ export default function CreatePost({ fetchPosts }) {
 							disabled={waiting}
 							required
 						/>
-						<Geolocation />
+						<Geolocation setGeolocation={setGeolocation}/>
 						<button type="submit" disabled={waiting}>
 							{waiting ? "Publishing..." : "Publicar"}
 						</button>

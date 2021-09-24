@@ -17,6 +17,8 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
+import Localization from "./LocalizationButton";
+import styled from "styled-components";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
 
@@ -104,7 +106,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 	useEffect(fillLikedByMe, []);
 	useEffect(generatelikeTooltipText, [likesCount]);
-
+	//console.log(data.geolocation)
 	return (
 		<>
 			<PostContents>
@@ -137,7 +139,12 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 					</AvatarAndLikesContainer>
 					<MainPostContainer>
+						<div>
+
+						</div>
 						<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
+						<Localization coordinates={data.geolocation}/>
+
 						<DescriptionPost 
 							postId={data.user.id} userID={userID} data={data} 
 							fetchPosts={fetchPosts} id={id} text={text}
@@ -153,3 +160,5 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		</>
 	);
 }
+
+const headCard = styled.div``;
