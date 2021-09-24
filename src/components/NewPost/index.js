@@ -1,6 +1,7 @@
 import { getUserInfo, postNewPost } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import { Container, BoxDescription, BoxPost, Form } from "./style";
+import Geolocation from "../Geolocation";
 
 export default function CreatePost({ fetchPosts }) {
 	const [url, setUrl] = useState("");
@@ -69,6 +70,7 @@ export default function CreatePost({ fetchPosts }) {
 							disabled={waiting}
 							required
 						/>
+						<Geolocation />
 						<button type="submit" disabled={waiting}>
 							{waiting ? "Publishing..." : "Publicar"}
 						</button>
