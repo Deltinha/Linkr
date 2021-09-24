@@ -9,8 +9,8 @@ const PostWrapper = styled.div`
 	display: flex;
 	padding: 17px;
 	color: white;
-	margin-bottom: 26px;
 	word-break: break-word;
+	margin-bottom: ${(props) => props.margin};
 	@media screen and (max-width: 600px) {
 		width: 100%;
 		max-width: 100vw;
@@ -25,6 +25,11 @@ const AvatarAndLikesContainer = styled.div`
 	align-items: center;
 	font-size: 11px;
 	position: relative;
+    @media screen and (max-width: 600px) {
+		p {
+			font-size: 9px;
+		}
+	}
 `;
 
 const ProfilePic = styled.div`
@@ -75,6 +80,11 @@ const PostContents = styled.div`
 	background: #1e1e1e;
 	position: relative;
 	border-radius: 16px;
+	@media screen and (max-width: 600px) {
+		width: 100%;
+		max-width: 100vw;
+		border-radius: 0;
+	}
 `;
 
 export {

@@ -22,6 +22,11 @@ export default function TrendingContainer(){
             .catch(()=>null)
     },[]);
 
+    function goHashtag(e) {
+        e.preventDefault();
+        history.push(`/hashtag/${hashtagInput}`)
+    }
+
     return (
         <Container>
             <Title>trending</Title>
@@ -37,7 +42,7 @@ export default function TrendingContainer(){
                 :
                 null}
             </Hashtags>
-            <Form onSubmit={() => history.push(`/hashtag/${hashtagInput}`)}>
+            <Form onSubmit={goHashtag}>
                 <Input 
                     placeholder="type a hashtag" 
                     onChange={(e) => setHashtagInput(e.target.value)}
