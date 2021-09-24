@@ -1,4 +1,4 @@
-import { CancelButton, ConfirmButton, DeleteButtonWrapper, DeleteModal, ModalText } from "./style";
+import { CancelButton, ConfirmButton, DeleteButtonWrapper, DeleteModal, ModalText } from "../../shared/CommonStyled";
 import { FaTrash } from "react-icons/fa";
 import { deletePost } from "../../../services/linkr-api";
 import { useState } from "react";

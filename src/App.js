@@ -10,7 +10,7 @@ import Hashtag from "./screens/Hashtag";
 import Navbar from "./components/Navbar";
 import MyLikes from "./screens/MyLikes";
 import { ModalProvider } from "styled-react-modal";
-import { ModalBackground } from "./components/Post/DeleteButton/style";
+import { ModalBackground } from "./components/shared/CommonStyled";
 import UserPosts from "./screens/UserPosts";
 import MyPosts from "./screens/MyPosts";
 import { getFollowedByMe } from "./services/linkr-api";

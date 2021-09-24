@@ -24,19 +24,20 @@ export default function Timeline() {
 	useEffect(fetchPosts, [token]);
 
 	function fetchPosts() {
-		getFollowingPosts({ token }).then(
-			(res) => {
+		getFollowingPosts({ token })
+			.then((res) => {
 				setTimelinePosts(res.data.posts);
 				setIsLoading(false);
-			},
-			(err) => {
+			})
+			.catch((err) => {
 				if (token) {
 					alert("Houve uma falha ao obter os posts, por favor atualize a página");
 				}
 				setIsLoading(false);
-			}
-		);
+			});
 	}
+
+	useEffect(fetchPosts, [token]);
 
 	return (
 		<PageWrapper>
@@ -56,10 +57,10 @@ export default function Timeline() {
 								<WarningMessage>Nenhuma publicação encontrada</WarningMessage>
 							)
 						) : (
-							timelinePosts.map((post) => (
+							timelinePosts.map((post, index) => (
 								<Post
 									fetchPosts={fetchPosts}
-									key={post.id}
+									key={index}
 									data={post}
 									poster={post.user}
 									likes={post.likes}

@@ -12,7 +12,7 @@ function postSignUp(body) {
 	return promise;
 }
 
-function getAllPosts({ token }) {
+function getAllPosts(token) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/posts`, config);
 	return promise;
@@ -89,6 +89,12 @@ function getFollowingPosts({ token }) {
 	return promise;
 }
 
+function postShare(id, token) {
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts/${id}/share`, {}, config);
+	return promise;
+}
+
 function getFollowedByMe({ token }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/follows`, config);
@@ -107,6 +113,12 @@ function postUnfollowUser({ token, userID }) {
 	return promise;
 }
 
+function getSearchUser({ token, queryString }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/search?username=${queryString}`, config);
+	return promise;
+}
+
 export {
 	postSignUp,
 	postLogIn,
@@ -122,7 +134,9 @@ export {
 	getLikedPosts,
 	deletePost,
 	getFollowingPosts,
+	postShare,
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,
+	getSearchUser,
 };

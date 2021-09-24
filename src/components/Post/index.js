@@ -1,33 +1,31 @@
+import styled from "styled-components";
 import LikeButton from "./LikeButton";
 import { useHistory } from "react-router-dom";
-import ReactHashtag from "react-hashtag";
-import EditPost from "../EditPost";
-import DeleteButton from "./DeleteButton";
+import RePost from "../RePost";
 import { postDislike, postLike } from "../../services/linkr-api";
 import { useEffect, useState } from "react";
 import ReactTooltip from "react-tooltip";
-import YtEmbedVideo from "./YtEmbedVideo";
 import {
-	Hashtag,
-	LinkPreview,
-	LinkDescription,
-	LinkTitle,
-	LinkTextsContainer,
-	LinkCard,
-	PostText,
+	PostContents,
 	PostUserName,
 	MainPostContainer,
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
-	YtLink,
 } from "./style";
 
+import LinksCard from "./LinkCard";
+import DescriptionPost from "./DescriptionPost";
+import HeadPost from "./HeadPost";
+
 export default function Post({ data, poster, likes, fetchPosts }) {
+
 	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
 	const history = useHistory();
 	const token = localStorage.getItem("token");
 	const userID = localStorage.getItem("userID");
+
+
 	const [likedByMe, setLikedByMe] = useState(
 		Boolean(likes.find((like) => like["user.id"] === Number(userID)))
 	);
@@ -73,11 +71,6 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 		window.open(link);
 	}
 
-	function openHashtag(hashtag) {
-		const formattedHashtag = hashtag.substring(1, hashtag.length);
-		history.push(`/hashtag/${formattedHashtag}`);
-	}
-
 	function generatelikeTooltipText() {
 		if (likesCount === 1) {
 			if (likedByMe) {
@@ -114,70 +107,46 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	useEffect(generatelikeTooltipText, [likesCount]);
 
 	return (
-		<PostWrapper>
-			<AvatarAndLikesContainer>
-				<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
+		<>
+			<PostContents>
+				<HeadPost data={data} fetchPosts={fetchPosts} userID={userID}/>
+				<PostWrapper>
+					<AvatarAndLikesContainer>
+						<ProfilePic onClick={goToPosterPage} avatar={poster.avatar} />
+						<LikeButton 
+							toggleSelection={toggleLikeButton} likedByMe={likedByMe}
+							setLikedByMe={setLikedByMe}
+						/>
+						{likesCount > 0 ? (
+							<div>
+								<p data-tip data-for={`tolltip${id}`}>
+									{likesCount} likes
+								</p>
+								<ReactTooltip id={`tolltip${id}`} effect="solid" place="bottom" type='light'>
+									<span style={{ display: "flex", justifyContent: "center", width: "100px", fontWeight:'700', fontSize:'11px' }}>
+										{tooltipText}
+									</span>
+								</ReactTooltip>
+							</div>
+						) : (
+							<span>{likesCount} likes</span>
+						)}
 
-				<LikeButton
-					toggleSelection={toggleLikeButton}
-					likedByMe={likedByMe}
-					setLikedByMe={setLikedByMe}
-				/>
-
-				{likesCount > 0 ? (
-					<div>
-						<p data-tip data-for={`tolltip${id}`}>
-							{likesCount} likes
-						</p>
-						<ReactTooltip id={`tolltip${id}`} effect="solid" place="bottom" type='light'>
-							<span style={{ display: "flex", justifyContent: "center", width: "100px", fontWeight:'700', fontSize:'11px' }}>
-								{tooltipText}
-							</span>
-						</ReactTooltip>
-					</div>
-				) : (
-					<span>{likesCount} likes</span>
-				)}
-			</AvatarAndLikesContainer>
-
-			<MainPostContainer>
-				<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
-				{data.user.id === Number(userID) ? (
-					<>
-						<EditPost data={data} fetchPosts={fetchPosts} />
-						<DeleteButton fetchPosts={fetchPosts} id={id} />
-					</>
-				) : (
-					<PostText>
-						<ReactHashtag
-							renderHashtag={(hashtagValue) => (
-								<Hashtag onClick={() => openHashtag(hashtagValue)}>{hashtagValue}</Hashtag>
-							)}
-						>
-							{text}
-						</ReactHashtag>
-					</PostText>
-				)}
-				
-				{
-					link.includes('www.youtube.com/watch?v=')
-					? <>
-					<YtEmbedVideo link={link}/>
-					<YtLink onClick={openLink}>{link}</YtLink>
-					</>
-					: <LinkCard>
-						<LinkTextsContainer>
-							<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
-
-							<LinkDescription>{linkDescription}</LinkDescription>
-
-							<LinkPreview onClick={openLink}>{link}</LinkPreview>
-						</LinkTextsContainer>
-
-						<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
-					</LinkCard>
-				}			
-			</MainPostContainer>
-		</PostWrapper>
+						<RePost data={data} fetchPosts={fetchPosts}/>
+					</AvatarAndLikesContainer>
+					<MainPostContainer>
+						<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
+						<DescriptionPost 
+							postId={data.user.id} userID={userID} data={data} 
+							fetchPosts={fetchPosts} id={id} text={text}
+						/>		
+						<LinksCard 
+							openLink={openLink} linkTitle={linkTitle} 
+							linkDescription={linkDescription} link={link} linkImage={linkImage}
+						/>
+					</MainPostContainer>
+				</PostWrapper>
+			</PostContents>
+		</>
 	);
 }
