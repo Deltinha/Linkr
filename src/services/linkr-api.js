@@ -107,6 +107,12 @@ function postUnfollowUser({token, userID}){
 	return promise;	
 }
 
+function getSearchUser({token, queryString}){
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/search?username=${queryString}`, config);
+	return promise;
+}
+
 export {
 	postSignUp,
 	postLogIn,
@@ -125,4 +131,5 @@ export {
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,
+	getSearchUser,
 };

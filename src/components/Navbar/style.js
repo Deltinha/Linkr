@@ -27,6 +27,14 @@ const Navbar = styled.div`
 	}
 `;
 
+const NavbarSpacer = styled.div`
+	height: 0px;
+
+	@media (max-width: 1230px) {
+		height: 40px;
+	}
+`;
+
 const NavbarMenu = styled.div`
 	font-family: "Lato", sans-serif;
 	display: flex;
@@ -88,4 +96,4 @@ const NavbarLinks = styled.div`
 	}
 `;
 
-export { Navbar, NavbarMenu, NavbarLinks };
+export { Navbar, NavbarMenu, NavbarLinks, NavbarSpacer };
