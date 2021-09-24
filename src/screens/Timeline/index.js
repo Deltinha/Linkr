@@ -17,12 +17,14 @@ import {
 export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isNewPostsLoading, setIsNewPostsLoading] = useState(false);
 	const token = localStorage.getItem("token");
 	const refreshRate = 15000;
 
 	useEffect(fetchPosts, [token]);
 
 	useInterval(() => {
+		setIsNewPostsLoading(true);
 		updatePosts();
 	}, refreshRate);
 
@@ -40,13 +42,27 @@ export default function Timeline() {
 			});
 	}
 
-	function updatePosts() {
-		const firstPostID = timelinePosts[0].id;
+	/**
+	 * Returns the repostId of the first post if it a repost, otherwise returns its id
+	 * @returns the id or reposId of the first post
+	 */
+	function getFirstPostID() {
+		const firstPost = timelinePosts[0];
 
+		if (firstPost.repostId) {
+			return firstPost.repostId;
+		}
+
+		return firstPost.id;
+	}
+
+	function updatePosts() {
+		const firstPostID = getFirstPostID();
 		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
 			if (!(res.data.posts.length === 0)) {
 				setTimelinePosts([...res.data.posts, ...timelinePosts]);
 			}
+			setIsNewPostsLoading(false);
 		});
 	}
 
@@ -57,6 +73,7 @@ export default function Timeline() {
 				<MainContainer>
 					<PostsContainer>
 						<CreatePost fetchPosts={fetchPosts} />
+						{isNewPostsLoading ? <Loader message={"Carregando novos Posts..."} /> : ""}
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
