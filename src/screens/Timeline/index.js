@@ -24,7 +24,6 @@ export default function Timeline() {
 	useEffect(fetchPosts, [token]);
 
 	useInterval(() => {
-		setIsNewPostsLoading(true);
 		updatePosts();
 	}, refreshRate);
 
@@ -60,9 +59,10 @@ export default function Timeline() {
 		const firstPostID = getFirstPostID();
 		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
 			if (!(res.data.posts.length === 0)) {
+				setIsNewPostsLoading(true);
+				setTimeout(setIsNewPostsLoading(false), 500);
 				setTimelinePosts([...res.data.posts, ...timelinePosts]);
 			}
-			setIsNewPostsLoading(false);
 		});
 	}
 
