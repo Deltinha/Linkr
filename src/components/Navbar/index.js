@@ -4,6 +4,7 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { getUserInfo } from "../../services/linkr-api";
 import * as S from './style';
 import enhanceWithClickOutside from "react-click-outside";
+import SearchUser from "./SearchUser";
 
 export default function Navbar (){
     
@@ -70,9 +71,13 @@ export default function Navbar (){
       useEffect(loadAvatar,[userID, token, history]);
 
         return (
+            <>
             <S.Navbar>
                 <span onClick={()=>goToRoute('/timeline')}>linkr</span>
+                <SearchUser />
                 <MenuHandler />
             </S.Navbar>
+            <S.NavbarSpacer />
+            </>
         );
 }
