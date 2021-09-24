@@ -19,7 +19,7 @@ export default function Localization({coordinates, user}) {
             >
                 <Content>
                     <Infos>
-                        <h6>{user}</h6>
+                        <h6>{user.split(" ")[0]}</h6>
                         <h6>{"'s location"}</h6>
                         <CloseIcon>
                             <MdClose onClick={() => setClicked(false)}
