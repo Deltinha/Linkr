@@ -113,6 +113,18 @@ function postUnfollowUser({ token, userID }) {
 	return promise;
 }
 
+function getComments(id, token) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/posts/${id}/comments`, config);
+	return promise;
+}
+
+function postComment(id, body, token) {
+	const config = createHeaders(token);
+	const promise = axios.post(`${BASE_URL}/posts/${id}/comment`, body, config);
+	return promise;
+}
+
 function getSearchUser({ token, queryString }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/search?username=${queryString}`, config);
@@ -138,5 +150,7 @@ export {
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,
+	getComments,
+	postComment,
 	getSearchUser,
 };
