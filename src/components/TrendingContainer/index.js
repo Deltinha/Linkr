@@ -1,11 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { getTrendingHashtags } from '../../services/linkr-api';
-import * as S from './style'
+import { getTrendingHashtags } from "../../services/linkr-api";
+import { 
+	Container, 
+	Title, 
+	Hashtags,
+	Form,
+	Input,
+} from './style'
 
 export default function TrendingContainer(){
     const token = localStorage.getItem('token');
     const [hashtagsArray, setHashtagasArray] = useState([]);
+    const [hashtagInput, setHashtagInput] = useState("");
+    const history = useHistory();
 
     useEffect(()=>{
         getTrendingHashtags({token})
@@ -14,9 +23,9 @@ export default function TrendingContainer(){
     },[]);
 
     return (
-        <S.TrendingContainer>
-            <S.Title>trending</S.Title>
-            <S.Hashtags>
+        <Container>
+            <Title>trending</Title>
+            <Hashtags>
                 {hashtagsArray.length !== 0 ?
                 hashtagsArray.map((hashtag)=>(
                     <Link 
@@ -27,7 +36,15 @@ export default function TrendingContainer(){
                 ))
                 :
                 null}
-            </S.Hashtags>
-        </S.TrendingContainer>
+            </Hashtags>
+            <Form onSubmit={() => history.push(`/hashtag/${hashtagInput}`)}>
+                <Input 
+                    placeholder="type a hashtag" 
+                    onChange={(e) => setHashtagInput(e.target.value)}
+                    value={hashtagInput}
+                    />
+                <p>#</p>
+            </Form>
+        </Container>
     );
 }
