@@ -9,7 +9,9 @@ export const StyledLoaderWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-color: blue;
 
 	@media screen and (max-width: 1230px) {
+		width: 100%;
 	}
 `;
