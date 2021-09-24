@@ -5,11 +5,11 @@ export default function HeadPost({data, fetchPosts, userID}) {
 
     return (
         <>
-            {data.repostCount != 0 ? 
+            {data.repostedBy ? 
                     <RepostUser fetchPosts={fetchPosts}>
                         <MdRepeat fontSize="20px"/>
                         <p>Re-posted by <span>{
-                            data.repostedBy ? (data.repostedBy.id === Number(userID) ? "you" : data.repostedBy.username) : "you"}</span>
+                            (data.repostedBy.id === Number(userID) ? "you" : data.repostedBy.username)}</span>
                         </p>
                     </RepostUser>
                 :
