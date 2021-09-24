@@ -6,7 +6,6 @@ import * as S from './style';
 import enhanceWithClickOutside from "react-click-outside";
 import SearchUser from "./SearchUser";
 
-
 export default function Navbar (){
     
     let history = useHistory();
