@@ -1,8 +1,9 @@
-import { SearchUserWrapper, SuggestionsList } from "./style";
+import { SearchUserWrapper, SuggestionsList, Username, FollowingText } from "./style";
 import { useState } from "react";
 import { getSearchUser } from "../../../services/linkr-api";
 import { DebounceInput } from "react-debounce-input";
 import { useHistory } from "react-router";
+import { GoSearch } from "react-icons/go";
 
 export default function SearchUser(){
     const token = localStorage.getItem('token');
@@ -17,7 +18,8 @@ export default function SearchUser(){
 
     function sortSuggestions(suggestions){
         suggestions.sort((sugg)=>sugg.isFollowingLoggedUser===false);
-        setSuggestions(suggestions)     
+        setSuggestions(suggestions);
+        console.log(suggestions);
     }
 
     function updateSuggestions(e) {
@@ -32,23 +34,29 @@ export default function SearchUser(){
                 .catch((err)=>console.log(err.response));
         }
     };
-
+    
+    
     return (
         <SearchUserWrapper>
+            <GoSearch />
             <DebounceInput 
+            placeholder='Pesquise por amigos e pessoas'
             value={value}
             minLength={3}
             debounceTimeout={300}
             onChange={e => updateSuggestions(e)}
             onFocus={e => updateSuggestions(e)}/>
 
-            <SuggestionsList>
-                {suggestions.map((suggestion)=>(
-                    <li onClick={()=>gotoUserPage(suggestion.id)}>
-                        <span>{suggestion.username}</span>
-                    </li>
-                ))}
-            </SuggestionsList>
+            {suggestions.length > 0 &&
+                <SuggestionsList>
+                    {suggestions.map((suggestion, index)=>(
+                        <li id={index} onClick={()=>gotoUserPage(suggestion.id)}>
+                            <img src={suggestion.avatar} alt='user avatar'/>
+                            <Username>{suggestion.username}</Username>
+                            {suggestion.isFollowingLoggedUser && <FollowingText>•following</FollowingText>}
+                        </li>
+                    ))}
+                </SuggestionsList>}
         </SearchUserWrapper>
     );
 }
