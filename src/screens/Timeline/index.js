@@ -1,4 +1,8 @@
-import { getFollowingPosts, getFollowingPostsEarlierThan } from "../../services/linkr-api";
+import {
+	getFollowingPosts,
+	getFollowingPostsEarlierThan,
+	getFollowingPostsOlderThan,
+} from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
@@ -13,6 +17,7 @@ import {
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
+import InfiniteScroller from "../../components/InfiniteScroller";
 
 export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
@@ -79,15 +84,12 @@ export default function Timeline() {
 						) : timelinePosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							timelinePosts.map((post, index) => (
-								<Post
-									fetchPosts={fetchPosts}
-									key={index}
-									data={post}
-									poster={post.user}
-									likes={post.likes}
-								/>
-							))
+							<InfiniteScroller
+								getMoreFunction={getFollowingPostsOlderThan}
+								fetchPosts={fetchPosts}
+								posts={timelinePosts}
+								setPosts={setTimelinePosts}
+							/>
 						)}
 					</PostsContainer>
 					<TrendingContainer />

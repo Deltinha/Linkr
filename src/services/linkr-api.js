@@ -120,9 +120,9 @@ function getFollowingPosts({ token }) {
 	return promise;
 }
 
-function getFollowingPostsOlderThan({ token, lastPostID }) {
-	const config = createLimitHeaders(token);
-	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostID}`, config);
+function getFollowingPostsOlderThan({ token, lastPostId }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostId}`, config);
 	return promise;
 }
 
