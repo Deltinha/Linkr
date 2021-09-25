@@ -3,10 +3,11 @@ import Loader from "react-loader-spinner";
 import { StyledLoaderWrapper } from "./style";
 
 function StyledLoader(props) {
+	console.log(props);
 	return (
 		<StyledLoaderWrapper>
 			{props.message ? props.message : "Loading..."}
-			<Loader type="ThreeDots" color="white" height={70} width={70} />
+			<Loader type={props.type ? props.type : "TailSpin"} color="white" height={70} width={70} />
 		</StyledLoaderWrapper>
 	);
 }

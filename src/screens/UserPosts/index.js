@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import {
 	PageWrapper,
@@ -12,8 +11,9 @@ import {
 	UserName,
 } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
-import { getUserPosts, getUserInfo } from "../../services/linkr-api";
+import { getUserPosts, getUserInfo, getUserPostsOlderThan } from "../../services/linkr-api";
 import FollowButton from "../../components/FollowButton";
+import InfiniteScroller from "../../components/InfiniteScroller";
 
 export default function UserPosts() {
 	const { id } = useParams();
@@ -42,6 +42,10 @@ export default function UserPosts() {
 		);
 	}
 
+	function getMorePosts({ token, lastPostId }) {
+		return getUserPostsOlderThan({ token, lastPostId, userID });
+	}
+
 	getUserInfo({ token, userID: id })
 		.then((res) => setName(res.data.user.username))
 		.catch(() => {
@@ -64,15 +68,12 @@ export default function UserPosts() {
 						) : posts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							posts.map((post) => (
-								<Post
-									fetchPosts={fetchPosts}
-									key={post.id}
-									data={post}
-									poster={post.user}
-									likes={post.likes}
-								/>
-							))
+							<InfiniteScroller
+								getMorePostsFunction={getMorePosts}
+								fetchPosts={fetchPosts}
+								posts={posts}
+								setPosts={setPosts}
+							/>
 						)}
 					</PostsContainer>
 					<TrendingContainer />

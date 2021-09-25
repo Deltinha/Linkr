@@ -3,11 +3,9 @@ import Post from "../Post";
 import InfiniteScroll from "react-infinite-scroller";
 import Loader from "../Loader";
 
-export default function InfiniteScroller({ getMoreFunction, fetchPosts, posts, setPosts }) {
+export default function InfiniteScroller({ getMorePostsFunction, fetchPosts, posts, setPosts }) {
 	const [hasMore, setHasMore] = useState(true);
 	const token = localStorage.getItem("token");
-
-	const observer = useRef();
 
 	function getLastPostId() {
 		const lastPost = posts[posts.length - 1];
@@ -22,7 +20,7 @@ export default function InfiniteScroller({ getMoreFunction, fetchPosts, posts, s
 
 	function loadMoreHandler() {
 		const lastPostId = getLastPostId();
-		getMoreFunction({ token, lastPostId }).then(
+		getMorePostsFunction({ token, lastPostId }).then(
 			(res) => {
 				console.log({ res });
 				if (res.data.posts.length === 0) {
@@ -38,7 +36,7 @@ export default function InfiniteScroller({ getMoreFunction, fetchPosts, posts, s
 		<InfiniteScroll
 			loadMore={loadMoreHandler}
 			hasMore={hasMore}
-			loader={<Loader message="Loading more Posts..." />}
+			loader={<Loader message="Loading more Posts..." type="TailSpin" />}
 		>
 			{posts.map((post, index) => (
 				<Post

@@ -132,6 +132,12 @@ function getFollowingPostsEarlierThan({ token, firstPostID }) {
 	return promise;
 }
 
+function getUserPostsOlderThan({ token, lastPostId, userID }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/${userID}/posts?olderThan=${lastPostId}`, config);
+	return promise;
+}
+
 function getComments(id, token) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/posts/${id}/comments`, config);
@@ -168,8 +174,9 @@ export {
 	postFollowUser,
 	postUnfollowUser,
 	getFollowingPosts,
-	getFollowingPostsOlderThan,
 	getFollowingPostsEarlierThan,
+	getFollowingPostsOlderThan,
+	getUserPostsOlderThan,
 	getComments,
 	postComment,
 	getSearchUser,

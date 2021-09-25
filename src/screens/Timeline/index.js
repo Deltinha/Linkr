@@ -4,7 +4,6 @@ import {
 	getFollowingPostsOlderThan,
 } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
-import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
@@ -62,6 +61,7 @@ export default function Timeline() {
 
 	function updatePosts() {
 		const firstPostID = getFirstPostID();
+
 		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
 			if (!(res.data.posts.length === 0)) {
 				setIsNewPostsLoading(true);
@@ -85,7 +85,7 @@ export default function Timeline() {
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
 							<InfiniteScroller
-								getMoreFunction={getFollowingPostsOlderThan}
+								getMorePostsFunction={getFollowingPostsOlderThan}
 								fetchPosts={fetchPosts}
 								posts={timelinePosts}
 								setPosts={setTimelinePosts}
