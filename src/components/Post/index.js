@@ -22,6 +22,7 @@ import {
 	PostWrapper,
 	YtLink,
 } from "./style";
+import LinkPreviewModal from "./LinkPreviewModal";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
 	const { text, link, linkTitle, linkDescription, linkImage, id } = data;
@@ -33,6 +34,7 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 	);
 	const [likesCount, setLikesCount] = useState(likes.length);
 	const [tooltipText, setTooltipText] = useState("");
+	const [previewOpen, setPreviewOpen] = useState(false);
 
 	function toggleLikeButton() {
 		if (likedByMe) {
@@ -167,14 +169,16 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 					</>
 					: <LinkCard>
 						<LinkTextsContainer>
-							<LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
+							<LinkTitle onClick={()=>setPreviewOpen(true)}>{linkTitle}</LinkTitle>
 
 							<LinkDescription>{linkDescription}</LinkDescription>
 
-							<LinkPreview onClick={openLink}>{link}</LinkPreview>
+							<LinkPreview onClick={()=>setPreviewOpen(true)}>{link}</LinkPreview>
+
+							<LinkPreviewModal previewOpen={previewOpen} setPreviewOpen={setPreviewOpen} link={link} openLink={openLink}/>
 						</LinkTextsContainer>
 
-						<img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
+						<img src={linkImage} onClick={()=>setPreviewOpen(true)} alt="imagem ilustrativa do link" />
 					</LinkCard>
 				}			
 			</MainPostContainer>
