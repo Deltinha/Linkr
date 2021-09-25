@@ -1,16 +1,16 @@
 import styled from "styled-components";
+
 const PostWrapper = styled.div`
 	width: 611px;
 	max-height: fit-content;
+	min-height: 276px;
 	background-color: #171717;
 	border-radius: 16px;
 	display: flex;
 	padding: 17px;
 	color: white;
-	margin-bottom: 26px;
 	word-break: break-word;
-	position: relative;
-
+	margin-bottom: ${(props) => props.margin};
 	@media screen and (max-width: 600px) {
 		width: 100%;
 		max-width: 100vw;
@@ -24,6 +24,12 @@ const AvatarAndLikesContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	font-size: 11px;
+	position: relative;
+    @media screen and (max-width: 600px) {
+		p {
+			font-size: 9px;
+		}
+	}
 `;
 
 const ProfilePic = styled.div`
@@ -64,74 +70,31 @@ const PostText = styled.div`
 	color: #b7b7b7;
 `;
 
-const LinkCard = styled.div`
-	border: 1px solid #4d4d4d;
-	border-radius: 11px;
-	height: 100%;
-	display: flex;
-
-	img {
-		cursor: pointer;
-		width: 30%;
-		height: 100%;
-	}
-`;
-
-const LinkTextsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-	padding: 24px 18px;
-	flex: 1;
-`;
-
-const LinkTitle = styled.div`
-	color: #cecece;
-	font-size: 16px;
-	line-height: 19px;
-	cursor: pointer;
-`;
-
-const LinkDescription = styled.div`
-	font-size: 11px;
-	line-height: 13px;
-	color: #9b9595;
-	padding-top: 5px;
-	padding-bottom: 13px;
-`;
-
-const LinkPreview = styled.div`
-	font-size: 11px;
-	line-height: 13px;
-	color: #cecece;
-	cursor: pointer;
-`;
-
-const YtLink = styled.span`
-	font-size: 17px;
-	color: #B7B7B7;
-	margin-top: 6px;
-	cursor: pointer;
-`;
-
 const Hashtag = styled.span`
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
 `;
 
+
+const PostContents = styled.div`
+	background: #1E1E1E;
+	position: relative;
+	border-radius: 16px;
+	@media screen and (max-width: 600px) {
+		width: 100%;
+		max-width: 100vw;
+		border-radius: 0;
+	}
+`;
+
 export {
 	Hashtag,
-	LinkPreview,
-	LinkDescription,
-	LinkTitle,
-	LinkTextsContainer,
-	LinkCard,
 	PostText,
 	PostUserName,
 	MainPostContainer,
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
-	YtLink,
+	PostContents,
 };

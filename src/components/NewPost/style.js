@@ -23,6 +23,7 @@ const BoxPost = styled.div`
     height: 209px;
     width: 100%;
     padding-top: 16px;
+    border-radius: 16px;
     box-shadow: 0px 4px 4px 0px #00000040;
     img {
         height: 50px;
@@ -32,6 +33,7 @@ const BoxPost = styled.div`
     @media screen and (max-width: 600px) {
 		width: 100%;
 		height: 164px;
+        border-radius: 0;
         img {
             display: none;
         }
