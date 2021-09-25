@@ -42,8 +42,8 @@ export default function UserPosts() {
 		);
 	}
 
-	function getMorePosts({ token, lastPostId }) {
-		return getUserPostsOlderThan({ token, lastPostId, userID });
+	function getMorePosts({ lastPostId }) {
+		return getUserPostsOlderThan({ token, lastPostId, userID: id });
 	}
 
 	getUserInfo({ token, userID: id })

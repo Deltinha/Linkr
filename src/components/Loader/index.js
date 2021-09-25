@@ -3,7 +3,6 @@ import Loader from "react-loader-spinner";
 import { StyledLoaderWrapper } from "./style";
 
 function StyledLoader(props) {
-	console.log(props);
 	return (
 		<StyledLoaderWrapper>
 			{props.message ? props.message : "Loading..."}

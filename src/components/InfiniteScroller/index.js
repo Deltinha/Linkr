@@ -9,12 +9,9 @@ export default function InfiniteScroller({ getMorePostsFunction, fetchPosts, pos
 
 	function getLastPostId() {
 		const lastPost = posts[posts.length - 1];
-		console.log({ lastPost });
-
 		if (lastPost.repostId) {
 			return lastPost.repostId;
 		}
-
 		return lastPost.id;
 	}
 
@@ -22,7 +19,6 @@ export default function InfiniteScroller({ getMorePostsFunction, fetchPosts, pos
 		const lastPostId = getLastPostId();
 		getMorePostsFunction({ token, lastPostId }).then(
 			(res) => {
-				console.log({ res });
 				if (res.data.posts.length === 0) {
 					setHasMore(false);
 				}
