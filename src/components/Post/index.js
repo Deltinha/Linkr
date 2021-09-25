@@ -17,7 +17,6 @@ import {
 	AvatarAndLikesContainer,
 	PostWrapper,
 } from "./style";
-import LinkPreviewModal from "./LinkPreviewModal";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
 
