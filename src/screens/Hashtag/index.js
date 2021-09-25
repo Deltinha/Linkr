@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
-import { getPostsHashtag } from "../../services/linkr-api";
+import { getPostsHashtag, getHashtagPostsOlderThan } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
-import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import { PageWrapper, PageTitle } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
@@ -11,6 +10,7 @@ import {
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
+import InfiniteScroller from "../../components/InfiniteScroller";
 
 export default function Hashtag() {
 	const [hashtagPosts, setHashtagPosts] = useState([]);
@@ -30,6 +30,10 @@ export default function Hashtag() {
 			});
 	}
 
+	function getMorePosts({ lastPostId }) {
+		return getHashtagPostsOlderThan({ token, lastPostId, hashtag });
+	}
+
 	useEffect(fetchHashtagPosts, [hashtag, token]);
 	return (
 		<PageWrapper>
@@ -42,9 +46,12 @@ export default function Hashtag() {
 						) : hashtagPosts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							hashtagPosts.map((post) => (
-								<Post key={post.id} data={post} poster={post.user} likes={post.likes} />
-							))
+							<InfiniteScroller
+								getMorePostsFunction={getMorePosts}
+								fetchPosts={fetchHashtagPosts}
+								posts={hashtagPosts}
+								setPosts={setHashtagPosts}
+							/>
 						)}
 					</PostsContainer>
 					<TrendingContainer />

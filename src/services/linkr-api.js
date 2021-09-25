@@ -120,21 +120,30 @@ function getFollowingPosts({ token }) {
 	return promise;
 }
 
-function getFollowingPostsOlderThan({ token, lastPostId }) {
-	const config = createHeaders(token);
-	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostId}`, config);
-	return promise;
-}
-
 function getFollowingPostsEarlierThan({ token, firstPostID }) {
 	const config = createLimitHeaders(token);
 	const promise = axios.get(`${BASE_URL}/following/posts?earlierThan=${firstPostID}`, config);
 	return promise;
 }
 
+function getFollowingPostsOlderThan({ token, lastPostId }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostId}`, config);
+	return promise;
+}
+
 function getUserPostsOlderThan({ token, lastPostId, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/${userID}/posts?olderThan=${lastPostId}`, config);
+	return promise;
+}
+
+function getHashtagPostsOlderThan({ token, lastPostId, hashtag }) {
+	const config = createHeaders(token);
+	const promise = axios.get(
+		`${BASE_URL}/hashtags/${hashtag}/posts?olderThan=${lastPostId}`,
+		config
+	);
 	return promise;
 }
 
@@ -177,6 +186,7 @@ export {
 	getFollowingPostsEarlierThan,
 	getFollowingPostsOlderThan,
 	getUserPostsOlderThan,
+	getHashtagPostsOlderThan,
 	getComments,
 	postComment,
 	getSearchUser,
