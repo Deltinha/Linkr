@@ -7,11 +7,15 @@ import {
     YtLink,
 } from "./style";
 import YtEmbedVideo from ".././YtEmbedVideo";
+import LinkPreviewModal from "../LinkPreviewModal";
+import { useState } from "react";
 
 export default function LinksCard({openLink, linkTitle, linkDescription, link, linkImage}) {
+    const [previewOpen, setPreviewOpen] = useState(false);
 
     return (
         <>
+    
             {link.includes('www.youtube.com/watch?v=') ? 
                 <>
                     <YtEmbedVideo link={link}/>
@@ -20,11 +24,18 @@ export default function LinksCard({openLink, linkTitle, linkDescription, link, l
                 : 
                 <LinkCard>
                     <LinkTextsContainer>
-                        <LinkTitle onClick={openLink}>{linkTitle}</LinkTitle>
+                        <LinkTitle onClick={()=>setPreviewOpen(true)}>{linkTitle}</LinkTitle>
                         <LinkDescription>{linkDescription}</LinkDescription>
-                        <LinkPreview onClick={openLink}>{link}</LinkPreview>
+                        <LinkPreview onClick={()=>setPreviewOpen(true)}>{link}</LinkPreview>
                     </LinkTextsContainer>
-                    <img src={linkImage} onClick={openLink} alt="imagem ilustrativa do link" />
+                    <img src={linkImage} onClick={()=>setPreviewOpen(true)} alt="imagem ilustrativa do link" />
+
+                    <LinkPreviewModal 
+                    previewOpen={previewOpen} 
+                    setPreviewOpen={setPreviewOpen} 
+                    link={link} 
+                    openLink={openLink}
+                    title={linkTitle}/>
                 </LinkCard>
             }	
         </>

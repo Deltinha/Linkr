@@ -5,6 +5,8 @@ import {
 } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import CreatePost from "../../components/NewPost";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
 import useInterval from "react-useinterval";
@@ -24,6 +26,7 @@ export default function Timeline() {
 	const [isNewPostsLoading, setIsNewPostsLoading] = useState(false);
 	const token = localStorage.getItem("token");
 	const refreshRate = 15000;
+	const { followedUsers } = useContext(UserContext);
 
 	useEffect(fetchPosts, [token]);
 
@@ -82,7 +85,13 @@ export default function Timeline() {
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
-							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
+							followedUsers.length === 0 ? (
+								<WarningMessage>
+									Você não segue ninguém ainda, procure por perfis na busca
+								</WarningMessage>
+							) : (
+								<WarningMessage>Nenhuma publicação encontrada</WarningMessage>
+							)
 						) : (
 							<InfiniteScroller
 								getMorePostsFunction={getFollowingPostsOlderThan}

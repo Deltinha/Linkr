@@ -21,8 +21,9 @@ export default function InfiniteScroller({ getMorePostsFunction, fetchPosts, pos
 			(res) => {
 				if (res.data.posts.length === 0) {
 					setHasMore(false);
+				} else {
+					setPosts([...posts, ...res.data.posts]);
 				}
-				setPosts([...posts, ...res.data.posts]);
 			},
 			(err) => console.log({ err })
 		);
