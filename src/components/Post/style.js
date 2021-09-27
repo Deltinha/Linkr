@@ -61,7 +61,7 @@ const PostUserName = styled.div`
 	font-size: 19px;
 	font-weight: bold;
 	cursor: pointer;
-	width: calc(100% - 70px);
+	width: auto;
 `;
 
 const PostText = styled.div`
@@ -88,6 +88,12 @@ const PostContents = styled.div`
 	}
 `;
 
+const HeadCard = styled.div`
+	display: flex;
+	justify-content: left;
+	max-width: 90%;
+`;
+
 export {
 	Hashtag,
 	PostText,
@@ -97,4 +103,5 @@ export {
 	AvatarAndLikesContainer,
 	PostWrapper,
 	PostContents,
+	HeadCard,
 };

@@ -53,11 +53,11 @@ const SuggestionsList = styled.ul`
     position: absolute;
     padding-top: 24px;
     padding-left: 17px;
-    padding-bottom: 40px;
+    padding-bottom: 23px;
     padding-right: 17px;
     top: 35px;
     width: 563px;
-    height: 600px;
+    max-height: 600px;
     overflow: scroll;
     overflow-x: hidden;
     display: flex;
@@ -90,7 +90,7 @@ const SuggestionsList = styled.ul`
 
     @media (max-width: 1230px) {
             width: 611px;
-            height: 400px;
+            max-height: 400px;
             
             li {
                 font-size: 17px;

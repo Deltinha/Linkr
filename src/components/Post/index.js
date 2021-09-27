@@ -9,6 +9,7 @@ import Comments from "../Comments";
 import LinksCard from "./LinkCard";
 import DescriptionPost from "./DescriptionPost";
 import HeadPost from "./HeadPost";
+import Localization from "./LocalizationMap";
 import {
 	PostContents,
 	PostUserName,
@@ -16,6 +17,7 @@ import {
 	ProfilePic,
 	AvatarAndLikesContainer,
 	PostWrapper,
+	HeadCard
 } from "./style";
 
 export default function Post({ data, poster, likes, fetchPosts }) {
@@ -137,7 +139,11 @@ export default function Post({ data, poster, likes, fetchPosts }) {
 
 					</AvatarAndLikesContainer>
 					<MainPostContainer>
-						<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
+						<HeadCard>
+							<PostUserName onClick={goToPosterPage}>{poster.username}</PostUserName>
+							<Localization coordinates={data.geolocation} user={data.user.username}/>
+						</HeadCard>
+						
 						<DescriptionPost 
 							postId={data.user.id} userID={userID} data={data} 
 							fetchPosts={fetchPosts} id={id} text={text}
