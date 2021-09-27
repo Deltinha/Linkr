@@ -82,15 +82,21 @@ const WarningMessage = styled.div`
 	justify-content: center;
 	font-size: 20px;
 	color: white;
+	width: 611px;
+
+	@media screen and (max-width: 600px) {
+		width: 100%;
+		max-width: 100vw;
+	}
 `;
 
 const DeleteButtonWrapper = styled.div`
-    font-size: 14px;
-    cursor: pointer;
-    position: absolute;
-    right: 0px;
-    top: 5px;
-    height: 20px;
+	font-size: 14px;
+	cursor: pointer;
+	position: absolute;
+	right: 0px;
+	top: 5px;
+	height: 20px;
 `;
 
 const DeleteModal = Modal.styled`
@@ -138,27 +144,28 @@ const DeleteModal = Modal.styled`
 `;
 
 const ModalText = styled.span`
-    color: white;
+	color: white;
 	font-family: Lato;
-    font-weight: 700;
-    font-size: 34px;
-    text-align: center;
+	font-weight: 700;
+	font-size: 34px;
+	text-align: center;
 
-    @media (max-width: 640px){
-      font-size: 27px;
-    }
+	@media (max-width: 640px) {
+		font-size: 27px;
+	}
 `;
 
 const ConfirmButton = styled.button`
-    font-family: Lato;
-	background-color: ${({lightColor})=>lightColor ? 'rgba(24, 119, 242, 0.4)' : 'rgb(24, 119, 242)'};
+	font-family: Lato;
+	background-color: ${({ lightColor }) =>
+		lightColor ? "rgba(24, 119, 242, 0.4)" : "rgb(24, 119, 242)"};
 	color: white;
 `;
 
 const CancelButton = styled.button`
-    font-family: Lato;
+	font-family: Lato;
 	background-color: white;
-	color: #1877F2;
+	color: #1877f2;
 `;
 
 const ModalBackground = styled.div`
@@ -169,7 +176,7 @@ const ModalBackground = styled.div`
 	width: 100vw;
 	height: 100vh;
 	z-index: 30;
-	background-color: rgba(255,255,255,0.9);
+	background-color: rgba(255, 255, 255, 0.9);
 `;
 
 export {
@@ -181,10 +188,10 @@ export {
 	PageWrapper,
 	PageTitle,
 	DeleteButtonWrapper,
-	DeleteModal, 
-	ModalBackground, 
-	ConfirmButton, 
-	CancelButton, 
+	DeleteModal,
+	ModalBackground,
+	ConfirmButton,
+	CancelButton,
 	ModalText,
 	UserName,
 };

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Post from "../../components/Post";
 import Loader from "../../components/Loader";
 import {
 	PageWrapper,
@@ -10,7 +9,8 @@ import {
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
 import TrendingContainer from "../../components/TrendingContainer";
-import { getUserPosts } from "../../services/linkr-api";
+import { getUserPosts, getUserPostsOlderThan } from "../../services/linkr-api";
+import InfiniteScroller from "../../components/InfiniteScroller";
 
 export default function MyPosts() {
 	const [posts, setPosts] = useState([]);
@@ -35,6 +35,10 @@ export default function MyPosts() {
 		);
 	}
 
+	function getMorePosts({ lastPostId }) {
+		return getUserPostsOlderThan({ token, lastPostId, userID });
+	}
+
 	return (
 		<PageWrapper>
 			<PageContentWrapper>
@@ -46,15 +50,12 @@ export default function MyPosts() {
 						) : posts.length === 0 ? (
 							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
 						) : (
-							posts.map((post) => (
-								<Post
-									fetchPosts={fetchPosts}
-									key={post.id}
-									data={post}
-									poster={post.user}
-									likes={post.likes}
-								/>
-							))
+							<InfiniteScroller
+								getMorePostsFunction={getMorePosts}
+								fetchPosts={fetchPosts}
+								posts={posts}
+								setPosts={setPosts}
+							/>
 						)}
 					</PostsContainer>
 					<TrendingContainer />

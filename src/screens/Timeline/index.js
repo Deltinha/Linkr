@@ -1,6 +1,9 @@
-import { getFollowingPosts, getFollowingPostsEarlierThan } from "../../services/linkr-api";
+import {
+	getFollowingPosts,
+	getFollowingPostsEarlierThan,
+	getFollowingPostsOlderThan,
+} from "../../services/linkr-api";
 import { useState, useEffect } from "react";
-import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
 import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
@@ -15,6 +18,7 @@ import {
 	PageContentWrapper,
 	WarningMessage,
 } from "../../components/shared/CommonStyled";
+import InfiniteScroller from "../../components/InfiniteScroller";
 
 export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
@@ -60,6 +64,7 @@ export default function Timeline() {
 
 	function updatePosts() {
 		const firstPostID = getFirstPostID();
+
 		getFollowingPostsEarlierThan({ token, firstPostID }).then((res) => {
 			if (!(res.data.posts.length === 0)) {
 				setIsNewPostsLoading(true);
@@ -88,15 +93,12 @@ export default function Timeline() {
 								<WarningMessage>Nenhuma publicação encontrada</WarningMessage>
 							)
 						) : (
-							timelinePosts.map((post, index) => (
-								<Post
-									fetchPosts={fetchPosts}
-									key={index}
-									data={post}
-									poster={post.user}
-									likes={post.likes}
-								/>
-							))
+							<InfiniteScroller
+								getMorePostsFunction={getFollowingPostsOlderThan}
+								fetchPosts={fetchPosts}
+								posts={timelinePosts}
+								setPosts={setTimelinePosts}
+							/>
 						)}
 					</PostsContainer>
 					<TrendingContainer />

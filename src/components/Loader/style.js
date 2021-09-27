@@ -5,6 +5,7 @@ export const StyledLoaderWrapper = styled.div`
 	flex: 1;
 	color: white;
 	font-size: 20px;
+	line-height: 200%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

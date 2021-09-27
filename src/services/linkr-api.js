@@ -90,12 +90,6 @@ function postDislike({ id, token }) {
 	return promise;
 }
 
-function getFollowingPosts({ token }) {
-	const config = createHeaders(token);
-	const promise = axios.get(`${BASE_URL}/following/posts`, config);
-	return promise;
-}
-
 function postShare(id, token) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts/${id}/share`, {}, config);
@@ -120,15 +114,36 @@ function postUnfollowUser({ token, userID }) {
 	return promise;
 }
 
-function getFollowingPostsOlderThan({ token, lastPostID }) {
-	const config = createLimitHeaders(token);
-	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostID}`, config);
+function getFollowingPosts({ token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts`, config);
 	return promise;
 }
 
 function getFollowingPostsEarlierThan({ token, firstPostID }) {
 	const config = createLimitHeaders(token);
 	const promise = axios.get(`${BASE_URL}/following/posts?earlierThan=${firstPostID}`, config);
+	return promise;
+}
+
+function getFollowingPostsOlderThan({ token, lastPostId }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostId}`, config);
+	return promise;
+}
+
+function getUserPostsOlderThan({ token, lastPostId, userID }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/users/${userID}/posts?olderThan=${lastPostId}`, config);
+	return promise;
+}
+
+function getHashtagPostsOlderThan({ token, lastPostId, hashtag }) {
+	const config = createHeaders(token);
+	const promise = axios.get(
+		`${BASE_URL}/hashtags/${hashtag}/posts?olderThan=${lastPostId}`,
+		config
+	);
 	return promise;
 }
 
@@ -168,8 +183,10 @@ export {
 	postFollowUser,
 	postUnfollowUser,
 	getFollowingPosts,
-	getFollowingPostsOlderThan,
 	getFollowingPostsEarlierThan,
+	getFollowingPostsOlderThan,
+	getUserPostsOlderThan,
+	getHashtagPostsOlderThan,
 	getComments,
 	postComment,
 	getSearchUser,
