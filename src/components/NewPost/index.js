@@ -1,12 +1,14 @@
 import { getUserInfo, postNewPost } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import { Container, BoxDescription, BoxPost, Form } from "./style";
+import Geolocation from "../Geolocation";
 
 export default function CreatePost({ fetchPosts }) {
 	const [url, setUrl] = useState("");
 	const [description, setDescription] = useState("");
 	const [waiting, setWaiting] = useState(false);
 	const [userAvatar, setUserAvatar] = useState("");
+	const [geolocation, setGeolocation] = useState({latitude: "", longitude: ""});
 	const userID = localStorage.getItem("userID");
 	const token = localStorage.getItem("token");
 
@@ -27,12 +29,17 @@ export default function CreatePost({ fetchPosts }) {
 			const body = {
 				text: description,
 				link: url,
+				geolocation
 			};
 
 			postNewPost(body, token)
 				.then((resp) => {
 					setDescription("");
 					setUrl("");
+					setGeolocation({
+						latitude: "",
+						longitude: ""
+					})
 					setWaiting(false);
 					fetchPosts();
 				})
@@ -69,6 +76,7 @@ export default function CreatePost({ fetchPosts }) {
 							disabled={waiting}
 							required
 						/>
+						<Geolocation setGeolocation={setGeolocation}/>
 						<button type="submit" disabled={waiting}>
 							{waiting ? "Publishing..." : "Publicar"}
 						</button>

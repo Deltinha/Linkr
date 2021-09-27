@@ -19,7 +19,6 @@ export default function SearchUser(){
     function sortSuggestions(suggestions){
         suggestions.sort((sugg)=>sugg.isFollowingLoggedUser===false);
         setSuggestions(suggestions);
-        console.log(suggestions);
     }
 
     function updateSuggestions(e) {
@@ -31,7 +30,7 @@ export default function SearchUser(){
         else {
             getSearchUser({token , queryString:e.target.value})
                 .then((res)=>sortSuggestions(res.data.users))
-                .catch((err)=>console.log(err.response));
+                .catch((err)=>alert(err.response));
         }
     };
     

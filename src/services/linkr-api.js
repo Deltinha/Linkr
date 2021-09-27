@@ -90,6 +90,12 @@ function postDislike({ id, token }) {
 	return promise;
 }
 
+function getFollowingPosts({ token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts`, config);
+	return promise;
+}
+
 function postShare(id, token) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts/${id}/share`, {}, config);
@@ -111,12 +117,6 @@ function postFollowUser({ token, userID }) {
 function postUnfollowUser({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/users/${userID}/unfollow`, {}, config);
-	return promise;
-}
-
-function getFollowingPosts({ token }) {
-	const config = createHeaders(token);
-	const promise = axios.get(`${BASE_URL}/following/posts`, config);
 	return promise;
 }
 
