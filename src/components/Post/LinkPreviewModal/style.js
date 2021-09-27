@@ -3,13 +3,13 @@ import Modal from "styled-react-modal";
 const LinkPreviewWrapper = Modal.styled`
     background-color: #333333;
     border-radius: 20px;
-    height: 904px;
+    height: 80vh;
     width: 966px;
     position: relative;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    padding: 22px 16px 0 16px;
+    padding: 22px 16px 16px 16px;
     display: flex;
     flex-direction: column;
     gap: 23px;
@@ -39,7 +39,7 @@ const LinkPreviewWrapper = Modal.styled`
 
     iframe {
         width: 100%;
-        height: 821px;
+        height: 100%;
         background-color: white;
     }
 `;
