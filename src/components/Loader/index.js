@@ -2,10 +2,10 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { StyledLoaderWrapper } from "./style";
 
-function StyledLoader() {
+function StyledLoader(props) {
 	return (
 		<StyledLoaderWrapper>
-			Loading...
+			{props.message ? props.message : "Loading..."}
 			<Loader type="ThreeDots" color="white" height={70} width={70} />
 		</StyledLoaderWrapper>
 	);

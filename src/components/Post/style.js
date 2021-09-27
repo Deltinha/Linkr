@@ -76,9 +76,8 @@ const Hashtag = styled.span`
 	cursor: pointer;
 `;
 
-
 const PostContents = styled.div`
-	background: #1E1E1E;
+	background: #1e1e1e;
 	position: relative;
 	border-radius: 16px;
 	@media screen and (max-width: 600px) {

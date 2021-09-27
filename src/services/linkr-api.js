@@ -2,19 +2,26 @@ import axios from "axios";
 
 const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/linkr";
 
+/**
+ * Max number of posts that the API will send back from the GET request
+ */
+const RESPONSE_LIMIT = 50;
+
 function createHeaders(token) {
 	const config = { headers: { Authorization: `Bearer ${token}` } };
 	return config;
 }
 
-function postSignUp(body) {
-	const promise = axios.post(`${BASE_URL}/sign-up`, body);
-	return promise;
+function createLimitHeaders(token) {
+	const config = {
+		params: { limit: RESPONSE_LIMIT },
+		headers: { Authorization: `Bearer ${token}` },
+	};
+	return config;
 }
 
-function getAllPosts(token) {
-	const config = createHeaders(token);
-	const promise = axios.get(`${BASE_URL}/posts`, config);
+function postSignUp(body) {
+	const promise = axios.post(`${BASE_URL}/sign-up`, body);
 	return promise;
 }
 
@@ -113,6 +120,18 @@ function postUnfollowUser({ token, userID }) {
 	return promise;
 }
 
+function getFollowingPostsOlderThan({ token, lastPostID }) {
+	const config = createLimitHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?olderThan=${lastPostID}`, config);
+	return promise;
+}
+
+function getFollowingPostsEarlierThan({ token, firstPostID }) {
+	const config = createLimitHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts?earlierThan=${firstPostID}`, config);
+	return promise;
+}
+
 function getComments(id, token) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/posts/${id}/comments`, config);
@@ -134,7 +153,6 @@ function getSearchUser({ token, queryString }) {
 export {
 	postSignUp,
 	postLogIn,
-	getAllPosts,
 	getTrendingHashtags,
 	getUserInfo,
 	postNewPost,
@@ -145,11 +163,13 @@ export {
 	releasePost,
 	getLikedPosts,
 	deletePost,
-	getFollowingPosts,
 	postShare,
 	getFollowedByMe,
 	postFollowUser,
 	postUnfollowUser,
+	getFollowingPosts,
+	getFollowingPostsOlderThan,
+	getFollowingPostsEarlierThan,
 	getComments,
 	postComment,
 	getSearchUser,
