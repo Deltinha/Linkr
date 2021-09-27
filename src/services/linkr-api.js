@@ -83,28 +83,34 @@ function postDislike({ id, token }) {
 	return promise;
 }
 
+function getFollowingPosts({ token }) {
+	const config = createHeaders(token);
+	const promise = axios.get(`${BASE_URL}/following/posts`, config);
+	return promise;
+}
+
 function postShare(id, token) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts/${id}/share`, {}, config);
 	return promise;
 }
 
-function getFollowedByMe({token}){
+function getFollowedByMe({ token }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/follows`, config);
-	return promise;	
+	return promise;
 }
 
-function postFollowUser({token, userID}){
+function postFollowUser({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/users/${userID}/follow`, {}, config);
-	return promise;	
+	return promise;
 }
 
-function postUnfollowUser({token, userID}){
+function postUnfollowUser({ token, userID }) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/users/${userID}/unfollow`, {}, config);
-	return promise;	
+	return promise;
 }
 
 function getComments(id, token) {
@@ -113,13 +119,13 @@ function getComments(id, token) {
 	return promise;
 }
 
-function postComment(id, body, token){
+function postComment(id, body, token) {
 	const config = createHeaders(token);
 	const promise = axios.post(`${BASE_URL}/posts/${id}/comment`, body, config);
-	return promise;	
+	return promise;
 }
 
-function getSearchUser({token, queryString}){
+function getSearchUser({ token, queryString }) {
 	const config = createHeaders(token);
 	const promise = axios.get(`${BASE_URL}/users/search?username=${queryString}`, config);
 	return promise;
@@ -139,6 +145,7 @@ export {
 	releasePost,
 	getLikedPosts,
 	deletePost,
+	getFollowingPosts,
 	postShare,
 	getFollowedByMe,
 	postFollowUser,

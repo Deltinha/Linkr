@@ -1,7 +1,9 @@
-import { getAllPosts } from "../../services/linkr-api";
+import { getFollowingPosts, getFollowers } from "../../services/linkr-api";
 import { useState, useEffect } from "react";
 import Post from "../../components/Post";
 import CreatePost from "../../components/NewPost";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
 import Loader from "../../components/Loader";
 import TrendingContainer from "../../components/TrendingContainer";
 import {
@@ -17,23 +19,25 @@ export default function Timeline() {
 	const [timelinePosts, setTimelinePosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const token = localStorage.getItem("token");
-	
+	const { followedUsers } = useContext(UserContext);
+
+	useEffect(fetchPosts, [token]);
+
 	function fetchPosts() {
-		getAllPosts(token)
+		getFollowingPosts({ token })
 			.then((res) => {
 				setTimelinePosts(res.data.posts);
 				setIsLoading(false);
 			})
-			.catch((err) =>{
-					if (token) {
-						alert("Houve uma falha ao obter os posts, por favor atualize a página");
-					}
+			.catch((err) => {
+				if (token) {
+					alert("Houve uma falha ao obter os posts, por favor atualize a página");
+				}
 				setIsLoading(false);
 			});
 	}
 
 	useEffect(fetchPosts, [token]);
-
 
 	return (
 		<PageWrapper>
@@ -45,7 +49,13 @@ export default function Timeline() {
 						{isLoading ? (
 							<Loader />
 						) : timelinePosts.length === 0 ? (
-							<WarningMessage>Nenhum Post Encontrado</WarningMessage>
+							followedUsers.length === 0 ? (
+								<WarningMessage>
+									Você não segue ninguém ainda, procure por perfis na busca
+								</WarningMessage>
+							) : (
+								<WarningMessage>Nenhuma publicação encontrada</WarningMessage>
+							)
 						) : (
 							timelinePosts.map((post, index) => (
 								<Post
