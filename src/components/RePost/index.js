@@ -1,9 +1,9 @@
 import { CancelButton, ConfirmButton, DeleteModal, ModalText } from "../shared/CommonStyled";
 import { useState } from "react";
 import { MdRepeat } from 'react-icons/md';
-import styled from "styled-components";
 import Loader from "react-loader-spinner";
 import { postShare } from "../../services/linkr-api";
+import { IconBox } from "./style"
 
 export default function RePost({data, fetchPosts}) {
 
@@ -50,13 +50,3 @@ export default function RePost({data, fetchPosts}) {
         </>
     );
 }
-
-const IconBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 185px;
-    cursor: pointer;
-    width: 100px;
-`;
