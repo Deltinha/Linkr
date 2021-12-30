@@ -79,35 +79,36 @@ export default function Post({ data, poster, likes, fetchPosts }) {
         setTooltipText(likes[0]['user.username']);
       }
     }
+
     if (likesCount === 2) {
-      const findUser = likes.find((like) => like['user.id'] !== Number(userID))[
-        'user.username'
-      ];
       if (likedByMe) {
+        const findUser = likes.find(
+          (like) => like['user.id'] !== Number(userID)
+        )['user.username'];
         setTooltipText(`Você e ${findUser}.`);
       } else {
-        const findAnotherUser = likes.find(
-          (like) =>
-            like['user.id'] !== Number(userID) &&
-            like['user.username'] !== findUser
-        )['user.username'];
-        setTooltipText(`${findUser} e ${findAnotherUser}.`);
+        setTooltipText(
+          `${likes[0]['user.username']} e ${likes[1]['user.username']}.`
+        );
       }
     }
+
     if (likesCount >= 3) {
-      const findUser = likes.find((like) => like['user.id'] !== Number(userID))[
-        'user.username'
-      ];
-      const findAnotherUser = likes.find(
-        (like) =>
-          like['user.id'] !== Number(userID) &&
-          like['user.username'] !== findUser
-      )['user.username'];
+      const filteredUsers = likes.filter(
+        (like) => like['user.id'] !== Number(userID)
+      );
+
       if (likedByMe) {
-        setTooltipText(`Você, ${findUser} e outras ${likesCount - 2} pessoas.`);
+        setTooltipText(
+          `Você, ${filteredUsers[0]['user.username']} e outras ${
+            likesCount - 2
+          } pessoas.`
+        );
       } else {
         setTooltipText(
-          `${findUser}, ${findAnotherUser} e outras ${likesCount - 2} pessoas.`
+          `${filteredUsers[0]['user.username']}, ${
+            filteredUsers[1]['user.username']
+          } e outras ${likesCount - 2} pessoas.`
         );
       }
     }
